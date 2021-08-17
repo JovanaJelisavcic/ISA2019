@@ -1,8 +1,11 @@
 package com.ISA2020.farmacia.entity.users;
 
+
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 
 @MappedSuperclass
 public class UserInfo {
@@ -23,10 +26,20 @@ public class UserInfo {
 	private String state;
 	@Column(nullable=false)
 	private String phoneNum;
+	@Transient
+	private String password;
 	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public UserInfo() {}
 
-	public UserInfo(String email, String name, String surname, String adress, String city, String state, String phoneNum) {
+	public UserInfo(String email, String name, String surname, String adress, String city, String state, String phoneNum, String password) {
 		super();
 		this.email = email;
 		this.name = name;
@@ -35,6 +48,17 @@ public class UserInfo {
 		this.city = city;
 		this.state = state;
 		this.phoneNum = phoneNum;
+		this.password=password;
+	}
+	public UserInfo(UserInfo user) {
+		super();
+		this.email = user.email;
+		this.name = user.name;
+		this.surname = user.surname;
+		this.adress = user.adress;
+		this.city = user.city;
+		this.state = user.state;
+		this.phoneNum = user.phoneNum;
 	}
 
 	public String getEmail() {

@@ -1,50 +1,64 @@
 package com.ISA2020.farmacia.controller.basic;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 
-
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ISA2020.farmacia.entity.users.Patient;
+import com.ISA2020.farmacia.entity.users.UserInfo;
+import com.ISA2020.farmacia.repository.PatientRepository;
+import com.ISA2020.farmacia.security.ERole;
 import com.ISA2020.farmacia.security.JwtResponse;
 import com.ISA2020.farmacia.security.JwtUtils;
-
+import com.ISA2020.farmacia.security.Role;
 import com.ISA2020.farmacia.security.RoleRepository;
 import com.ISA2020.farmacia.security.User;
 import com.ISA2020.farmacia.security.UserDetailsImpl;
+import com.ISA2020.farmacia.security.UserDetailsServiceImpl;
 import com.ISA2020.farmacia.security.UserRepository;
 
 
 
+
+
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/register")
 public class RegisterController {
+	
+	private static final org.slf4j.Logger logger = LoggerFactory.getLogger(RegisterController.class);
 	@Autowired
 	AuthenticationManager authenticationManager;
 
+	 @Autowired
+	 private UserDetailsServiceImpl service;
 	@Autowired
-	UserRepository userRepository;
+	PatientRepository patientRepo;
 
 	@Autowired
 	RoleRepository roleRepository;
-
 	@Autowired
-	PasswordEncoder encoder;
+	UserRepository userRepository;
+
 
 	@Autowired
 	JwtUtils jwtUtils;
@@ -54,7 +68,7 @@ public class RegisterController {
 
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-
+		logger.info(loginRequest.getPassword());
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateJwtToken(authentication);
 		
@@ -63,8 +77,7 @@ public class RegisterController {
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
 
-		return ResponseEntity.ok(new JwtResponse(jwt, 
-												 userDetails.getId(), 
+		return ResponseEntity.ok(new JwtResponse(jwt,
 												 userDetails.getUsername(), 
 												 roles));
 	}
@@ -72,7 +85,7 @@ public class RegisterController {
 	
 	@GetMapping("/all")
 	public String allAccess() {
-		return "Public";
+		return "signup_form";
 	}
 	
 	@GetMapping("/user")
@@ -98,51 +111,38 @@ public class RegisterController {
 		return "Admin";
 	}
 
-/*	@PostMapping("/signup")
-	public ResponseEntity<?> registerUser(@RequestBody User signUpRequest) {
-		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+	@PostMapping("/signup")
+	public ResponseEntity<String> registerUser(@RequestBody UserInfo signUpRequest, HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
+		if (userRepository.existsByUsername(signUpRequest.getEmail())) {
 			return ResponseEntity
-					.badRequest()
-					.body(new MessageResponse("Error: Username is already taken!"));
+					.badRequest().build();
 		}
 
-		// Create new user's account
-		User user = new User(signUpRequest.getUsername(), 
-							 encoder.encode(signUpRequest.getPassword()));
-
-		Set<String> strRoles = signUpRequest.getRoles();
-		Set<Role> roles = new HashSet<>();
-
-		if (strRoles == null) {
-			Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-			roles.add(userRole);
-		} else {
-			strRoles.forEach(role -> {
-				switch (role) {
-				case "admin":
-					Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-					roles.add(adminRole);
-
-					break;
-				case "mod":
-					Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
-							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-					roles.add(modRole);
-
-					break;
-				default:
-					Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-					roles.add(userRole);
-				}
-			});
-		}
-
-		user.setRoles(roles);
-		userRepository.save(user);
-
-		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-	}*/
+		Patient otherCheck =  patientRepo.save(new Patient(signUpRequest));
+		if(otherCheck!=null) {
+			logger.info(signUpRequest.getPassword());
+			User user = new User(signUpRequest.getEmail(), 
+					 signUpRequest.getPassword());
+				Set<Role> userRole = new HashSet<>();
+					userRole.add(roleRepository.findByName(ERole.PATIENT));
+					user.setRoles(userRole);
+			service.register(user, getSiteURL(request));
+			return ResponseEntity.ok().build();
+		}else return ResponseEntity.badRequest().build();
+			
+	}
+	
+	 private String getSiteURL(HttpServletRequest request) {
+	        String siteURL = request.getRequestURL().toString();
+	        return siteURL.replace(request.getServletPath(), "");
+	    }  
+	 
+	 @GetMapping("/verify")
+	 public String verifyUser(@Param("code") String code) {
+	     if (service.verify(code)) {
+	         return "verify_success";
+	     } else {
+	         return "verify_fail";
+	     }
+	 }
 }

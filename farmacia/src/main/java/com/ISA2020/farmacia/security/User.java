@@ -29,6 +29,11 @@ public class User {
 
 	@Column(nullable=false)
 	private String password;
+	
+	@Column(name = "verification_code", length = 64)
+	private String verificationCode;
+	     
+	private boolean enabled;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(	name = "user_roles", 
@@ -41,6 +46,22 @@ public class User {
 	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
+	}
+
+	public String getVerificationCode() {
+		return verificationCode;
+	}
+
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	public Long getId() {

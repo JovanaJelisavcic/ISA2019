@@ -17,6 +17,10 @@ public class Patient extends UserInfo {
     private List<Drug> allergies;
 	
 	public Patient() {}
+	
+	public Patient(UserInfo user) {
+		super(user);
+	}
 
 	public Patient(List<Drug> allergies) {
 		super();

@@ -52,9 +52,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-			.authorizeRequests().antMatchers("/auth/signin").permitAll()
+			.authorizeRequests().antMatchers("/register/signin").permitAll()
+			.antMatchers("/register/signup").permitAll()
 			.antMatchers("/h2-console/**").permitAll()
-			.antMatchers("/auth/all").permitAll()
+			.antMatchers("/register/all").permitAll()
+			.antMatchers("/register/verify*").permitAll()
+			.antMatchers("**/verify*/**").permitAll()
+			.antMatchers("**/error/**").permitAll()
 			.anyRequest().authenticated();
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
