@@ -72,25 +72,30 @@ public class RegisterController {
 	
 	@GetMapping("/all")
 	public String allAccess() {
-		return "Public Content.";
+		return "Public";
 	}
 	
 	@GetMapping("/user")
-	@PreAuthorize("hasRole('PATIENT') or hasRole('FARMACY_ADMIN') or hasRole('SYS_ADMIN')")
+	@PreAuthorize("hasAuthority('PATIENT') or hasAuthority('FARMACY_ADMIN') or hasAuthority('SYS_ADMIN')")
 	public String userAccess() {
-		return "User Content.";
+		return "any user";
 	}
 
-	@GetMapping("/mod")
-	@PreAuthorize("hasRole('FARMACY_ADMIN')")
-	public String moderatorAccess() {
-		return "Moderator Board.";
+	@GetMapping("/farm")
+	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
+	public String farmAccess() {
+		return "farmacy admin";
+	}
+	@GetMapping("/patient")
+	@PreAuthorize("hasAuthority('PATIENT')")
+	public String patientAccess() {
+		return "farmacy admin";
 	}
 
 	@GetMapping("/admin")
-	@PreAuthorize("hasRole('SYS_ADMIN')")
+	@PreAuthorize("hasAuthority('SYS_ADMIN')")
 	public String adminAccess() {
-		return "Admin Board.";
+		return "Admin";
 	}
 
 /*	@PostMapping("/signup")

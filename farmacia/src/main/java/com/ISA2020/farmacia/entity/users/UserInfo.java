@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class User {
+public class UserInfo {
 	
 	@Id
 	@Column(nullable=false, unique =true,
@@ -24,9 +24,9 @@ public class User {
 	@Column(nullable=false)
 	private String phoneNum;
 	
-	public User() {}
+	public UserInfo() {}
 
-	public User(String email, String name, String surname, String adress, String city, String state, String phoneNum) {
+	public UserInfo(String email, String name, String surname, String adress, String city, String state, String phoneNum) {
 		super();
 		this.email = email;
 		this.name = name;

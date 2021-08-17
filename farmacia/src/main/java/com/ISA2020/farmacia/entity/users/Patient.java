@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import com.ISA2020.farmacia.entity.Drug;
 
 @Entity
-public class Patient extends User {
+public class Patient extends UserInfo {
 
 	@ElementCollection(targetClass=Drug.class)
 	@CollectionTable(joinColumns = @JoinColumn(name = "email"))

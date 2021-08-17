@@ -1,6 +1,7 @@
 package com.ISA2020.farmacia.security;
 
 import java.io.UnsupportedEncodingException;
+import java.security.Key;
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -9,41 +10,44 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JwtUtils {
 	private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-	@Value("${bezkoder.app.jwtSecret}")
+	@Value("${app.jwtSecret}")
 	private String jwtSecret;
-
-	@Value("${bezkoder.app.jwtExpirationMs}")
+	
+	@Value("${app.jwtExpirationMs}")
 	private int jwtExpirationMs;
-
+	Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 	public String generateJwtToken(Authentication authentication) throws UnsupportedEncodingException {
 
 		UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
-
+		
 		return Jwts.builder()
 				.setSubject((userPrincipal.getUsername()))
 				.setIssuedAt(new Date())
 				.setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-				.signWith(SignatureAlgorithm.HS512, jwtSecret.getBytes("UTF-8"))
+				.signWith(key)
 				.compact();
 	}
 
-	public String getUserNameFromJwtToken(String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException, UnsupportedEncodingException {
-		return Jwts.parser().setSigningKey(jwtSecret.getBytes("UTF-8")).parseClaimsJws(token).getBody().getSubject();
+	public String getUserNameFromJwtToken(String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException,  IllegalArgumentException, UnsupportedEncodingException {
+		return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody().getSubject();
 	}
 
 	public boolean validateJwtToken(String authToken) throws UnsupportedEncodingException {
 		try {
-			Jwts.parser().setSigningKey(jwtSecret.getBytes("UTF-8")).parseClaimsJws(authToken);
+			Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(authToken);
 			return true;
-		} catch (SignatureException e) {
-			logger.error("Invalid JWT signature: {}", e.getMessage());
+		
 		} catch (MalformedJwtException e) {
 			logger.error("Invalid JWT token: {}", e.getMessage());
 		} catch (ExpiredJwtException e) {

@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 import com.ISA2020.farmacia.entity.Farmacy;
 
 @Entity
-public class Pharmacist extends User {
+public class Pharmacist extends UserInfo {
 
 	@ManyToOne
 	@JoinColumn(name = "farmacyId")
