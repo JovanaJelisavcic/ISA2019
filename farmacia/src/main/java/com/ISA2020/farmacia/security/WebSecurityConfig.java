@@ -3,6 +3,7 @@ package com.ISA2020.farmacia.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -62,6 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/register/verify*").permitAll()
 			.antMatchers("**/verify*/**").permitAll()
 			.antMatchers("**/error/**").permitAll()
+			.antMatchers(HttpMethod.GET,"/search/farmacy/{criteria}").access("not(hasAuthority('FARMACY_ADMIN'))")
 			.anyRequest().authenticated();
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

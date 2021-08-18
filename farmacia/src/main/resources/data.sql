@@ -100,3 +100,138 @@ insert into patient (email, name, surname, adress, city, state, phone_num) value
 insert into sys_admin (email, name, surname, adress, city, state, phone_num) values ('gmilesop1@house.gov', 'Cornell', 'Jayme', '494 Harper Park', 'Businovo', 'Russia', '672-670-6543');
 insert into farmacy_admin (email, name, surname, adress, city, state, phone_num) values ('vleathley0@fastcompany.com', 'Cornell', 'Jayme', '494 Harper Park', 'Businovo', 'Russia', '672-670-6543');
 
+
+
+
+
+insert into FARMACY (farmacy_id, adress, name, stars) values (1, '179 Fieldstone Lane, Uzice', 'Redunca redunca', 2.3);
+insert into FARMACY (farmacy_id, adress, name, stars) values (2, '3487 Hauk Junction, Uzice', 'Antechinus flavipes', 3.6);
+insert into FARMACY (farmacy_id, adress, name, stars) values (3, '9094 Lerdahl Drive, Beograd', 'Castor canadensis', 2.5);
+insert into FARMACY (farmacy_id, adress, name, stars) values (4, '18226 Anniversary Point, Vranje', 'Phalaropus fulicarius', 4.8);
+insert into FARMACY (farmacy_id, adress, name, stars) values (5, '1 Meadow Valley Road, Pirot', 'Gazella thompsonii', 2.4);
+insert into FARMACY (farmacy_id, adress, name, stars) values (6, '140 Farmco Lane, Pirot', 'Estrilda erythronotos', 1.1);
+insert into FARMACY (farmacy_id, adress, name, stars) values (7, '9 Little Fleur Alley, Leskovac', 'Uraeginthus angolensis', 3.6);
+insert into FARMACY (farmacy_id, adress, name, stars) values (8, '31 Brickson Park Center, Vranje', 'Macropus parryi', 4.5);
+insert into FARMACY (farmacy_id, adress, name, stars) values (9, '36321 Maple Hill, Uzice', 'Naja nivea', 3.6);
+insert into FARMACY (farmacy_id, adress, name, stars) values (10, '7275 Gerald Plaza, Beograd', 'Paraxerus cepapi', 3.7);
+insert into FARMACY (farmacy_id, adress, name, stars) values (11, '31 East Hill, Beograd', 'Dolichitus patagonum', 4.2);
+insert into FARMACY (farmacy_id, adress, name, stars) values (12, '91678 Autumn Leaf Road, Beograd', 'Spermophilus armatus', 4.9);
+insert into FARMACY (farmacy_id, adress, name, stars) values (13, '6038 Sycamore Avenue, Uzice', 'Pelecans onocratalus', 1.4);
+insert into FARMACY (farmacy_id, adress, name, stars) values (14, '9 Center Alley, Vranje', 'Colobus guerza', 4.1);
+insert into FARMACY (farmacy_id, adress, name, stars) values (15, '4661 Elmside Lane, Pirot', 'Casmerodius albus', 3.3);
+insert into FARMACY (farmacy_id, adress, name, stars) values (16, '4554 Debs Hill, Uzice', 'Sciurus vulgaris', 1.9);
+insert into FARMACY (farmacy_id, adress, name, stars) values (17, '0 Farwell Street, Beograd', 'Corvus albus', 1.5);
+insert into FARMACY (farmacy_id, adress, name, stars) values (18, '371 Village Trail, Novi Sad', 'Acrantophis madagascariensis', 4.4);
+insert into FARMACY (farmacy_id, adress, name, stars) values (19, '19 Heath Parkway, Novi Sad', 'Ninox superciliaris', 3.0);
+insert into FARMACY (farmacy_id, adress, name, stars) values (20, '074 Division Hill, Novi Sad', 'Thylogale stigmatica', 1.3);
+
+
+
+
+
+
+
+insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('S90465', 'TAZORAC', 'ANTIBIOTIC', 'Aenean sit amet justo.', 'Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.
+
+Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.', 'Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.');
+insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('T474X4A', 'CARBON DIOXIDE', 'ANTIBIOTIC', 'Nullam sit amet turpis elementum ligula vehicula consequat.', 'Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.
+
+Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.', 'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.
+
+Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.
+
+Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.
+
+Fusce consequat. Nulla nisl. Nunc nisl.');
+insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('M1215', 'Avon Sun Sport', 'ANTIBIOTIC', 'Sed accumsan felis.', 'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.', 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.
+
+Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.');
+insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('S61207S', 'Doxepin Hydrochloride', 'ANTIBIOTIC', 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla.', 'Sed ante. Vivamus tortor. Duis mattis egestas metus.
+
+Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.', 'Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.');
+insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('T81522A', 'Stratuscare Antacid And Antigas', 'ANTIBIOTIC', 'Nulla suscipit ligula in lacus.',  'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.
+
+Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.', 'Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.
+
+Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.
+
+Fusce consequat. Nulla nisl. Nunc nisl.
+
+Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.');
+insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('A485', 'Triple Antibiotic Plus Pain Relief', 'ANESTHETIC', 'Cras in purus eu magna vulputate luctus.', 'Sed ante. Vivamus tortor. Duis mattis egestas metus.
+
+Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.', 'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.');
+insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('S11014D', 'Depo-Provera', 'ANESTHETIC', 'Nulla tellus.','Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.
+
+Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.
+
+Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.
+
+Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.');
+insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('S93312D', 'Mucinex Fast-Max', 'ANESTHETIC', 'Phasellus sit amet erat.',  'Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.', 'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.');
+insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('H02134', 'Arthritis Relief', 'ANESTHETIC', 'Sed ante.', 'Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.
+
+Phasellus in felis. Donec semper sapien a libero. Nam dui.', 'Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.');
+insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('H4043X2', 'Vitamin A D', 'ANESTHETIC', 'Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.', 'Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.
+
+Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.', 'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.
+
+Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.');
+insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('M05219', 'Nutropin AQ NuSpin 10', 'ANTIHISTAMINE', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.
+
+Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.', 'Phasellus in felis. Donec semper sapien a libero. Nam dui.');
+insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('S066X1D', 'COUGH AND COLD KIDS RELIEF', 'ANTIHISTAMINE', 'Nam dui.', 'Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.
+
+Sed ante. Vivamus tortor. Duis mattis egestas metus.', 'Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.
+
+Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.');
+insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('S499', 'Gyno Complex', 'ANTIHISTAMINE', 'Integer non velit.',  'Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.
+
+Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.', 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.
+
+Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+
+Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.
+
+Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.');
+insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('O410', 'Fluconazole', 'ANTIHISTAMINE', 'Vivamus tortor.',  'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.', 'Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.');
+insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('T532X2', 'Varicose Veins - Phlebitis', 'ANTIHISTAMINE', 'Nulla suscipit ligula in lacus.', 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.
+
+Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 'Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.
+
+Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.');
+insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('M724', 'Shark Cartilage', 'ANTIHISTAMINE', 'Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.', 'Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.', 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.
+
+Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.');
+insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('S59129G', 'SEUK', 'ANTIHISTAMINE', 'In hac habitasse platea dictumst.', 'In congue. Etiam justo. Etiam pretium iaculis justo.
+
+In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.', 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.
+
+Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.
+
+Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.');
+insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('S95991D', 'PHOTO FINISH MORE THAN PRIMER BLEMISH CONTROL', 'ANTIDEPRESIV', 'Donec dapibus.', 'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.', 'Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.
+
+Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.
+
+Phasellus in felis. Donec semper sapien a libero. Nam dui.');
+insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('M4004', 'Cranberry', 'ANTIDEPRESIV', 'Sed sagittis.',  'Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.', 'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.
+
+Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.
+
+Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.
+
+Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.');
+insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('T550X3', 'Hydralazine Hydrochloride', 'ANTIDEPRESIV', 'In congue.', 'Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.', 'Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.');
+
+insert into DRUG_REPLACEMENT (code, replacement_code) values ('S90465','T474X4A');
+insert into DRUG_REPLACEMENT (code, replacement_code) values ('S90465','M1215');
+insert into DRUG_REPLACEMENT (code, replacement_code) values ('S90465', 'S61207S');
+insert into DRUG_REPLACEMENT (code, replacement_code) values ('S90465','T532X2');
+insert into DRUG_REPLACEMENT (code, replacement_code) values ('S90465','O410');
+insert into DRUG_REPLACEMENT (code, replacement_code) values ('S90465','S499');
+insert into DRUG_REPLACEMENT (code, replacement_code) values ('T550X3','M4004');
+insert into DRUG_REPLACEMENT (code, replacement_code) values ('T550X3','S95991D');
+
+
+

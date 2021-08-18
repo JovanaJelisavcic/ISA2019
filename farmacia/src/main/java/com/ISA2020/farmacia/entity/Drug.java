@@ -1,10 +1,15 @@
 package com.ISA2020.farmacia.entity;
 
+import java.util.Set;
+
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 
 
 @Entity
@@ -16,18 +21,20 @@ public class Drug {
 	private String name;
 	@Enumerated(EnumType.STRING)
 	private DrugType type;
-	@Column(nullable=false)
+	@Column(nullable=false, length = 2000)
 	private String contraindications;
-	@Column(nullable=false)
+	@Column(nullable=false, length = 2000)
 	private String composition;
 	@Column(nullable=false)
 	private String prescriptionMetrics;
-	private String replacement;
+	@ElementCollection(targetClass=Drug.class)
+	@CollectionTable(joinColumns = @JoinColumn(name = "code"))
+	private Set<Drug> replacement;
 	
 	public Drug() {}
 
 	public Drug(String code, String name, DrugType type, String contraindications, String composition,
-			String prescriptionMetrics, String replacement) {
+			String prescriptionMetrics) {
 		super();
 		this.code = code;
 		this.name = name;
@@ -35,7 +42,6 @@ public class Drug {
 		this.contraindications = contraindications;
 		this.composition = composition;
 		this.prescriptionMetrics = prescriptionMetrics;
-		this.replacement = replacement;
 	}
 
 	public String getCode() {
@@ -86,12 +92,14 @@ public class Drug {
 		this.prescriptionMetrics = prescriptionMetrics;
 	}
 
-	public String getReplacement() {
+	public Set<Drug> getReplacement() {
 		return replacement;
 	}
 
-	public void setReplacement(String replacement) {
+	public void setReplacement(Set<Drug> replacement) {
 		this.replacement = replacement;
 	}
+
+	
 	
 }
