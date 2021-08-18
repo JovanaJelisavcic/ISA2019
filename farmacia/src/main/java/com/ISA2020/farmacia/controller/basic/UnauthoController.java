@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 @RestController
 @RequestMapping("/unautho")
-public class RetrieveController {
+public class UnauthoController {
 	
 	
 	@Autowired 

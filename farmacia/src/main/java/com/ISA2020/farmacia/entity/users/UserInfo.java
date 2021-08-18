@@ -7,26 +7,38 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 
+import com.ISA2020.farmacia.entity.Views;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonView;
+
 @MappedSuperclass
 public class UserInfo {
 	
 	@Id
 	@Column(nullable=false, unique =true,
 		        updatable=false)
+	@JsonView(Views.Simple.class)
 	private String email;
 	@Column(nullable=false)
+	@JsonView(Views.Simple.class)
 	private String name;
 	@Column(nullable=false)
+	@JsonView(Views.Simple.class)
 	private String surname;
 	@Column(nullable=false)
+	@JsonView(Views.Simple.class)
 	private String adress;
 	@Column(nullable=false)
+	@JsonView(Views.Simple.class)
 	private String city;
 	@Column(nullable=false)
+	@JsonView(Views.Simple.class)
 	private String state;
 	@Column(nullable=false)
+	@JsonView(Views.Simple.class)
 	private String phoneNum;
 	@Transient
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String password;
 	
 	public String getPassword() {
