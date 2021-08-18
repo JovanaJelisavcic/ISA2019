@@ -233,5 +233,46 @@ insert into DRUG_REPLACEMENT (code, replacement_code) values ('S90465','S499');
 insert into DRUG_REPLACEMENT (code, replacement_code) values ('T550X3','M4004');
 insert into DRUG_REPLACEMENT (code, replacement_code) values ('T550X3','S95991D');
 
+ 
 
 
+insert into DRUG_FARMACIES (DRUG_CODE, FARMACIES_FARMACY_ID ) values ('T474X4A', 1);
+insert into DRUG_FARMACIES (DRUG_CODE, FARMACIES_FARMACY_ID ) values ('T474X4A', 3);
+insert into DRUG_FARMACIES (DRUG_CODE, FARMACIES_FARMACY_ID ) values ('T474X4A', 4);
+insert into DRUG_FARMACIES (DRUG_CODE, FARMACIES_FARMACY_ID ) values ('T474X4A', 5);
+insert into DRUG_FARMACIES (DRUG_CODE, FARMACIES_FARMACY_ID ) values ('T474X4A', 6);
+insert into DRUG_FARMACIES (DRUG_CODE, FARMACIES_FARMACY_ID ) values ('T474X4A', 7);
+insert into DRUG_FARMACIES (DRUG_CODE, FARMACIES_FARMACY_ID ) values ('M1215', 1);
+insert into DRUG_FARMACIES (DRUG_CODE, FARMACIES_FARMACY_ID ) values ('M1215', 3);
+insert into DRUG_FARMACIES (DRUG_CODE, FARMACIES_FARMACY_ID ) values ('M1215', 4);
+insert into DRUG_FARMACIES (DRUG_CODE, FARMACIES_FARMACY_ID ) values ('M1215', 5);
+insert into DRUG_FARMACIES (DRUG_CODE, FARMACIES_FARMACY_ID ) values ('M1215', 6);
+insert into DRUG_FARMACIES (DRUG_CODE, FARMACIES_FARMACY_ID ) values ('M1215', 7);
+insert into DRUG_FARMACIES (DRUG_CODE, FARMACIES_FARMACY_ID ) values ('S61207S', 5);
+insert into DRUG_FARMACIES (DRUG_CODE, FARMACIES_FARMACY_ID ) values ('S61207S', 6);
+insert into DRUG_FARMACIES (DRUG_CODE, FARMACIES_FARMACY_ID ) values ('S61207S', 7);
+insert into DRUG_FARMACIES (DRUG_CODE, FARMACIES_FARMACY_ID ) values ('T532X2', 1);
+insert into DRUG_FARMACIES (DRUG_CODE, FARMACIES_FARMACY_ID ) values ('T532X2', 3);
+insert into DRUG_FARMACIES (DRUG_CODE, FARMACIES_FARMACY_ID ) values ('T532X2', 4);
+insert into DRUG_FARMACIES (DRUG_CODE, FARMACIES_FARMACY_ID ) values ('T532X2', 2);
+
+
+insert into PRICE(ID,PRICE,CODE,FARMACY_ID) values (1, 19.9, 'T474X4A', 1);
+insert into PRICE(ID,PRICE,CODE,FARMACY_ID) values (2, 5.2,'T474X4A', 3);
+insert into PRICE(ID,PRICE,CODE,FARMACY_ID) values (3, 9,'T474X4A', 4);
+insert into PRICE(ID,PRICE,CODE,FARMACY_ID) values (4,2.1,'T474X4A', 5);
+insert into PRICE(ID,PRICE,CODE,FARMACY_ID) values (5,0.97,'T474X4A', 6);
+insert into PRICE(ID,PRICE,CODE,FARMACY_ID) values (6,0.87,'T474X4A', 7);
+insert into PRICE(ID,PRICE,CODE,FARMACY_ID) values (7,2.1,'M1215', 1);
+insert into PRICE(ID,PRICE,CODE,FARMACY_ID) values (8,5.4,'M1215', 3);
+insert into PRICE(ID,PRICE,CODE,FARMACY_ID) values (9,9.4,'M1215', 4);
+insert into PRICE(ID,PRICE,CODE,FARMACY_ID) values (10,5.6,'M1215', 5);
+insert into PRICE(ID,PRICE,CODE,FARMACY_ID) values (11, 0.4,'M1215', 6);
+insert into PRICE(ID,PRICE,CODE,FARMACY_ID) values (12,9,'M1215', 7);
+insert into PRICE(ID,PRICE,CODE,FARMACY_ID) values (13,1.6,'S61207S', 5);
+insert into PRICE(ID,PRICE,CODE,FARMACY_ID) values (14,0.8,'S61207S', 6);
+insert into PRICE(ID,PRICE,CODE,FARMACY_ID) values (15,2.9,'S61207S', 7);
+insert into PRICE(ID,PRICE,CODE,FARMACY_ID) values (16,10.2,'T532X2', 1);
+insert into PRICE(ID,PRICE,CODE,FARMACY_ID) values (17,4.5,'T532X2', 3);
+insert into PRICE(ID,PRICE,CODE,FARMACY_ID) values (18,2.3,'T532X2', 4);
+insert into PRICE(ID,PRICE,CODE,FARMACY_ID) values (19,1.5,'T532X2', 2);

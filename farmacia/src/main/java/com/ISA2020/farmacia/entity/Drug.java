@@ -1,6 +1,6 @@
 package com.ISA2020.farmacia.entity;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -10,26 +10,40 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonView;
 
 
 @Entity
 public class Drug {
 
 	@Id
+	@JsonView(Views.Simple.class)
 	private String code;
 	@Column(nullable=false)
+	@JsonView(Views.Simple.class)
 	private String name;
 	@Enumerated(EnumType.STRING)
+	@JsonView(Views.Simple.class)
 	private DrugType type;
 	@Column(nullable=false, length = 2000)
+	@JsonView(Views.Simple.class)
 	private String contraindications;
 	@Column(nullable=false, length = 2000)
+	@JsonView(Views.Simple.class)
 	private String composition;
 	@Column(nullable=false)
+	@JsonView(Views.Simple.class)
 	private String prescriptionMetrics;
 	@ElementCollection(targetClass=Drug.class)
 	@CollectionTable(joinColumns = @JoinColumn(name = "code"))
-	private Set<Drug> replacement;
+	@JsonView(Views.VeryDetailed.class)
+	private List<Drug> replacement;
+	
+	@ManyToMany
+	@JsonView(Views.Detailed.class)
+	private List<Farmacy> farmacies;
 	
 	public Drug() {}
 
@@ -92,12 +106,20 @@ public class Drug {
 		this.prescriptionMetrics = prescriptionMetrics;
 	}
 
-	public Set<Drug> getReplacement() {
+	public List<Drug> getReplacement() {
 		return replacement;
 	}
 
-	public void setReplacement(Set<Drug> replacement) {
+	public void setReplacement(List<Drug> replacement) {
 		this.replacement = replacement;
+	}
+
+	public List<Farmacy> getFarmacies() {
+		return farmacies;
+	}
+
+	public void setFarmacies(List<Farmacy> farmacies) {
+		this.farmacies = farmacies;
 	}
 
 	

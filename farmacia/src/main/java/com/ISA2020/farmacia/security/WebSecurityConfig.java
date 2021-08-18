@@ -63,6 +63,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/register/verify*").permitAll()
 			.antMatchers("**/verify*/**").permitAll()
 			.antMatchers("**/error/**").permitAll()
+			.antMatchers("/unautho/**").permitAll()
+			.antMatchers("/search/drugs/{name}").permitAll()
 			.antMatchers(HttpMethod.GET,"/search/farmacy/{criteria}").access("not(hasAuthority('FARMACY_ADMIN'))")
 			.anyRequest().authenticated();
 
