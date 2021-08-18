@@ -40,6 +40,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		logger.info(username);
 		User user = userRepository.findByUsername(username)
 				.orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 	
@@ -48,6 +49,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	
 	public void register(User user, String siteURL)
 	        throws UnsupportedEncodingException, MessagingException {
+		logger.info(user.getUsername());
 		logger.info(user.getPassword());
 	    String encodedPassword = passwordEncoder.encode(user.getPassword());
 	    logger.info(encodedPassword);

@@ -78,8 +78,7 @@ public class RegisterController {
 				.collect(Collectors.toList());
 
 		return ResponseEntity.ok(new JwtResponse(jwt,
-												 userDetails.getUsername(), 
-												 roles));
+												 loginRequest.getUsername(), roles));
 	}
 	
 	

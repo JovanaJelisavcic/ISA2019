@@ -27,6 +27,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	UserDetailsServiceImpl userDetailsService;
 
 
+	 @Autowired
+	 MyOwnAuthenticationEntryPoint myOwnAuthenticationEntryPoint;
 	@Bean
 	public AuthTokenFilter authenticationJwtTokenFilter() {
 		return new AuthTokenFilter();
@@ -51,6 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable()
+		.exceptionHandling().authenticationEntryPoint(myOwnAuthenticationEntryPoint).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.authorizeRequests().antMatchers("/register/signin").permitAll()
 			.antMatchers("/register/signup").permitAll()
