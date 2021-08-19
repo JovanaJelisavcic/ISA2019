@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -27,7 +28,12 @@ public class Farmacy {
 	 @JsonView(Views.Simple.class)
 	private String adress;
 	 @JsonView(Views.Simple.class)
+	 @Column(columnDefinition="Decimal(2,1)")
+	 @JsonInclude(JsonInclude.Include.NON_NULL)
 	private float stars;
+	 @JsonView(Views.Simple.class)
+	 @JsonInclude(JsonInclude.Include.NON_NULL)
+	 private String description;
 	 
 	@OneToMany(mappedBy = "farmacy", fetch = FetchType.LAZY,
 		            cascade = CascadeType.ALL, targetEntity = Price.class)
@@ -38,11 +44,12 @@ public class Farmacy {
 	
 	public Farmacy() {}
 	
-	public Farmacy(String name, String adress, float stars) {
+	public Farmacy(String name, String adress, float stars, String description) {
 		super();
 		this.name = name;
 		this.adress = adress;
 		this.stars = stars;
+		this.description = description;
 	}
 	public String getId() {
 		return farmacyId;
@@ -78,7 +85,13 @@ public class Farmacy {
 	}
 
 	
-
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 	
 	
 	

@@ -12,14 +12,14 @@ public class FarmacyAdmin extends UserInfo {
 	@ManyToOne
 	@JoinColumn(name = "farmacyId")
 	private Farmacy farmacy;
-	private String description;
+	
 	
 	public FarmacyAdmin() {}
 	
-	public FarmacyAdmin(Farmacy farmacy, String description) {
+	public FarmacyAdmin(Farmacy farmacy) {
 		super();
 		this.farmacy = farmacy;
-		this.description = description;
+		
 	}
 
 	public Farmacy getFarmacy() {
@@ -28,12 +28,23 @@ public class FarmacyAdmin extends UserInfo {
 	public void setFarmacy(Farmacy farmacy) {
 		this.farmacy = farmacy;
 	}
-	public String getDescription() {
-		return description;
+
+	public void changeUserInfo(UserInfo farmacyadmin) {
+		if(!farmacyadmin.getAdress().equals(super.getAdress()))
+			super.setAdress(farmacyadmin.getAdress());
+		if(!farmacyadmin.getCity().equals(super.getCity()))
+			super.setCity(farmacyadmin.getCity());
+		if(!farmacyadmin.getName().equals(super.getName()))
+			super.setName(farmacyadmin.getName());
+		if(!farmacyadmin.getPhoneNum().equals(super.getPhoneNum()))
+			super.setPhoneNum(farmacyadmin.getPhoneNum());
+		if(!farmacyadmin.getState().equals(super.getState()))
+			super.setState(farmacyadmin.getState());
+		if(!farmacyadmin.getSurname().equals(super.getSurname()))
+			super.setSurname(farmacyadmin.getSurname());
+		
 	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
+
 	
 	
 }

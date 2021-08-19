@@ -98,36 +98,35 @@ insert into patient (email, name, surname, adress, city, state, phone_num) value
 insert into patient (email, name, surname, adress, city, state, phone_num) values ('gbusseys@canalblog.com', 'Jodie', 'Flahy', '2 Thackeray Lane', 'Dangmu', 'China', '684-507-7680');
 insert into patient (email, name, surname, adress, city, state, phone_num) values ('kellert@cbsnews.com', 'Axel', 'McVanamy', '17902 Farwell Trail', 'Delmiro Gouveia', 'Brazil', '974-212-1856');
 insert into sys_admin (email, name, surname, adress, city, state, phone_num) values ('gmilesop1@house.gov', 'Cornell', 'Jayme', '494 Harper Park', 'Businovo', 'Russia', '672-670-6543');
-insert into farmacy_admin (email, name, surname, adress, city, state, phone_num) values ('vleathley0@fastcompany.com', 'Cornell', 'Jayme', '494 Harper Park', 'Businovo', 'Russia', '672-670-6543');
 
 
 
 
 
-insert into FARMACY (farmacy_id, adress, name, stars) values (1, '179 Fieldstone Lane, Uzice', 'Redunca redunca', 2.3);
-insert into FARMACY (farmacy_id, adress, name, stars) values (2, '3487 Hauk Junction, Uzice', 'Antechinus flavipes', 3.6);
-insert into FARMACY (farmacy_id, adress, name, stars) values (3, '9094 Lerdahl Drive, Beograd', 'Castor canadensis', 2.5);
-insert into FARMACY (farmacy_id, adress, name, stars) values (4, '18226 Anniversary Point, Vranje', 'Phalaropus fulicarius', 4.8);
-insert into FARMACY (farmacy_id, adress, name, stars) values (5, '1 Meadow Valley Road, Pirot', 'Gazella thompsonii', 2.4);
-insert into FARMACY (farmacy_id, adress, name, stars) values (6, '140 Farmco Lane, Pirot', 'Estrilda erythronotos', 1.1);
-insert into FARMACY (farmacy_id, adress, name, stars) values (7, '9 Little Fleur Alley, Leskovac', 'Uraeginthus angolensis', 3.6);
-insert into FARMACY (farmacy_id, adress, name, stars) values (8, '31 Brickson Park Center, Vranje', 'Macropus parryi', 4.5);
-insert into FARMACY (farmacy_id, adress, name, stars) values (9, '36321 Maple Hill, Uzice', 'Naja nivea', 3.6);
-insert into FARMACY (farmacy_id, adress, name, stars) values (10, '7275 Gerald Plaza, Beograd', 'Paraxerus cepapi', 3.7);
-insert into FARMACY (farmacy_id, adress, name, stars) values (11, '31 East Hill, Beograd', 'Dolichitus patagonum', 4.2);
-insert into FARMACY (farmacy_id, adress, name, stars) values (12, '91678 Autumn Leaf Road, Beograd', 'Spermophilus armatus', 4.9);
-insert into FARMACY (farmacy_id, adress, name, stars) values (13, '6038 Sycamore Avenue, Uzice', 'Pelecans onocratalus', 1.4);
-insert into FARMACY (farmacy_id, adress, name, stars) values (14, '9 Center Alley, Vranje', 'Colobus guerza', 4.1);
-insert into FARMACY (farmacy_id, adress, name, stars) values (15, '4661 Elmside Lane, Pirot', 'Casmerodius albus', 3.3);
-insert into FARMACY (farmacy_id, adress, name, stars) values (16, '4554 Debs Hill, Uzice', 'Sciurus vulgaris', 1.9);
-insert into FARMACY (farmacy_id, adress, name, stars) values (17, '0 Farwell Street, Beograd', 'Corvus albus', 1.5);
-insert into FARMACY (farmacy_id, adress, name, stars) values (18, '371 Village Trail, Novi Sad', 'Acrantophis madagascariensis', 4.4);
-insert into FARMACY (farmacy_id, adress, name, stars) values (19, '19 Heath Parkway, Novi Sad', 'Ninox superciliaris', 3.0);
-insert into FARMACY (farmacy_id, adress, name, stars) values (20, '074 Division Hill, Novi Sad', 'Thylogale stigmatica', 1.3);
+
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (1, '179 Fieldstone Lane, Uzice', 'Redunca redunca', 2.3, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (2, '3487 Hauk Junction, Uzice', 'Antechinus flavipes', 3.6, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (3, '9094 Lerdahl Drive, Beograd', 'Castor canadensis', 2.5, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (4, '18226 Anniversary Point, Vranje', 'Phalaropus fulicarius', 4.8, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (5, '1 Meadow Valley Road, Pirot', 'Gazella thompsonii', 2.4, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (6, '140 Farmco Lane, Pirot', 'Estrilda erythronotos', 1.1, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (7, '9 Little Fleur Alley, Leskovac', 'Uraeginthus angolensis', 3.6, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (8, '31 Brickson Park Center, Vranje', 'Macropus parryi', 4.5, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (9, '36321 Maple Hill, Uzice', 'Naja nivea', 3.6, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (10, '7275 Gerald Plaza, Beograd', 'Paraxerus cepapi', 3.7, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (11, '31 East Hill, Beograd', 'Dolichitus patagonum', 4.2, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (12, '91678 Autumn Leaf Road, Beograd', 'Spermophilus armatus', 4.9, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (13, '6038 Sycamore Avenue, Uzice', 'Pelecans onocratalus', 1.4, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (14, '9 Center Alley, Vranje', 'Colobus guerza', 4.1, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (15, '4661 Elmside Lane, Pirot', 'Casmerodius albus', 3.3, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (16, '4554 Debs Hill, Uzice', 'Sciurus vulgaris', 1.9, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (17, '0 Farwell Street, Beograd', 'Corvus albus', 1.5, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (18, '371 Village Trail, Novi Sad', 'Acrantophis madagascariensis', 4.4, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (19, '19 Heath Parkway, Novi Sad', 'Ninox superciliaris', 3.0, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (20, '074 Division Hill, Novi Sad', 'Thylogale stigmatica', 1.3, 'Placed in busy place, works all the time');
 
 
-
-
+insert into farmacy_admin (email, name, surname, adress, city, state, phone_num, farmacy_id) values ('vleathley0@fastcompany.com', 'Cornell', 'Jayme', '494 Harper Park', 'Businovo', 'Russia', '672-670-6543', 1);
 
 
 

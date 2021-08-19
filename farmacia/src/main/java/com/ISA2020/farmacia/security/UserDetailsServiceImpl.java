@@ -107,5 +107,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	    }
 	     
 	}
+	
+	public boolean checkIfValidOldPassword(UserDetails user, String oldPassword) {
+		User old =userRepository.findByUsername(user.getUsername()).get();
+		if(passwordEncoder.matches(oldPassword, old.getPassword())) return true;
+		else return false;
+		
+	}
+
+	public void changeUserPassword(UserDetails user, String password) {
+		User old =userRepository.findByUsername(user.getUsername()).get();
+		old.setPassword(passwordEncoder.encode(password));
+		userRepository.save(old);
+		
+	}
 
 }

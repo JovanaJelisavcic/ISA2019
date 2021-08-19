@@ -40,21 +40,22 @@ public class Patient extends UserInfo {
 		this.allergies.addAll(drugs);
 	}
 
-	public void changeUserInfo(UserInfo user) {
-		if(!user.getAdress().equals(super.getAdress()) && user.getAdress()!=null)
-			super.setAdress(user.getAdress());
-		if(!user.getCity().equals(super.getCity()) && user.getCity()!=null)
-			super.setCity(user.getCity());
-		if(!user.getName().equals(super.getName()) && user.getName()!=null)
-			super.setName(user.getName());
-		if(!user.getPhoneNum().equals(super.getPhoneNum()) && user.getPhoneNum()!=null)
-			super.setPhoneNum(user.getPhoneNum());
-		if(!user.getState().equals(super.getState()) && user.getState()!=null)
-			super.setState(user.getState());
-		if(!user.getSurname().equals(super.getSurname()) && user.getSurname()!=null)
-			super.setSurname(user.getSurname());
+	public void changeUserInfo(UserInfo farmacyadmin) {
+		if(!farmacyadmin.getAdress().equals(super.getAdress()))
+			super.setAdress(farmacyadmin.getAdress());
+		if(!farmacyadmin.getCity().equals(super.getCity()))
+			super.setCity(farmacyadmin.getCity());
+		if(!farmacyadmin.getName().equals(super.getName()))
+			super.setName(farmacyadmin.getName());
+		if(!farmacyadmin.getPhoneNum().equals(super.getPhoneNum()))
+			super.setPhoneNum(farmacyadmin.getPhoneNum());
+		if(!farmacyadmin.getState().equals(super.getState()))
+			super.setState(farmacyadmin.getState());
+		if(!farmacyadmin.getSurname().equals(super.getSurname()))
+			super.setSurname(farmacyadmin.getSurname());
 		
 	}
+
 
 	
 
