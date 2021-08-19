@@ -104,6 +104,20 @@ public class Farmacy {
 		this.drugs = drugs;
 	}
 
+	public boolean addPrice(Price price) {
+		boolean check = true;
+		for(Price p : prices) {
+			if(p.getDrug().equals(price.getDrug()))
+					if(price.getStandsFrom().isBefore(p.getStandsUntill()) )
+						check=false;
+		}
+		if(check) {
+		prices.add(price);
+		return true;
+		}
+		else return false;
+	}
+
 
 	
 	

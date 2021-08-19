@@ -1,4 +1,4 @@
-package com.ISA2020.farmacia.controller.search;
+package com.ISA2020.farmacia.controller.basic;
 
 import java.util.List;
 
