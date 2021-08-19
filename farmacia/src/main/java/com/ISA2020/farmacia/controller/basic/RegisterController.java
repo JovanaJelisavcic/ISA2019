@@ -1,6 +1,10 @@
 package com.ISA2020.farmacia.controller.basic;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import org.springframework.http.HttpHeaders;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -67,7 +71,7 @@ public class RegisterController {
 	JwtUtils jwtUtils;
 
 	@PostMapping("/signin")
-	public ResponseEntity<?> authenticateUser(@RequestBody User loginRequest) throws UnsupportedEncodingException {
+	public ResponseEntity<?> authenticateUser(@RequestBody User loginRequest) throws UnsupportedEncodingException, URISyntaxException {
 
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -79,7 +83,6 @@ public class RegisterController {
 		List<String> roles = userDetails.getAuthorities().stream()
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
-
 		return ResponseEntity.ok(new JwtResponse(jwt,
 												 loginRequest.getUsername(), roles));
 	}
@@ -150,7 +153,7 @@ public class RegisterController {
 	 
 	 @PostMapping("/changePassword")
 	 @PreAuthorize("hasAuthority('FARMACY_ADMIN')")
-		public ResponseEntity<?> changePassword(@RequestBody PasswordChangeRequest passwordChange) {
+		public ResponseEntity<?> changePassword(@RequestBody PasswordChangeRequest passwordChange) throws URISyntaxException {
 		 UserDetails user = service.loadUserByUsername(
 			      SecurityContextHolder.getContext().getAuthentication().getName());
 			    
@@ -158,8 +161,9 @@ public class RegisterController {
 			       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			    }
 			    service.changeUserPassword(user, passwordChange.getPassword());
-			    return new ResponseEntity<>(HttpStatus.OK);
-			
+			    HttpHeaders headers = new HttpHeaders();
+				headers.setLocation(new URI("/signin"));   
+				return new ResponseEntity<>(headers,HttpStatus.OK);
 				
 		}
 }

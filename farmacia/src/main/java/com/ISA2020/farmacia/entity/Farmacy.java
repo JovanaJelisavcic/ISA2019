@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -40,6 +41,9 @@ public class Farmacy {
 	@JsonView(Views.Detailed.class)
 	 private List<Price> prices; 
 	 
+	@ManyToMany(mappedBy = "farmacies")
+	@JsonView(Views.VeryDetailed.class)
+	private List<Drug> drugs;
 	 
 	
 	public Farmacy() {}
@@ -91,6 +95,16 @@ public class Farmacy {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public List<Drug> getDrugs() {
+		return drugs;
+	}
+
+	public void setDrugs(List<Drug> drugs) {
+		this.drugs = drugs;
+	}
+
+
 	
 	
 	

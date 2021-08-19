@@ -10,6 +10,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -42,6 +43,10 @@ public class Drug {
 	private List<Drug> replacement;
 	
 	@ManyToMany
+	@JoinTable(
+			  name = "drug_farmacies", 
+			  joinColumns = @JoinColumn(name = "code"), 
+			  inverseJoinColumns = @JoinColumn(name = "farmacy_id"))
 	@JsonView(Views.Detailed.class)
 	private List<Farmacy> farmacies;
 	
@@ -120,6 +125,22 @@ public class Drug {
 
 	public void setFarmacies(List<Farmacy> farmacies) {
 		this.farmacies = farmacies;
+	}
+
+	public boolean addFarmacy(Farmacy farmacy) {
+		if(farmacies.contains(farmacy)) return false;
+		else {
+			farmacies.add(farmacy);
+			return true;
+		}
+	}
+
+	public boolean deleteFarmacy(Farmacy farmacy) {
+		if(!farmacies.contains(farmacy)) return false;
+		else {
+			farmacies.remove(farmacy);
+			return true;
+		}
 	}
 
 	

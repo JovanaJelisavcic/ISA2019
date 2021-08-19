@@ -15,6 +15,8 @@ public interface DrugRepository extends JpaRepository<Drug, String> {
 	List<Drug> getFiveRandom();
 
 	List<Drug> findByNameLikeIgnoreCase(String string);
+
+	List<Drug> findByNameLikeIgnoreCaseOrCodeLikeIgnoreCase(String string, String string2);
 	
 
 	

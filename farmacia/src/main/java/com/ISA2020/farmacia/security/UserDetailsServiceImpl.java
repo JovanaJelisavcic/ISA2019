@@ -5,7 +5,6 @@ import java.io.UnsupportedEncodingException;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -16,7 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import com.ISA2020.farmacia.repository.PatientRepository;
 
 import net.bytebuddy.utility.RandomString;
@@ -25,7 +23,7 @@ import net.bytebuddy.utility.RandomString;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-	private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
+
 	@Autowired
 	UserRepository userRepository;
      
@@ -40,7 +38,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		logger.info(username);
 		User user = userRepository.findByUsername(username)
 				.orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 	
@@ -49,10 +46,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	
 	public void register(User user, String siteURL)
 	        throws UnsupportedEncodingException, MessagingException {
-		logger.info(user.getUsername());
-		logger.info(user.getPassword());
+	
 	    String encodedPassword = passwordEncoder.encode(user.getPassword());
-	    logger.info(encodedPassword);
 	    user.setPassword(encodedPassword);
 	     
 	    String randomCode = RandomString.make(64);
@@ -121,5 +116,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		userRepository.save(old);
 		
 	}
+
 
 }
