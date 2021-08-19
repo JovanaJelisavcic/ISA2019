@@ -114,7 +114,7 @@ public class FarmacyController {
 		 
 	}
 	
-	@JsonView(Views.Simple.class)
+
 	@DeleteMapping("/drug/{code}")
 	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
 	public ResponseEntity<?> farmacyDrug(@RequestHeader("Authorization") String token, @PathVariable String code) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	

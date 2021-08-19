@@ -20,10 +20,10 @@ public class UserInfo {
 	@JsonView(Views.Simple.class)
 	private String email;
 	@Column(nullable=false)
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.VerySimple.class)
 	private String name;
 	@Column(nullable=false)
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.VerySimple.class)
 	private String surname;
 	@Column(nullable=false)
 	@JsonView(Views.Simple.class)

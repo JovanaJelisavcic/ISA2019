@@ -3,19 +3,25 @@ package com.ISA2020.farmacia.entity.users;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.ISA2020.farmacia.entity.Farmacy;
+import com.ISA2020.farmacia.entity.Views;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 public class Pharmacist extends UserInfo {
 
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "farmacyId")
+	@JsonView(Views.VerySimple.class)
 	private Farmacy farmacy;
+	@JsonView(Views.VerySimple.class)
 	float stars;
 	@Column(nullable=false)
+	@JsonView(Views.Simple.class)
 	String worksFrom;
+	@JsonView(Views.Simple.class)
 	@Column(nullable=false)
 	String worksTo;
 	

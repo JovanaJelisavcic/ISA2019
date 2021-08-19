@@ -20,10 +20,10 @@ public class Farmacy {
 
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.VerySimple.class)
 	private String farmacyId;
 	@Column(nullable=false)
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.VerySimple.class)
 	private String name;
 	 @Column(nullable=false)
 	 @JsonView(Views.Simple.class)
