@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 @Entity
 public class Farmacy {
 
+	
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@JsonView(Views.VerySimple.class)
@@ -107,10 +108,12 @@ public class Farmacy {
 	public boolean addPrice(Price price) {
 		boolean check = true;
 		for(Price p : prices) {
-			if(p.getDrug().equals(price.getDrug()))
-					if(price.getStandsFrom().isBefore(p.getStandsUntill()) )
-						check=false;
-		}
+			if(p.getDrug().equals(price.getDrug())) {
+			
+			if(!((price.getStandsFrom().isBefore(p.getStandsFrom()) && price.getStandsUntill().isBefore(p.getStandsFrom()))||(price.getStandsFrom().isAfter(p.getStandsUntill())&&price.getStandsUntill().isAfter(p.getStandsUntill()))))
+						{check=false;}
+		
+			}}
 		if(check) {
 		prices.add(price);
 		return true;

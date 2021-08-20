@@ -177,7 +177,28 @@ insert into pharmacist (name, surname, email, adress, city, state, phone_num, st
 insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Sallie', 'Mandrey', 'smandrey13@cocolog-nifty.com', '70347 Waywood Way', 'Dayrūţ', 'Egypt', '663-220-0307', 4.8, '8:24 AM', '10:39 PM', 18);
 
 
+insert into dermatologist (name, surname, email, adress, city, state, phone_num) values ('Nathalia', 'Farney', 'nfarney0@ucoz.com', '0828 Sloan Trail', 'Aiquile', 'Bolivia', '704-804-4088');
+insert into dermatologist (name, surname, email, adress, city, state, phone_num) values ('Toddie', 'Loveard', 'tloveard1@engadget.com', '25796 Forest Run Center', 'San Rafael', 'Philippines', '301-779-6221');
+insert into dermatologist (name, surname, email, adress, city, state, phone_num) values ('Hamid', 'Mulholland', 'hmulholland2@globo.com', '37912 Rieder Parkway', 'Na''ale', 'Israel', '695-521-1523');
+insert into dermatologist (name, surname, email, adress, city, state, phone_num) values ('Hillary', 'Metcalfe', 'hmetcalfe3@istockphoto.com', '2 Riverside Street', 'Huyang', 'China', '595-105-7217');
+insert into dermatologist (name, surname, email, adress, city, state, phone_num) values ('Cassandra', 'Timmermann', 'ctimmermann4@chron.com', '291 Bartelt Place', 'Oulmes', 'Morocco', '427-813-1145');
+insert into dermatologist (name, surname, email, adress, city, state, phone_num) values ('Shalom', 'Barneville', 'sbarneville5@nytimes.com', '968 Meadow Ridge Circle', 'Yosowilangun', 'Indonesia', '913-572-2827');
+insert into dermatologist (name, surname, email, adress, city, state, phone_num) values ('Brooke', 'Buckingham', 'bbuckingham6@macromedia.com', '1 Monterey Plaza', 'Laka', 'Indonesia', '716-189-6997');
+insert into dermatologist (name, surname, email, adress, city, state, phone_num) values ('Tanney', 'Lipscomb', 'tlipscomb7@acquirethisname.com', '6542 Montana Way', 'Datuan', 'China', '373-963-5079');
+insert into dermatologist (name, surname, email, adress, city, state, phone_num) values ('Nell', 'Scourge', 'nscourge8@foxnews.com', '1055 Londonderry Hill', 'Salaya', 'Thailand', '666-939-7105');
+insert into dermatologist (name, surname, email, adress, city, state, phone_num) values ('Olympe', 'Stonman', 'ostonman9@state.tx.us', '7 New Castle Park', 'Dayr Sharaf', 'Palestinian Territory', '858-827-3458');
 
+
+insert into WORKING_HOURS (works_from, works_to, DERMATOLOGIST_EMAIL, farmacy_id) values ('8:45', '18:50', 'tlipscomb7@acquirethisname.com', 19);
+insert into WORKING_HOURS (works_from, works_to, DERMATOLOGIST_EMAIL, farmacy_id) values ('5:32', '22:28', 'bbuckingham6@macromedia.com', 15);
+insert into WORKING_HOURS (works_from, works_to, DERMATOLOGIST_EMAIL, farmacy_id) values ('8:10', '22:10', 'ctimmermann4@chron.com', 2);
+insert into WORKING_HOURS (works_from, works_to, DERMATOLOGIST_EMAIL, farmacy_id) values ('8:48', '20:52', 'sbarneville5@nytimes.com', 13);
+insert into WORKING_HOURS (works_from, works_to, DERMATOLOGIST_EMAIL, farmacy_id) values ('6:05', '9:22', 'hmulholland2@globo.com', 7);
+insert into WORKING_HOURS (works_from, works_to, DERMATOLOGIST_EMAIL, farmacy_id) values ('10:58', '20:57', 'hmulholland2@globo.com', 9);
+insert into WORKING_HOURS (works_from, works_to, DERMATOLOGIST_EMAIL, farmacy_id) values ('9:57', '21:36', 'nscourge8@foxnews.com', 19);
+insert into WORKING_HOURS (works_from, works_to, DERMATOLOGIST_EMAIL, farmacy_id) values ('6:54', '10:07', 'ostonman9@state.tx.us', 1);
+insert into WORKING_HOURS (works_from, works_to, DERMATOLOGIST_EMAIL, farmacy_id) values ('5:17', '9:28', 'nscourge8@foxnews.com', 1);
+insert into WORKING_HOURS (works_from, works_to, DERMATOLOGIST_EMAIL, farmacy_id) values ('11:00', '23:41', 'ostonman9@state.tx.us', 20);
 
 
 insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('S90465', 'TAZORAC', 'ANTIBIOTIC', 'Aenean sit amet justo.', 'Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.

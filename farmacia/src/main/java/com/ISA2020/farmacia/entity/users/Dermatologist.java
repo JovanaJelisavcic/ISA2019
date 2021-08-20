@@ -1,64 +1,57 @@
 package com.ISA2020.farmacia.entity.users;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import java.time.LocalTime;
+import java.util.List;
 
-import com.ISA2020.farmacia.entity.Farmacy;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+
+import com.ISA2020.farmacia.entity.WorkingHours;
 
 @Entity
 public class Dermatologist extends UserInfo {
 
-	@ManyToOne
-	@JoinColumn(name = "farmacyId")
-	private Farmacy farmacy;
-	float stars;
-	@Column(nullable=false)
-	String worksFrom;
-	@Column(nullable=false)
-	String worksTo;
+	
+	@OneToMany(
+	        mappedBy = "dermatologist",
+	        cascade = CascadeType.ALL,
+	        orphanRemoval = true
+	    )
+	private List<WorkingHours> workingHours;
 	
 	public Dermatologist() {}
-
-	public Dermatologist(Farmacy farmacy, float stars, String worksFrom, String worksTo) {
+	
+	public Dermatologist(List<WorkingHours> workingHours) {
 		super();
-		this.farmacy = farmacy;
-		this.stars = stars;
-		this.worksFrom = worksFrom;
-		this.worksTo = worksTo;
+		this.workingHours = workingHours;
 	}
 
-	public Farmacy getFarmacy() {
-		return farmacy;
+	public List<WorkingHours> getWorkingHours() {
+		return workingHours;
 	}
 
-	public void setFarmacy(Farmacy farmacy) {
-		this.farmacy = farmacy;
+	public void setWorkingHours(List<WorkingHours> workingHours) {
+		this.workingHours = workingHours;
+	}
+	public void addWorkingHours(WorkingHours workingHours) {
+		this.workingHours.add(workingHours);
 	}
 
-	public float getStars() {
-		return stars;
+	public boolean checkIfAvailable(LocalTime from, LocalTime to) {
+		if(workingHours.isEmpty()) return true;
+		for(WorkingHours wa : workingHours) {
+			if(!((from.isBefore(wa.getWorksFrom()) && to.isBefore(wa.getWorksFrom())) || (from.isAfter(wa.getWorksTo()) && to.isAfter(wa.getWorksTo()))))
+				return false;	
+		}
+		return true;
 	}
 
-	public void setStars(float stars) {
-		this.stars = stars;
+	public boolean removeWorkingHours(String id) {
+		if(workingHours.isEmpty()) return false;
+		workingHours.removeIf(p -> p.getFarmacy().getId().equals(id));
+		return true;		
 	}
-
-	public String getWorksFrom() {
-		return worksFrom;
-	}
-
-	public void setWorksFrom(String worksFrom) {
-		this.worksFrom = worksFrom;
-	}
-
-	public String getWorksTo() {
-		return worksTo;
-	}
-
-	public void setWorksTo(String worksTo) {
-		this.worksTo = worksTo;
-	}
+	
 	
 }

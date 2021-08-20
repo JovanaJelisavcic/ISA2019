@@ -77,7 +77,7 @@ public class PharmacistController {
 	
 	@DeleteMapping("/delete/{email}")
 	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
-	public ResponseEntity<?> farmacyDrug(@RequestHeader("Authorization") String token, @PathVariable String email) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {		
+	public ResponseEntity<?> deletePharma(@RequestHeader("Authorization") String token, @PathVariable String email) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {		
 		Optional<Pharmacist> pharmacist = pharmacistRepo.findById(email);
 		if(pharmacist.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
