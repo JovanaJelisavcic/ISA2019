@@ -22,13 +22,24 @@ public class Dermatologist extends UserInfo {
 	    )
 	@JsonView(Views.VerySimple.class)
 	private List<WorkingHours> workingHours;
+	@JsonView(Views.VerySimple.class)
+	private float stars;
 
 	
 	public Dermatologist() {}
 	
-	public Dermatologist(List<WorkingHours> workingHours) {
+	public Dermatologist(List<WorkingHours> workingHours, float stars) {
 		super();
 		this.workingHours = workingHours;
+		this.stars=stars;
+	}
+
+	public float getStars() {
+		return stars;
+	}
+
+	public void setStars(float stars) {
+		this.stars = stars;
 	}
 
 	public List<WorkingHours> getWorkingHours() {
@@ -55,6 +66,14 @@ public class Dermatologist extends UserInfo {
 		if(workingHours.isEmpty()) return false;
 		workingHours.removeIf(p -> p.getFarmacy().getId().equals(id));
 		return true;		
+	}
+
+	public boolean checkIfworksIn(String id) {
+		for(WorkingHours wh : workingHours) {
+			if(wh.getFarmacy().getId().equals(id))
+				return true;
+		}
+		return false;
 	}
 
 

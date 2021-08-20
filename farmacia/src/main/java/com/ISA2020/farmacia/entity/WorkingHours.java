@@ -22,7 +22,7 @@ public class WorkingHours {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int wAid;
+    private Long wAid;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "farmacy_id", nullable=false)
 	@JsonView(Views.VerySimple.class)
@@ -48,11 +48,11 @@ public class WorkingHours {
 		this.dermatologist=dermat;
 	}
 	
-	public int getwAid() {
+	public Long getwAid() {
 		return wAid;
 	}
 
-	public void setwAid(int wAid) {
+	public void setwAid(Long wAid) {
 		this.wAid = wAid;
 	}
 
