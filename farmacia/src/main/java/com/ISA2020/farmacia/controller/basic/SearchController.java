@@ -1,5 +1,6 @@
 package com.ISA2020.farmacia.controller.basic;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,18 +9,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ISA2020.farmacia.entity.Drug;
 import com.ISA2020.farmacia.entity.Farmacy;
 import com.ISA2020.farmacia.entity.Views;
+import com.ISA2020.farmacia.entity.users.Dermatologist;
 import com.ISA2020.farmacia.entity.users.Pharmacist;
+import com.ISA2020.farmacia.repository.DermatologistRepository;
 import com.ISA2020.farmacia.repository.DrugRepository;
 import com.ISA2020.farmacia.repository.FarmacyRepository;
 import com.ISA2020.farmacia.repository.PharmacistRepository;
 import com.ISA2020.farmacia.util.FilteringUtil;
 import com.fasterxml.jackson.annotation.JsonView;
+
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.UnsupportedJwtException;
 
 
 
@@ -32,6 +40,8 @@ public class SearchController {
 	PharmacistRepository pharmacistRepo;
 	@Autowired
 	DrugRepository drugRepo;
+	@Autowired
+	DermatologistRepository dermaRepo;
 	@Autowired 
 	FilteringUtil filteringUtil;
 	
@@ -77,6 +87,19 @@ public class SearchController {
 		return new ResponseEntity<List<Pharmacist>>(pharmacists, HttpStatus.OK);
 	}
 
+	@JsonView(Views.VerySimple.class)
+	@GetMapping("/dermatologist/{parametar}")
+	@PreAuthorize("hasAuthority('PATIENT')")
+	public ResponseEntity<Object> searchFarmacyDerma(@RequestHeader("Authorization") String token,@PathVariable String parametar) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+		 StringBuilder sb = new StringBuilder(parametar.concat("%"));
+		 sb.insert(0,"%");
+		 List<Dermatologist> dermas = dermaRepo.findByNameLikeIgnoreCaseOrSurnameLikeIgnoreCase(sb.toString(),sb.toString());
+		if(dermas.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+		return new ResponseEntity<Object>(dermas, HttpStatus.OK);		
+		 
+	}
 
 	
 	

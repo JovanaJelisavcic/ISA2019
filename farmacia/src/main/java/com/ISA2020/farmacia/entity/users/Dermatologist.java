@@ -7,7 +7,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.ISA2020.farmacia.entity.Views;
 import com.ISA2020.farmacia.entity.WorkingHours;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 public class Dermatologist extends UserInfo {
@@ -18,7 +20,9 @@ public class Dermatologist extends UserInfo {
 	        cascade = CascadeType.ALL,
 	        orphanRemoval = true
 	    )
+	@JsonView(Views.VerySimple.class)
 	private List<WorkingHours> workingHours;
+
 	
 	public Dermatologist() {}
 	
@@ -52,6 +56,7 @@ public class Dermatologist extends UserInfo {
 		workingHours.removeIf(p -> p.getFarmacy().getId().equals(id));
 		return true;		
 	}
-	
+
+
 	
 }

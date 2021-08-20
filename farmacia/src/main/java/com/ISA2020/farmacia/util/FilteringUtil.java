@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import com.ISA2020.farmacia.entity.Drug;
 import com.ISA2020.farmacia.entity.Farmacy;
 import com.ISA2020.farmacia.entity.Price;
+import com.ISA2020.farmacia.entity.WorkingHours;
+import com.ISA2020.farmacia.entity.users.Dermatologist;
 @Component
 public class FilteringUtil {
 	
@@ -29,6 +31,17 @@ public class FilteringUtil {
 			}
 			dr.setFarmacies( farm);
 			result.add(dr);
+		}
+		return result;
+	}
+	public List<Dermatologist> filterDermas(List<Dermatologist> dermas, Farmacy farmacy) {
+		List<Dermatologist> result = new ArrayList<>();
+		for(Dermatologist d: dermas) {
+			List<WorkingHours> wh = d.getWorkingHours();
+			for(WorkingHours w: wh) {
+				if(farmacy.getId().equals(w.getFarmacy().getId()))
+					if(!result.contains(d)) result.add(d);
+			}
 		}
 		return result;
 	}
