@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.ISA2020.farmacia.entity.users.Patient;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -45,6 +46,10 @@ public class Farmacy {
 	@ManyToMany(mappedBy = "farmacies")
 	@JsonView(Views.VeryDetailedFarmacy.class)
 	private List<Drug> drugs;
+
+	@ManyToMany(mappedBy = "farmaciesSubs")
+	@JsonView(Views.VeryDetailedFarmacy.class)
+	private List<Patient> subscribedUsers;
 	 
 	
 	public Farmacy() {}
@@ -119,6 +124,14 @@ public class Farmacy {
 		return true;
 		}
 		else return false;
+	}
+
+	public List<Patient> getSubscribedUsers() {
+		return subscribedUsers;
+	}
+
+	public void setSubscribedUsers(List<Patient> subscribedUsers) {
+		this.subscribedUsers = subscribedUsers;
 	}
 
 

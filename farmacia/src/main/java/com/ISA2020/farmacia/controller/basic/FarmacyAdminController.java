@@ -22,6 +22,7 @@ import com.ISA2020.farmacia.entity.Farmacy;
 import com.ISA2020.farmacia.entity.Price;
 import com.ISA2020.farmacia.entity.PriceDTO;
 import com.ISA2020.farmacia.entity.PriceListDTO;
+import com.ISA2020.farmacia.entity.Promotion;
 import com.ISA2020.farmacia.entity.Views;
 import com.ISA2020.farmacia.entity.users.FarmacyAdmin;
 import com.ISA2020.farmacia.entity.users.UserInfo;
@@ -29,7 +30,9 @@ import com.ISA2020.farmacia.repository.DermappointRepository;
 import com.ISA2020.farmacia.repository.DrugRepository;
 import com.ISA2020.farmacia.repository.FarmacyAdminRepository;
 import com.ISA2020.farmacia.repository.FarmacyRepository;
+import com.ISA2020.farmacia.repository.PromotionRepository;
 import com.ISA2020.farmacia.security.JwtUtils;
+import com.ISA2020.farmacia.util.MailUtil;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import io.jsonwebtoken.ExpiredJwtException;
@@ -50,6 +53,11 @@ public class FarmacyAdminController {
 	FarmacyRepository farmacyRepo;
 	@Autowired
 	DermappointRepository dermappointRepo;
+
+	   @Autowired
+	   private PromotionRepository promotionRepo;
+	   @Autowired
+	   MailUtil mailUtil;
 
 	@JsonView(Views.SimpleUser.class)
 	@GetMapping("/profile")
@@ -97,6 +105,21 @@ public class FarmacyAdminController {
 		List<Price> drugPrices = farmacy.getPrices();
 		List<DermAppointment> appointPrices = dermappointRepo.findByFarmacyId(farmacy.getId());
 		return new PriceListDTO(drugPrices,appointPrices);
+		
+		
+	}
+	
+	
+	@PostMapping("/promotion")
+	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
+	public ResponseEntity<?> postPromotion(@RequestHeader("Authorization") String token, @RequestBody Promotion promotion) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
+		Farmacy farmacy =  farmAdminRepo.findById(username).get().getFarmacy();
+		promotion.setFarmacyId(farmacy);
+		promotionRepo.save(promotion);
+		mailUtil.sendPromotionEmails(farmacy, promotion);
+		    
+		return ResponseEntity.ok().build();
 		
 		
 	}

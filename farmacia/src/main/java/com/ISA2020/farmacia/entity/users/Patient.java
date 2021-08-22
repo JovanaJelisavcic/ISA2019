@@ -6,8 +6,11 @@ import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import com.ISA2020.farmacia.entity.Drug;
+import com.ISA2020.farmacia.entity.Farmacy;
 import com.ISA2020.farmacia.entity.Views;
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -18,7 +21,21 @@ public class Patient extends UserInfo {
 	@CollectionTable(joinColumns = @JoinColumn(name = "email"))
 	@JsonView(Views.SimpleDrug.class)
     private List<Drug> allergies;
+	@ManyToMany
+	@JoinTable(
+			  name = "farmacies_subs", 
+			  joinColumns = @JoinColumn(name = "email"), 
+			  inverseJoinColumns = @JoinColumn(name = "farmacy_id"))
+	private List<Farmacy> farmaciesSubs; 
 	
+	public List<Farmacy> getFarmaciesSubs() {
+		return farmaciesSubs;
+	}
+
+	public void setFarmaciesSubs(List<Farmacy> farmaciesSubs) {
+		this.farmaciesSubs = farmaciesSubs;
+	}
+
 	public Patient() {}
 	
 	public Patient(UserInfo user) {
