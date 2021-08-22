@@ -45,7 +45,7 @@ public class FarmacyController {
 	@Autowired
 	FarmacyAdminRepository farmAdminRepo;
 	
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.SimpleFarmacy.class)
 	@GetMapping("/profile")
 	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
 	public Farmacy myfarmProfile(@RequestHeader("Authorization") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
@@ -66,7 +66,7 @@ public class FarmacyController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.SimpleDrug.class)
 	@GetMapping("/drugs")
 	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
 	public List<Drug> farmacyDrugs(@RequestHeader("Authorization") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
@@ -76,7 +76,7 @@ public class FarmacyController {
 	}
 	
 	
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.SimpleDrug.class)
 	@GetMapping("/search/{parametar}")
 	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
 	public ResponseEntity<Object> searchFarmacyDrugs(@RequestHeader("Authorization") String token,@PathVariable String parametar) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	

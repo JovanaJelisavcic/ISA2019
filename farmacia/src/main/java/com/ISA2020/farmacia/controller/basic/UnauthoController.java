@@ -15,6 +15,8 @@ import com.ISA2020.farmacia.repository.FarmacyRepository;
 import com.ISA2020.farmacia.util.FilteringUtil;
 import com.fasterxml.jackson.annotation.JsonView;
 
+
+
 @RestController
 @RequestMapping("/unautho")
 public class UnauthoController {
@@ -27,17 +29,16 @@ public class UnauthoController {
 	@Autowired 
 	FilteringUtil filteringUtil;
 	
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.VerySimpleFarmacy.class)
 	@GetMapping("/farmacies")
 	public List<Farmacy> getFarmForUnautho() {
 		return  farmRepo.getFiveHighestRated();
 	}
-	
-	@JsonView(Views.Detailed.class)
+	@JsonView(Views.DrugsUnautho.class)
 	@GetMapping("/drugs")
 	public List<Drug> getDrugForUnautho() {
 		List<Drug> drugs =  drugRepo.getFiveRandom();
-		return filteringUtil.filterPrices(drugs);
+		return filteringUtil.filterPricesAndFields(drugs);
 	}
 	
 }

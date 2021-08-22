@@ -16,7 +16,7 @@ public class Patient extends UserInfo {
 
 	@ElementCollection(targetClass=Drug.class)
 	@CollectionTable(joinColumns = @JoinColumn(name = "email"))
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.SimpleDrug.class)
     private List<Drug> allergies;
 	
 	public Patient() {}

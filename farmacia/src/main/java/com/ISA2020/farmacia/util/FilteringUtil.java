@@ -10,17 +10,21 @@ import com.ISA2020.farmacia.entity.Farmacy;
 import com.ISA2020.farmacia.entity.Price;
 import com.ISA2020.farmacia.entity.WorkingHours;
 import com.ISA2020.farmacia.entity.users.Dermatologist;
+import com.ISA2020.farmacia.entity.users.Pharmacist;
 @Component
 public class FilteringUtil {
 	
 	public FilteringUtil() {}
 	
-	public List<Drug> filterPrices(List<Drug> drugs) {
+	public List<Drug> filterPricesAndFields(List<Drug> drugs) {
 		List<Drug> result = new ArrayList<>();
 		for(Drug dr :  drugs) {
 			
 			List<Farmacy> farm = (List<Farmacy>) dr.getFarmacies();
 			for (Farmacy f : farm) {
+				f.setAdress(null);
+				f.setDescription(null);
+				f.setStars(Float.NaN);
 				List<Price> prices = (List<Price>) f.getPrices();
 				for(Price p : prices) {
 					if(!p.getDrug().getCode().equals(dr.getCode())) {
@@ -44,6 +48,20 @@ public class FilteringUtil {
 			}
 		}
 		return result;
+	}
+
+	public List<Pharmacist> filterAdress(List<Pharmacist> pharmacists) {
+		for(Pharmacist p : pharmacists)
+			p.getFarmacy().setAdress(null);
+		return pharmacists;
+	}
+
+	
+
+	public List<Dermatologist> filterAdressDerma(List<Dermatologist> resp) {
+		for(Dermatologist p : resp)
+			p.getWorkingHours().forEach(w-> w.getFarmacy().setAdress(null));
+		return resp;
 	}
 
 }

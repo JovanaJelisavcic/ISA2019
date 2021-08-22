@@ -16,34 +16,34 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Farmacy {
 
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-	@JsonView(Views.VerySimple.class)
 	private String farmacyId;
 	@Column(nullable=false)
-	@JsonView(Views.VerySimple.class)
+	@JsonView(Views.VerySimpleFarmacy.class)
 	private String name;
 	 @Column(nullable=false)
-	 @JsonView(Views.Simple.class)
+	 @JsonView(Views.VerySimpleFarmacy.class)
 	private String adress;
-	 @JsonView(Views.Simple.class)
+	 @JsonView(Views.VerySimpleFarmacy.class)
 	 @Column(columnDefinition="Decimal(2,1)")
 	 @JsonInclude(JsonInclude.Include.NON_NULL)
 	private float stars;
-	 @JsonView(Views.Simple.class)
+	 @JsonView(Views.SimpleFarmacy.class)
 	 @JsonInclude(JsonInclude.Include.NON_NULL)
 	 private String description;
 	 
 	@OneToMany(mappedBy = "farmacy", fetch = FetchType.LAZY,
 		            cascade = CascadeType.ALL, targetEntity = Price.class)
-	@JsonView(Views.Detailed.class)
+	@JsonView(Views.SemiDetailedFarmacy.class)
 	 private List<Price> prices; 
 	 
 	@ManyToMany(mappedBy = "farmacies")
-	@JsonView(Views.VeryDetailed.class)
+	@JsonView(Views.VeryDetailedFarmacy.class)
 	private List<Drug> drugs;
 	 
 	

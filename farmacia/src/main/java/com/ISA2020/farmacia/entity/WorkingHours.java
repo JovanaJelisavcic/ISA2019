@@ -15,9 +15,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.ISA2020.farmacia.entity.users.Dermatologist;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class WorkingHours {
 	
 	@Id
@@ -25,7 +27,7 @@ public class WorkingHours {
     private Long wAid;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "farmacy_id", nullable=false)
-	@JsonView(Views.VerySimple.class)
+	@JsonView(Views.VerySimpleFarmacy.class)
 	private Farmacy farmacyId;
 	@Column(nullable=false)
 	@DateTimeFormat(style = "HH:mm")

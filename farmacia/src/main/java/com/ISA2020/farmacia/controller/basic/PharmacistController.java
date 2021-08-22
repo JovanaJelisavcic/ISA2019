@@ -23,6 +23,7 @@ import com.ISA2020.farmacia.entity.users.Pharmacist;
 import com.ISA2020.farmacia.repository.FarmacyAdminRepository;
 import com.ISA2020.farmacia.repository.PharmacistRepository;
 import com.ISA2020.farmacia.security.JwtUtils;
+import com.ISA2020.farmacia.util.FilteringUtil;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import io.jsonwebtoken.ExpiredJwtException;
@@ -39,8 +40,10 @@ public class PharmacistController {
 	FarmacyAdminRepository farmAdminRepo;
 	@Autowired
 	PharmacistRepository pharmacistRepo;
+	@Autowired
+	FilteringUtil filteringUtil;
 	
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.SimpleUser.class)
 	@GetMapping("/all")
 	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
 	public ResponseEntity<?> pharmacyist(@RequestHeader("Authorization") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
@@ -51,13 +54,13 @@ public class PharmacistController {
 		 return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 	
-	@JsonView(Views.VerySimple.class)
+	@JsonView(Views.SearchPharmacistsForPatient.class)
 	@GetMapping("")
 	@PreAuthorize("hasAuthority('PATIENT')")
 	public ResponseEntity<?> pharmacyistAll()  {	
 		List<Pharmacist> list = pharmacistRepo.findAll();
 		if(list.isEmpty() ) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		 return new ResponseEntity<>(list, HttpStatus.OK);
+		 return new ResponseEntity<>(filteringUtil.filterAdress(list), HttpStatus.OK);
 	}
 	
 	
@@ -89,7 +92,7 @@ public class PharmacistController {
 		 
 	}
 	
-	@JsonView(Views.VerySimple.class)
+	@JsonView(Views.VerySimpleUser.class)
 	@GetMapping("/search/{parametar}")
 	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
 	public ResponseEntity<Object> searchFarmacyPharmacist(@RequestHeader("Authorization") String token,@PathVariable String parametar) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	

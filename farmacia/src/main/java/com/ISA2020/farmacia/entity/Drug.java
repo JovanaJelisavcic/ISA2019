@@ -20,26 +20,26 @@ import com.fasterxml.jackson.annotation.JsonView;
 public class Drug {
 
 	@Id
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.VerySimpleDrug.class)
 	private String code;
 	@Column(nullable=false)
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.VerySimpleDrug.class)
 	private String name;
 	@Enumerated(EnumType.STRING)
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.SimpleDrug.class)
 	private DrugType type;
 	@Column(nullable=false, length = 2000)
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.SimpleDrug.class)
 	private String contraindications;
 	@Column(nullable=false, length = 2000)
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.SimpleDrug.class)
 	private String composition;
 	@Column(nullable=false)
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.SimpleDrug.class)
 	private String prescriptionMetrics;
 	@ElementCollection(targetClass=Drug.class)
 	@CollectionTable(joinColumns = @JoinColumn(name = "code"))
-	@JsonView(Views.VeryDetailed.class)
+	@JsonView(Views.VeryDetailedDrug.class)
 	private List<Drug> replacement;
 	
 	@ManyToMany
@@ -47,7 +47,7 @@ public class Drug {
 			  name = "drug_farmacies", 
 			  joinColumns = @JoinColumn(name = "code"), 
 			  inverseJoinColumns = @JoinColumn(name = "farmacy_id"))
-	@JsonView(Views.Detailed.class)
+	@JsonView(Views.SemiDetailedFarmacy.class)
 	private List<Farmacy> farmacies;
 	
 	public Drug() {}

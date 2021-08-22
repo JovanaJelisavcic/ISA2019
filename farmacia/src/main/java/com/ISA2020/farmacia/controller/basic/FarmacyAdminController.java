@@ -1,6 +1,7 @@
 package com.ISA2020.farmacia.controller.basic;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +16,16 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ISA2020.farmacia.entity.DermAppointment;
 import com.ISA2020.farmacia.entity.Drug;
 import com.ISA2020.farmacia.entity.Farmacy;
 import com.ISA2020.farmacia.entity.Price;
 import com.ISA2020.farmacia.entity.PriceDTO;
+import com.ISA2020.farmacia.entity.PriceListDTO;
 import com.ISA2020.farmacia.entity.Views;
 import com.ISA2020.farmacia.entity.users.FarmacyAdmin;
 import com.ISA2020.farmacia.entity.users.UserInfo;
+import com.ISA2020.farmacia.repository.DermappointRepository;
 import com.ISA2020.farmacia.repository.DrugRepository;
 import com.ISA2020.farmacia.repository.FarmacyAdminRepository;
 import com.ISA2020.farmacia.repository.FarmacyRepository;
@@ -44,8 +48,10 @@ public class FarmacyAdminController {
 	DrugRepository drugRepo;
 	@Autowired
 	FarmacyRepository farmacyRepo;
+	@Autowired
+	DermappointRepository dermappointRepo;
 
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.SimpleUser.class)
 	@GetMapping("/profile")
 	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
 	public FarmacyAdmin myfarmProfile(@RequestHeader("Authorization") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
@@ -82,5 +88,17 @@ public class FarmacyAdminController {
 		 
 	}
 	
+	@JsonView(Views.PricesList.class)
+	@GetMapping("/getFarmacyPrices")
+	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
+	public PriceListDTO allfarmacyPrices(@RequestHeader("Authorization") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
+		Farmacy farmacy =  farmAdminRepo.findById(username).get().getFarmacy();
+		List<Price> drugPrices = farmacy.getPrices();
+		List<DermAppointment> appointPrices = dermappointRepo.findByFarmacyId(farmacy.getId());
+		return new PriceListDTO(drugPrices,appointPrices);
+		
+		
+	}
 
 }

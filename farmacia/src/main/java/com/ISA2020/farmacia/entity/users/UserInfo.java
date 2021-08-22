@@ -17,25 +17,25 @@ public class UserInfo {
 	@Id
 	@Column(nullable=false, unique =true,
 		        updatable=false)
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.SimpleUser.class)
 	private String email;
 	@Column(nullable=false)
-	@JsonView(Views.VerySimple.class)
+	@JsonView(Views.VerySimpleUser.class)
 	private String name;
 	@Column(nullable=false)
-	@JsonView(Views.VerySimple.class)
+	@JsonView(Views.VerySimpleUser.class)
 	private String surname;
 	@Column(nullable=false)
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.SimpleUser.class)
 	private String adress;
 	@Column(nullable=false)
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.SimpleUser.class)
 	private String city;
 	@Column(nullable=false)
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.SimpleUser.class)
 	private String state;
 	@Column(nullable=false)
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.SimpleUser.class)
 	private String phoneNum;
 	@Transient
 	@JsonInclude(JsonInclude.Include.NON_NULL)

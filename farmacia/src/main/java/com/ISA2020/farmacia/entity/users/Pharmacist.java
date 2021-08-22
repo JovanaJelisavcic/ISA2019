@@ -14,14 +14,14 @@ public class Pharmacist extends UserInfo {
 
 	@OneToOne
 	@JoinColumn(name = "farmacyId")
-	@JsonView(Views.VerySimple.class)
+	@JsonView(Views.VerySimpleFarmacy.class)
 	private Farmacy farmacy;
-	@JsonView(Views.VerySimple.class)
+	@JsonView(Views.VerySimpleUser.class)
 	float stars;
 	@Column(nullable=false)
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.SimpleUser.class)
 	String worksFrom;
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.SimpleUser.class)
 	@Column(nullable=false)
 	String worksTo;
 	

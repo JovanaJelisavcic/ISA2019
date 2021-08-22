@@ -48,7 +48,7 @@ public class DermatologistController {
 	@Autowired 
 	FilteringUtil filteringUtil;
 
-	@JsonView(Views.VerySimple.class)
+	@JsonView(Views.DermaInfo.class)
 	@GetMapping("/farmacys")
 	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
 	public ResponseEntity<?> farmacyDermatologists(@RequestHeader("Authorization") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
@@ -62,16 +62,16 @@ public class DermatologistController {
 		}
  
 		if(resp.isEmpty() ) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		 return new ResponseEntity<>(resp, HttpStatus.OK);
+		 return new ResponseEntity<>(filteringUtil.filterAdressDerma(resp), HttpStatus.OK);
 	}
 	
-	@JsonView(Views.VerySimple.class)
+	@JsonView(Views.DermaInfo.class)
 	@GetMapping("/all")
 	@PreAuthorize("hasAuthority('PATIENT')")
 	public ResponseEntity<?> allDermatologists() {	
 		List<Dermatologist> list = dermaRepo.findAll();
 		if(list.isEmpty() ) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		 return new ResponseEntity<>(list, HttpStatus.OK);
+		 return new ResponseEntity<>(filteringUtil.filterAdressDerma(list), HttpStatus.OK);
 	}
 	
 	@PostMapping("/addToFarmacy")
@@ -111,7 +111,7 @@ public class DermatologistController {
 	}
 	
 	
-	@JsonView(Views.VerySimple.class)
+	@JsonView(Views.DermaInfo.class)
 	@GetMapping("/search/{parametar}")
 	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
 	public ResponseEntity<Object> searchFarmacyDerma(@RequestHeader("Authorization") String token,@PathVariable String parametar) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
@@ -126,7 +126,7 @@ public class DermatologistController {
 		
 		List<Dermatologist> filtered = filteringUtil.filterDermas(dermas, farmacy);
 		if(filtered.isEmpty()) return ResponseEntity.notFound().build();
-		return new ResponseEntity<Object>(filtered, HttpStatus.OK);		
+		return new ResponseEntity<Object>(filteringUtil.filterAdressDerma(filtered), HttpStatus.OK);		
 		 
 	}
 

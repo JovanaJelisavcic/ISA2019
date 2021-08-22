@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.ISA2020.farmacia.entity.users.Dermatologist;
+import com.fasterxml.jackson.annotation.JsonView;
 
 
 @Entity
@@ -20,14 +21,18 @@ public class DermAppointment {
 	 	@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
+	 	@JsonView(Views.VerySimplePrice.class)
 	 	private float price;
 	 	@ManyToOne(fetch = FetchType.LAZY)
 	    @JoinColumn(name = "email")
+	 	@JsonView(Views.VerySimpleUser.class)
 	 	private Dermatologist derma;
 	 	@ManyToOne(fetch = FetchType.LAZY)
 	    @JoinColumn(name = "farmacy_id")
 	    private Farmacy farmacy;
+	 	@JsonView(Views.VerySimplePrice.class)
 	    private LocalDateTime dateTime;
+	 	@JsonView(Views.VerySimplePrice.class)
 	    private LocalDateTime endTime;
 
 	    public DermAppointment() {}

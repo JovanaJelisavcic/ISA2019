@@ -22,7 +22,7 @@ public class Dermatologist extends UserInfo {
 	        cascade = CascadeType.ALL,
 	        orphanRemoval = true
 	    )
-	@JsonView(Views.VerySimple.class)
+	@JsonView(Views.VerySimpleFarmacy.class)
 	private List<WorkingHours> workingHours;
 	
 	@OneToMany(
@@ -30,9 +30,9 @@ public class Dermatologist extends UserInfo {
 	        cascade = CascadeType.ALL,
 	        orphanRemoval = true
 	    )
-	@JsonView(Views.VerySimple.class)
+	@JsonView(Views.SemiDetailedUser.class)
 	private List<DermAppointment> appointments;
-	@JsonView(Views.VerySimple.class)
+	@JsonView(Views.VerySimpleUser.class)
 	private float stars;
 
 	
@@ -78,13 +78,7 @@ public class Dermatologist extends UserInfo {
 		return true;		
 	}
 
-	public boolean checkIfworksIn(String id) {
-		for(WorkingHours wh : workingHours) {
-			if(wh.getFarmacy().getId().equals(id))
-				return true;
-		}
-		return false;
-	}
+	
 
 	public boolean checkIfInAndFree(LocalDateTime dateTime, LocalDateTime endTime, String farmacyId) {
 		if(workingHours.isEmpty()) return false;
@@ -109,5 +103,12 @@ public class Dermatologist extends UserInfo {
 	}
 
 
+	public boolean checkIfworksIn(String id) {
+		for(WorkingHours wh : workingHours) {
+			if(wh.getFarmacy().getId().equals(id))
+				return true;
+		}
+		return false;
+	}
 	
 }

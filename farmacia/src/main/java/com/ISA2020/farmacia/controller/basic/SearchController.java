@@ -45,7 +45,7 @@ public class SearchController {
 	@Autowired 
 	FilteringUtil filteringUtil;
 	
-	@JsonView(Views.Simple.class)
+	@JsonView(Views.SimpleFarmacy.class)
 	@GetMapping(value="/farmacy/{criteria}")
 	public ResponseEntity<List<Farmacy>> searchFarmacyByNameOrPlace(@PathVariable String criteria){
 		 StringBuilder sb = new StringBuilder(criteria.concat("%"));
@@ -57,7 +57,7 @@ public class SearchController {
 		return new ResponseEntity<List<Farmacy>>(farmacies, HttpStatus.OK);
 	}
 	
-	@JsonView(Views.Detailed.class)
+	@JsonView(Views.DrugsUnautho.class)
 	@GetMapping(value="/drugs/{name}")
 	public ResponseEntity<List<Drug>> searchDrugsByName(@PathVariable String name){
 		 StringBuilder sb = new StringBuilder(name.concat("%"));
@@ -66,7 +66,7 @@ public class SearchController {
 		if(drugs.isEmpty() || drugs==null) {
 			return ResponseEntity.notFound().build();
 		}
-		List<Drug> filtered= filteringUtil.filterPrices(drugs);
+		List<Drug> filtered= filteringUtil.filterPricesAndFields(drugs);
 		if(filtered.isEmpty() || filtered==null) {
 			return ResponseEntity.notFound().build();
 		}
@@ -75,7 +75,7 @@ public class SearchController {
 	
 	
 	@PreAuthorize("hasAuthority('PATIENT')")
-	@JsonView(Views.VerySimple.class)
+	@JsonView(Views.SearchPharmacistsForPatient.class)
 	@GetMapping(value="/pharmacists/{name}")
 	public ResponseEntity<List<Pharmacist>> searchPharmacistsByName(@PathVariable String name){
 		 StringBuilder sb = new StringBuilder(name.concat("%"));
@@ -84,10 +84,11 @@ public class SearchController {
 		if(pharmacists.isEmpty() || pharmacists==null) {
 			return ResponseEntity.notFound().build();
 		}
-		return new ResponseEntity<List<Pharmacist>>(pharmacists, HttpStatus.OK);
+		
+		return new ResponseEntity<List<Pharmacist>>(filteringUtil.filterAdress(pharmacists), HttpStatus.OK);
 	}
 
-	@JsonView(Views.VerySimple.class)
+	@JsonView(Views.DermaInfo.class)
 	@GetMapping("/dermatologist/{parametar}")
 	@PreAuthorize("hasAuthority('PATIENT')")
 	public ResponseEntity<Object> searchFarmacyDerma(@RequestHeader("Authorization") String token,@PathVariable String parametar) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
@@ -97,7 +98,7 @@ public class SearchController {
 		if(dermas.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
-		return new ResponseEntity<Object>(dermas, HttpStatus.OK);		
+		return new ResponseEntity<Object>(filteringUtil.filterAdressDerma(dermas), HttpStatus.OK);		
 		 
 	}
 

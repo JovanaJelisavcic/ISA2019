@@ -20,10 +20,11 @@ public class Price {
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
 
-	 @JsonView(Views.Simple.class)
+	 @JsonView(Views.VerySimplePrice.class)
 	private float price;
 	 @ManyToOne(fetch = FetchType.LAZY, optional = false, targetEntity= Drug.class)
 	  @JoinColumn(name = "code", nullable = false)
+	 @JsonView(Views.SimplePrice.class)
 	private Drug drug;
 	 @ManyToOne(fetch = FetchType.LAZY, optional = false, targetEntity= Farmacy.class)
 	  @JoinColumn(name = "farmacy_id", nullable = false)
