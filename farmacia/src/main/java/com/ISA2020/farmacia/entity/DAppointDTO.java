@@ -7,17 +7,15 @@ public class DAppointDTO {
 
  	private float price;
  	private String derma;
-    private String farmacy;
     private LocalDateTime dateTime;
     private LocalDateTime endTime;
     
     public DAppointDTO() {}
 
-	public DAppointDTO(float price, String derma, String farmacy, LocalDateTime dateTime, LocalDateTime endTime) {
+	public DAppointDTO(float price, String derma, LocalDateTime dateTime, LocalDateTime endTime) {
 		super();
 		this.price = price;
 		this.derma = derma;
-		this.farmacy = farmacy;
 		this.dateTime = dateTime;
 		this.endTime = endTime;
 	}
@@ -38,13 +36,6 @@ public class DAppointDTO {
 		this.derma = derma;
 	}
 
-	public String getFarmacy() {
-		return farmacy;
-	}
-
-	public void setFarmacy(String farmacy) {
-		this.farmacy = farmacy;
-	}
 
 	public LocalDateTime getDateTime() {
 		return dateTime;

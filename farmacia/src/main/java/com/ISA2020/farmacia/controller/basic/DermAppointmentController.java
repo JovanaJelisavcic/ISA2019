@@ -41,11 +41,12 @@ public class DermAppointmentController {
 	
 	@PostMapping("/add")
 	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
-	public ResponseEntity<?> farmacyPrices(@RequestHeader("Authorization") String token, @RequestBody DAppointDTO dappDTO) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+	public ResponseEntity<?> addDermappoint(@RequestHeader("Authorization") String token, @RequestBody DAppointDTO dappDTO) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
 		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 		Farmacy farmacy =  farmAdminRepo.findById(username).get().getFarmacy();
 		Optional<Dermatologist> derm = dermaRepo.findById(dappDTO.getDerma());
 		if(derm.isEmpty() || !derm.get().checkIfworksIn(farmacy.getId())) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		if(!derm.get().checkIfInAndFree(dappDTO.getDateTime(),dappDTO.getEndTime(), farmacy.getId())) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		DermAppointment appoint = new DermAppointment(dappDTO.getPrice(), derm.get(),farmacy, dappDTO.getDateTime(),
 				dappDTO.getEndTime());
 		dermappointRepo.save(appoint);

@@ -1,5 +1,6 @@
 package com.ISA2020.farmacia.entity.users;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.ISA2020.farmacia.entity.DermAppointment;
 import com.ISA2020.farmacia.entity.Views;
 import com.ISA2020.farmacia.entity.WorkingHours;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -22,6 +24,14 @@ public class Dermatologist extends UserInfo {
 	    )
 	@JsonView(Views.VerySimple.class)
 	private List<WorkingHours> workingHours;
+	
+	@OneToMany(
+	        mappedBy = "derma",
+	        cascade = CascadeType.ALL,
+	        orphanRemoval = true
+	    )
+	@JsonView(Views.VerySimple.class)
+	private List<DermAppointment> appointments;
 	@JsonView(Views.VerySimple.class)
 	private float stars;
 
@@ -74,6 +84,28 @@ public class Dermatologist extends UserInfo {
 				return true;
 		}
 		return false;
+	}
+
+	public boolean checkIfInAndFree(LocalDateTime dateTime, LocalDateTime endTime, String farmacyId) {
+		if(workingHours.isEmpty()) return false;
+		for(WorkingHours wh : workingHours) {
+			if(wh.getFarmacy().getId().equals(farmacyId)) {
+				if(dateTime.toLocalTime().isAfter(wh.getWorksFrom()) && endTime.toLocalTime().isBefore(wh.getWorksTo())) 
+					if(checkIfFree(farmacyId, dateTime, endTime)) return true;
+					else return false;	
+			}
+		}
+		return false;
+	}
+
+	private boolean checkIfFree(String farmacyId,LocalDateTime dateTime, LocalDateTime endTime) {
+		if(appointments.isEmpty()) return true;
+		for(DermAppointment dapp : appointments) {
+			if(dapp.getFarmacy().getId().equals(farmacyId))
+				if(! (          (dateTime.isBefore(dapp.getDateTime()) && endTime.isBefore(dapp.getDateTime()))   ||   (      dateTime.isAfter(dapp.getEndTime()) && endTime.isAfter(dapp.getEndTime())     )   )   )
+					return false;
+		}
+		return true;
 	}
 
 

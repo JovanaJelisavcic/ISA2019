@@ -201,8 +201,8 @@ insert into WORKING_HOURS (works_from, works_to, DERMATOLOGIST_EMAIL, farmacy_id
 insert into WORKING_HOURS (works_from, works_to, DERMATOLOGIST_EMAIL, farmacy_id) values ('11:00', '23:41', 'ostonman9@state.tx.us', 20);
 
 
-insert into derm_appointment (DATE_TIME,END_TIME,PRICE,EMAIL,FARMACY_ID ) values ('2021-01-01T18:50', '2021-01-01T19:00', 20, 'nscourge8@foxnews.com',1  );
-insert into derm_appointment (DATE_TIME,END_TIME,PRICE,EMAIL,FARMACY_ID ) values ('2021-01-01T14:50', '2021-01-01T15:00', 20, 'nscourge8@foxnews.com',1  );
+insert into derm_appointment (DATE_TIME,END_TIME,PRICE,EMAIL,FARMACY_ID ) values ('2021-01-01T05:20', '2021-01-01T05:30', 20, 'nscourge8@foxnews.com',1  );
+insert into derm_appointment (DATE_TIME,END_TIME,PRICE,EMAIL,FARMACY_ID ) values ('2021-01-01T06:00', '2021-01-01T06:15', 20, 'nscourge8@foxnews.com',1  );
 
 insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('S90465', 'TAZORAC', 'ANTIBIOTIC', 'Aenean sit amet justo.', 'Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.
 
