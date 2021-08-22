@@ -351,5 +351,8 @@ insert into PRICE(ID,PRICE,CODE,FARMACY_ID, stands_from, stands_until) values (1
 insert into PRICE(ID,PRICE,CODE,FARMACY_ID, stands_from, stands_until) values (19,1.5,'T532X2', 2, '2021-01-01','2022-01-01');
 
 
-
 insert into farmacies_subs(email,farmacy_id ) values ('jovana.jelisavcic95@gmail.com',1);
+
+
+insert into purchase_order(order_id, expiration,status,email) values(1, '2021-12-08T12:00:00', 'WAITS_FOR_OFFER', 'vleathley0@fastcompany.com');
+insert into item_qty(order_id, code, qty) values(1, 'T474X4A', 100); 

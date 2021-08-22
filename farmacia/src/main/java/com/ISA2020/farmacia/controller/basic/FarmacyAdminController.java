@@ -1,7 +1,9 @@
 package com.ISA2020.farmacia.controller.basic;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ISA2020.farmacia.entity.DermAppointment;
 import com.ISA2020.farmacia.entity.Drug;
 import com.ISA2020.farmacia.entity.Farmacy;
+import com.ISA2020.farmacia.entity.OrderStatus;
 import com.ISA2020.farmacia.entity.Price;
 import com.ISA2020.farmacia.entity.PriceDTO;
 import com.ISA2020.farmacia.entity.PriceListDTO;
 import com.ISA2020.farmacia.entity.Promotion;
+import com.ISA2020.farmacia.entity.PurchaseOrder;
+import com.ISA2020.farmacia.entity.PurchaseOrderDTO;
 import com.ISA2020.farmacia.entity.Views;
 import com.ISA2020.farmacia.entity.users.FarmacyAdmin;
 import com.ISA2020.farmacia.entity.users.UserInfo;
@@ -30,6 +35,7 @@ import com.ISA2020.farmacia.repository.DermappointRepository;
 import com.ISA2020.farmacia.repository.DrugRepository;
 import com.ISA2020.farmacia.repository.FarmacyAdminRepository;
 import com.ISA2020.farmacia.repository.FarmacyRepository;
+import com.ISA2020.farmacia.repository.OrderRepository;
 import com.ISA2020.farmacia.repository.PromotionRepository;
 import com.ISA2020.farmacia.security.JwtUtils;
 import com.ISA2020.farmacia.util.MailUtil;
@@ -53,6 +59,8 @@ public class FarmacyAdminController {
 	FarmacyRepository farmacyRepo;
 	@Autowired
 	DermappointRepository dermappointRepo;
+	@Autowired
+	OrderRepository orderRepo;
 
 	   @Autowired
 	   private PromotionRepository promotionRepo;
@@ -119,6 +127,33 @@ public class FarmacyAdminController {
 		promotionRepo.save(promotion);
 		mailUtil.sendPromotionEmails(farmacy, promotion);
 		    
+		return ResponseEntity.ok().build();
+		
+		
+	}
+	
+	@PostMapping("/purchaseOrder")
+	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
+	public ResponseEntity<?> postOrder(@RequestHeader("Authorization") String token, @RequestBody PurchaseOrderDTO order) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
+		FarmacyAdmin farmacyAdmin =  farmAdminRepo.findById(username).get();
+		Farmacy farmacy = farmacyAdmin.getFarmacy();
+		PurchaseOrder finalOrder = new PurchaseOrder();
+		finalOrder.setExpiration(order.getExpiration());
+		finalOrder.setMaker(farmacyAdmin);
+		finalOrder.setStatus(OrderStatus.WAITS_FOR_OFFERS);
+		Map<Drug, Integer> readyOrder = new HashMap<>();
+		 for (Map.Entry<String, Integer> entry : order.getDrugsToPurchase().entrySet()) {
+			 Optional<Drug> drug = drugRepo.findById(entry.getKey());
+			 if(drug.isEmpty()) return  ResponseEntity.ok().build();
+		        if(!drug.get().getFarmacies().contains(farmacy)) {
+		        	drug.get().addFarmacy(farmacy);
+		        	drugRepo.save(drug.get());
+		        }
+		        readyOrder.put(drug.get(), entry.getValue());
+		    }
+		 finalOrder.setDrugsToPurchase(readyOrder);
+		orderRepo.save(finalOrder);
 		return ResponseEntity.ok().build();
 		
 		
