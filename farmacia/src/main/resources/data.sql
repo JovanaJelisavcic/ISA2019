@@ -101,7 +101,8 @@ insert into patient (email, name, surname, adress, city, state, phone_num) value
 insert into sys_admin (email, name, surname, adress, city, state, phone_num) values ('gmilesop1@house.gov', 'Cornell', 'Jayme', '494 Harper Park', 'Businovo', 'Russia', '672-670-6543');
 
 
-
+insert into supplier (email, name, surname, adress, city, state, phone_num) values ('jovana.jelisavcic95@gmail.com', 'Cornell', 'Jayme', '494 Harper Park', 'Businovo', 'Russia', '672-670-6543');
+insert into supplier (email, name, surname, adress, city, state, phone_num) values ('petarv7@gmail.com', 'Cornell', 'Petar', '494 Harper Park', 'Businovo', 'Russia', '672-670-6543');
 
 
 
@@ -351,8 +352,16 @@ insert into PRICE(ID,PRICE,CODE,FARMACY_ID, stands_from, stands_until) values (1
 insert into PRICE(ID,PRICE,CODE,FARMACY_ID, stands_from, stands_until) values (19,1.5,'T532X2', 2, '2021-01-01','2022-01-01');
 
 
+insert into FARMACY_DRUG_QTY  (QTY,CODE,FARMACY_ID) values ( 200, 'T474X4A', 1 );
+insert into FARMACY_DRUG_QTY  (QTY,CODE,FARMACY_ID) values ( 600, 'T532X2',1 );
+insert into FARMACY_DRUG_QTY  (QTY,CODE,FARMACY_ID) values ( 600, 'M1215',1 );
+
 insert into farmacies_subs(email,farmacy_id ) values ('jovana.jelisavcic95@gmail.com',1);
 
 
-insert into purchase_order(order_id, expiration,status,email) values(1, '2021-12-08T12:00:00', 'WAITS_FOR_OFFER', 'vleathley0@fastcompany.com');
-insert into item_qty(order_id, code, qty) values(1, 'T474X4A', 100); 
+insert into purchase_order(order_id, expiration,status,email) values(1, '2021-08-08T12:00:00', 'WAITS_FOR_CHOICE', 'vleathley0@fastcompany.com');
+insert into item_qty(order_id, code, qty) values(1, 'T474X4A', 100);
+
+
+insert into offer(offerid, deadline, price,status,orderid, email) values(1, '2021-12-12T12:00:00', 1500, 'WAITING', 1, 'jovana.jelisavcic95@gmail.com');
+insert into offer(offerid, deadline, price,status,orderid, email) values(2, '2021-12-12T14:00:00', 1480, 'WAITING', 1, 'petarv7@gmail.com');

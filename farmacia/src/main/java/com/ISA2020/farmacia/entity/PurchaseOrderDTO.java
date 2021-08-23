@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class PurchaseOrderDTO {
 	
+	private Long id;
 	private  Map<String, Integer> drugsToPurchase; // lekovi plus kolicina
 	 private LocalDateTime expiration;
 	 
@@ -25,6 +26,12 @@ public class PurchaseOrderDTO {
 	}
 	public void setExpiration(LocalDateTime expiration) {
 		this.expiration = expiration;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	 

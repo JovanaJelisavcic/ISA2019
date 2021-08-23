@@ -7,7 +7,9 @@ import org.springframework.stereotype.Component;
 
 import com.ISA2020.farmacia.entity.Drug;
 import com.ISA2020.farmacia.entity.Farmacy;
+import com.ISA2020.farmacia.entity.Offer;
 import com.ISA2020.farmacia.entity.Price;
+import com.ISA2020.farmacia.entity.PurchaseOrder;
 import com.ISA2020.farmacia.entity.WorkingHours;
 import com.ISA2020.farmacia.entity.users.Dermatologist;
 import com.ISA2020.farmacia.entity.users.Pharmacist;
@@ -62,6 +64,24 @@ public class FilteringUtil {
 		for(Dermatologist p : resp)
 			p.getWorkingHours().forEach(w-> w.getFarmacy().setAdress(null));
 		return resp;
+	}
+
+	public List<PurchaseOrder> filterByFarmacyOrder(List<PurchaseOrder> allOrders, String id) {
+		List<PurchaseOrder> result = new ArrayList<>();	
+		for(PurchaseOrder order : allOrders) {
+				if(order.getMaker().getFarmacy().getId().equals(id))
+					result.add(order);
+			}
+		return result;
+	}
+
+	public Object filterByFarmacyOffer(List<Offer> allOffers, String id) {
+		List<Offer> result = new ArrayList<>();	
+		for(Offer offer : allOffers) {
+				if(offer.getOrder().getMaker().getFarmacy().getId().equals(id))
+					result.add(offer);
+			}
+		return result;
 	}
 
 }

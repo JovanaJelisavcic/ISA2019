@@ -19,6 +19,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 @Entity
 public class Drug {
 
+	
+
 	@Id
 	@JsonView(Views.VerySimpleDrug.class)
 	private String code;
@@ -42,6 +44,8 @@ public class Drug {
 	@JsonView(Views.VeryDetailedDrug.class)
 	private List<Drug> replacement;
 	
+
+	
 	@ManyToMany
 	@JoinTable(
 			  name = "drug_farmacies", 
@@ -62,6 +66,11 @@ public class Drug {
 		this.composition = composition;
 		this.prescriptionMetrics = prescriptionMetrics;
 	}
+
+	public Drug(String key) {
+		   
+	}
+
 
 	public String getCode() {
 		return code;
@@ -143,7 +152,12 @@ public class Drug {
 		}
 	}
 
-
-	
+//return "Drug [code=" + code + ", name=" + name + ", type=" + type + ", contraindications=" + contraindications
+//	+ ", composition=" + composition + ", prescriptionMetrics=" + prescriptionMetrics + ", replacement="
+//	+ replacement + ", farmacies=" + farmacies + "]";
+	@Override
+	public String toString() {
+		return "Drug [code=" + code + ", name=" + name +"]";
+	}
 	
 }

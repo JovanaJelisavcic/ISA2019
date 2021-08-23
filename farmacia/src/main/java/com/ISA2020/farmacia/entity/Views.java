@@ -49,6 +49,7 @@ public class Views {
     public interface VeryDetailedPrice extends DetailedPrice {
     }
     
+    
     public interface DrugsUnautho extends SemiDetailedDrug , SemiDetailedFarmacy, VerySimplePrice {}
     
     public interface SearchPharmacistsForPatient extends VerySimpleUser, VerySimpleFarmacy {}
@@ -57,7 +58,9 @@ public class Views {
     
     public interface PricesList extends VerySimpleUser, SimplePrice, VerySimpleDrug {}
     
+    public interface MyFarmacyOrdersList extends VerySimpleUser, VerySimpleFarmacy, SimpleDrug {}
     
+    public interface MyFarmacyOffersList extends MyFarmacyOrdersList {}
     
     
 }

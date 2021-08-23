@@ -18,27 +18,40 @@ import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.OneToOne;
 
 import com.ISA2020.farmacia.entity.users.FarmacyAdmin;
+import com.ISA2020.farmacia.util.DrugDeserializer;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @Entity
 public class PurchaseOrder {
 	
 		@Id
 		@GeneratedValue(strategy=GenerationType.IDENTITY)
+		@JsonView(Views.MyFarmacyOrdersList.class)
 		private Long orderId;
 		@ElementCollection
 		@CollectionTable(name="item_qty",
 		    joinColumns=@JoinColumn(name="order_id"))
 		@MapKeyJoinColumn(name="code")
 		@Column(name="qty")
-		private  Map<Drug, Integer> drugsToPurchase; // lekovi plus kolicina
+		@JsonView(Views.SimpleDrug.class)
+		@JsonProperty("map")
+		  @JsonDeserialize(keyUsing = DrugDeserializer.class)
+		private  Map<Drug, Integer> drugsToPurchase; 
+		@JsonView(Views.MyFarmacyOrdersList.class)
 		 private LocalDateTime expiration;
 		 @Enumerated(EnumType.STRING)
+		 @JsonView(Views.MyFarmacyOrdersList.class)
 		 private OrderStatus status;
 		 @OneToOne(cascade = CascadeType.ALL)
 		    @JoinColumn(name = "email", referencedColumnName = "email")
+		 @JsonView(Views.MyFarmacyOrdersList.class)
 		 private FarmacyAdmin maker;
 		 
 		 public PurchaseOrder() {}
+		 @JsonCreator
 		public PurchaseOrder(Long orderId, Map<Drug, Integer> drugsToPurchase, LocalDateTime expiration,
 				OrderStatus status) {
 			super();
@@ -77,7 +90,11 @@ public class PurchaseOrder {
 		public void setMaker(FarmacyAdmin maker) {
 			this.maker = maker;
 		}
-		
+		@Override
+		public String toString() {
+			return "PurchaseOrder [drugsToPurchase=" + drugsToPurchase + ", expiration=" + expiration + ", status="
+					+ status + ", maker=" + maker + "]";
+		}
 		
 		 
 		 

@@ -1,20 +1,29 @@
 package com.ISA2020.farmacia.entity;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.OneToMany;
 
 import com.ISA2020.farmacia.entity.users.Patient;
+import com.ISA2020.farmacia.util.DrugDeserializer;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @Entity
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -51,7 +60,19 @@ public class Farmacy {
 	@JsonView(Views.VeryDetailedFarmacy.class)
 	private List<Patient> subscribedUsers;
 	 
+	@ElementCollection
+	@CollectionTable(name="farmacy_drug_qty",
+	    joinColumns=@JoinColumn(name="farmacy_id"))
+	@MapKeyJoinColumn(name="code")
+	@Column(name="qty")
+	@JsonProperty("map")
+	  @JsonDeserialize(keyUsing = DrugDeserializer.class)
+	private  Map<Drug, Integer> drugsQuantities; 
+
 	
+	
+
+
 	public Farmacy() {}
 	
 	public Farmacy(String name, String adress, float stars, String description) {
@@ -60,6 +81,15 @@ public class Farmacy {
 		this.adress = adress;
 		this.stars = stars;
 		this.description = description;
+	}
+	
+
+	public Map<Drug, Integer> getDrugsQuantities() {
+		return drugsQuantities;
+	}
+
+	public void setDrugsQuantities(Map<Drug, Integer> drugsQuantities) {
+		this.drugsQuantities = drugsQuantities;
 	}
 	public String getId() {
 		return farmacyId;
@@ -134,7 +164,17 @@ public class Farmacy {
 		this.subscribedUsers = subscribedUsers;
 	}
 
+	public void addQtys(Map<Drug, Integer> drugsPurchased) {
+		 for (Entry<Drug, Integer> entry : drugsPurchased.entrySet()) {
+			 if(drugsQuantities.keySet().contains(entry.getKey())) {
+				 drugsQuantities.put(entry.getKey(), entry.getValue() + drugsQuantities.get(entry.getKey()));
+				} else {
+					drugsQuantities.put(entry.getKey(), entry.getValue());
+				}
+		    }
+	}
 
+	
 
 	
 	
