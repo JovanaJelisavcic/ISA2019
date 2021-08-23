@@ -61,6 +61,7 @@ public class Views {
     public interface MyFarmacyOrdersList extends VerySimpleUser, VerySimpleFarmacy, SimpleDrug {}
     
     public interface MyFarmacyOffersList extends MyFarmacyOrdersList {}
+    public interface VacationRequestsList extends VerySimpleUser{}
     
     
 }

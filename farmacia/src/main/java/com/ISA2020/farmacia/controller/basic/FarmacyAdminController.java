@@ -4,11 +4,14 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Optional;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +26,8 @@ import com.ISA2020.farmacia.entity.Price;
 import com.ISA2020.farmacia.entity.PriceDTO;
 import com.ISA2020.farmacia.entity.PriceListDTO;
 import com.ISA2020.farmacia.entity.Promotion;
+import com.ISA2020.farmacia.entity.VacationPharmacist;
+import com.ISA2020.farmacia.entity.VacationStatus;
 import com.ISA2020.farmacia.entity.Views;
 import com.ISA2020.farmacia.entity.users.FarmacyAdmin;
 import com.ISA2020.farmacia.entity.users.UserInfo;
@@ -31,7 +36,9 @@ import com.ISA2020.farmacia.repository.DrugRepository;
 import com.ISA2020.farmacia.repository.FarmacyAdminRepository;
 import com.ISA2020.farmacia.repository.FarmacyRepository;
 import com.ISA2020.farmacia.repository.PromotionRepository;
+import com.ISA2020.farmacia.repository.VacationPharmacistRepository;
 import com.ISA2020.farmacia.security.JwtUtils;
+import com.ISA2020.farmacia.util.FilteringUtil;
 import com.ISA2020.farmacia.util.MailUtil;
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -53,7 +60,10 @@ public class FarmacyAdminController {
 	FarmacyRepository farmacyRepo;
 	@Autowired
 	DermappointRepository dermappointRepo;
-
+	@Autowired
+	VacationPharmacistRepository vacationRepo;
+	@Autowired
+	FilteringUtil filteringUtil;
 	   @Autowired
 	   private PromotionRepository promotionRepo;
 	   @Autowired
@@ -119,6 +129,55 @@ public class FarmacyAdminController {
 		promotionRepo.save(promotion);
 		mailUtil.sendPromotionEmails(farmacy, promotion);
 		    
+		return ResponseEntity.ok().build();
+		
+		
+	}
+	@JsonView(Views.VacationRequestsList.class)
+	@GetMapping("/vacationRequests")
+	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
+	public ResponseEntity<?> getVacations(@RequestHeader("Authorization") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
+		Farmacy farmacy =  farmAdminRepo.findById(username).get().getFarmacy();
+		List<VacationPharmacist> vacations = vacationRepo.findAll();
+		return new ResponseEntity<>(filteringUtil.filterVacationsPhFarmacy(vacations, farmacy.getId()), HttpStatus.OK);
+		
+		
+	}
+	
+	
+
+	@PostMapping("/acceptVacation/{vid}")
+	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
+	public ResponseEntity<?> acceptVacation(@RequestHeader("Authorization") String token, @PathVariable Long vid) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
+		Farmacy farmacy =  farmAdminRepo.findById(username).get().getFarmacy();
+		Optional<VacationPharmacist> vacation = vacationRepo.findById(vid);
+		if(vacation.isEmpty()) return ResponseEntity.notFound().build();
+		if(!vacation.get().getPharmacist().getFarmacy().getId().equals(farmacy.getId())) return ResponseEntity.badRequest().build();
+		vacation.get().setStatus(VacationStatus.ACCEPTED);
+		vacationRepo.save(vacation.get());
+		mailUtil.sendConfirmVacationMail(vacation.get());
+		return ResponseEntity.ok().build();
+		
+	}
+
+	@PostMapping("/denyVacation/{vid}")
+	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
+	public ResponseEntity<?> denyVacation(@RequestHeader("Authorization") String token, @PathVariable Long vid, @RequestBody String explanation) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException, MessagingException {	
+		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
+		Farmacy farmacy =  farmAdminRepo.findById(username).get().getFarmacy();
+		Optional<VacationPharmacist> vacation = vacationRepo.findById(vid);
+		if(vacation.isEmpty()) return ResponseEntity.notFound().build();
+		if(!vacation.get().getPharmacist().getFarmacy().getId().equals(farmacy.getId())) return ResponseEntity.badRequest().build();
+		vacation.get().setStatus(VacationStatus.DENIED);
+		String[] splited = explanation.split(":");
+		int first =splited[1].indexOf("\"");
+		int last =splited[1].lastIndexOf("\"");
+		String explanationValue =splited[1].substring(first+1, last);
+		vacation.get().setExplanation(explanationValue);
+		vacationRepo.save(vacation.get());
+		mailUtil.sendDenyVacation(vacation.get());
 		return ResponseEntity.ok().build();
 		
 		

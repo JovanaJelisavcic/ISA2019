@@ -174,10 +174,13 @@ insert into pharmacist (name, surname, email, adress, city, state, phone_num, st
 insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Berta', 'Golbourn', 'bgolbourny@hc360.com', '26294 Eastwood Center', 'Sagae', 'Japan', '849-660-4781', 1.9, '4:16 AM', '7:45 PM', 4);
 insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Mariette', 'Bater', 'mbaterz@dell.com', '797 Emmet Crossing', 'Dhali', 'Cyprus', '364-644-6729', 2.5, '6:47 AM', '9:12 PM', 6);
 insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Charlton', 'Huxster', 'chuxster10@prnewswire.com', '980 Pearson Street', 'Charikar', 'Afghanistan', '593-577-4916', 4.0, '5:28 AM', '7:40 PM', 5);
-insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Enrika', 'Preist', 'epreist11@vkontakte.ru', '2638 Merry Terrace', 'Yasenevo', 'Russia', '775-950-4486', 2.8, '7:11 AM', '8:00 PM', 5);
-insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Haydon', 'Shevlan', 'hshevlan12@chron.com', '580 Crowley Circle', 'Ryazanskaya', 'Russia', '820-142-4314', 3.4, '7:40 AM', '10:13 PM', 10);
-insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Sallie', 'Mandrey', 'smandrey13@cocolog-nifty.com', '70347 Waywood Way', 'Dayrūţ', 'Egypt', '663-220-0307', 4.8, '8:24 AM', '10:39 PM', 18);
+insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Enrika', 'Preist', 'epreist11@vkontakte.ru', '2638 Merry Terrace', 'Yasenevo', 'Russia', '775-950-4486', 2.8, '7:11 AM', '8:00 PM', 1);
+insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Haydon', 'Shevlan', 'hshevlan12@chron.com', '580 Crowley Circle', 'Ryazanskaya', 'Russia', '820-142-4314', 3.4, '7:40 AM', '10:13 PM', 1);
+insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Sallie', 'Mandrey', 'jovana.jelisavcic95@gmail.com', '70347 Waywood Way', 'Dayrūţ', 'Egypt', '663-220-0307', 4.8, '8:24 AM', '10:39 PM', 1);
 
+
+
+insert into vacation_pharmacist (VACATION_ID,BEGINNING,ENDING,STATUS,EMAIL)  values (1, '2021-12-12', '2021-12-25', 'CREATED', 'jovana.jelisavcic95@gmail.com'); 
 
 insert into dermatologist (name, surname, email, adress, city, state, phone_num, stars) values ('Nathalia', 'Farney', 'nfarney0@ucoz.com', '0828 Sloan Trail', 'Aiquile', 'Bolivia', '704-804-4088', 2.5);
 insert into dermatologist (name, surname, email, adress, city, state, phone_num, stars) values ('Toddie', 'Loveard', 'tloveard1@engadget.com', '25796 Forest Run Center', 'San Rafael', 'Philippines', '301-779-6221', 3.0);

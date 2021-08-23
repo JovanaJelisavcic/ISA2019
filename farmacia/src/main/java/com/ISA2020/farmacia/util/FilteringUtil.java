@@ -10,6 +10,7 @@ import com.ISA2020.farmacia.entity.Farmacy;
 import com.ISA2020.farmacia.entity.Offer;
 import com.ISA2020.farmacia.entity.Price;
 import com.ISA2020.farmacia.entity.PurchaseOrder;
+import com.ISA2020.farmacia.entity.VacationPharmacist;
 import com.ISA2020.farmacia.entity.WorkingHours;
 import com.ISA2020.farmacia.entity.users.Dermatologist;
 import com.ISA2020.farmacia.entity.users.Pharmacist;
@@ -81,6 +82,15 @@ public class FilteringUtil {
 				if(offer.getOrder().getMaker().getFarmacy().getId().equals(id))
 					result.add(offer);
 			}
+		return result;
+	}
+
+	public List<VacationPharmacist> filterVacationsPhFarmacy(List<VacationPharmacist> vacations, String id) {
+		List<VacationPharmacist> result = new ArrayList<>();
+		for(VacationPharmacist vacation : vacations) {
+			if(vacation.getPharmacist().getFarmacy().getId().equals(id))
+				result.add(vacation);
+		}
 		return result;
 	}
 
