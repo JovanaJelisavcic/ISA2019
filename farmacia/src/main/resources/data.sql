@@ -182,7 +182,7 @@ insert into pharmacist (name, surname, email, adress, city, state, phone_num, st
 
 insert into vacation_pharmacist (VACATION_ID,BEGINNING,ENDING,STATUS,EMAIL)  values (1, '2021-12-12', '2021-12-25', 'CREATED', 'jovana.jelisavcic95@gmail.com'); 
 
-insert into dermatologist (name, surname, email, adress, city, state, phone_num, stars) values ('Nathalia', 'Farney', 'nfarney0@ucoz.com', '0828 Sloan Trail', 'Aiquile', 'Bolivia', '704-804-4088', 2.5);
+insert into dermatologist (name, surname, email, adress, city, state, phone_num, stars) values ('Nathalia', 'Farney', 'jovana.jelisavcic95@gmail.com', '0828 Sloan Trail', 'Aiquile', 'Bolivia', '704-804-4088', 2.5);
 insert into dermatologist (name, surname, email, adress, city, state, phone_num, stars) values ('Toddie', 'Loveard', 'tloveard1@engadget.com', '25796 Forest Run Center', 'San Rafael', 'Philippines', '301-779-6221', 3.0);
 insert into dermatologist (name, surname, email, adress, city, state, phone_num, stars) values ('Hamid', 'Mulholland', 'hmulholland2@globo.com', '37912 Rieder Parkway', 'Na''ale', 'Israel', '695-521-1523', 4.5);
 insert into dermatologist (name, surname, email, adress, city, state, phone_num, stars) values ('Hillary', 'Metcalfe', 'hmetcalfe3@istockphoto.com', '2 Riverside Street', 'Huyang', 'China', '595-105-7217',3.8);
@@ -193,6 +193,8 @@ insert into dermatologist (name, surname, email, adress, city, state, phone_num,
 insert into dermatologist (name, surname, email, adress, city, state, phone_num, stars) values ('Nell', 'Scourge', 'nscourge8@foxnews.com', '1055 Londonderry Hill', 'Salaya', 'Thailand', '666-939-7105',4.2);
 insert into dermatologist (name, surname, email, adress, city, state, phone_num, stars) values ('Olympe', 'Stonman', 'ostonman9@state.tx.us', '7 New Castle Park', 'Dayr Sharaf', 'Palestinian Territory', '858-827-3458',4.5);
 
+
+insert into vacation_dermatologist (VACATION_ID,BEGINNING,ENDING,STATUS,EMAIL)  values (1, '2021-12-12', '2021-12-25', 'CREATED', 'jovana.jelisavcic95@gmail.com'); 
 
 insert into WORKING_HOURS (works_from, works_to, DERMATOLOGIST_EMAIL, farmacy_id) values ('8:45', '18:50', 'tlipscomb7@acquirethisname.com', 19);
 insert into WORKING_HOURS (works_from, works_to, DERMATOLOGIST_EMAIL, farmacy_id) values ('5:32', '22:28', 'bbuckingham6@macromedia.com', 15);

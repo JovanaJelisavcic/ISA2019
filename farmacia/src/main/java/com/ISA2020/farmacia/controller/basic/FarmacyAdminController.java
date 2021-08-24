@@ -64,10 +64,10 @@ public class FarmacyAdminController {
 	VacationPharmacistRepository vacationRepo;
 	@Autowired
 	FilteringUtil filteringUtil;
-	   @Autowired
-	   private PromotionRepository promotionRepo;
-	   @Autowired
-	   MailUtil mailUtil;
+	@Autowired
+	private PromotionRepository promotionRepo;
+	@Autowired
+	MailUtil mailUtil;
 
 	@JsonView(Views.SimpleUser.class)
 	@GetMapping("/profile")
@@ -154,7 +154,7 @@ public class FarmacyAdminController {
 		Farmacy farmacy =  farmAdminRepo.findById(username).get().getFarmacy();
 		Optional<VacationPharmacist> vacation = vacationRepo.findById(vid);
 		if(vacation.isEmpty()) return ResponseEntity.notFound().build();
-		if(!vacation.get().getPharmacist().getFarmacy().getId().equals(farmacy.getId())) return ResponseEntity.badRequest().build();
+		if(!vacation.get().getPharmacist().getFarmacy().getId().equals(farmacy.getId()) || !vacation.get().getStatus().equals(VacationStatus.CREATED)) return ResponseEntity.badRequest().build();
 		vacation.get().setStatus(VacationStatus.ACCEPTED);
 		vacationRepo.save(vacation.get());
 		mailUtil.sendConfirmVacationMail(vacation.get());
@@ -169,7 +169,7 @@ public class FarmacyAdminController {
 		Farmacy farmacy =  farmAdminRepo.findById(username).get().getFarmacy();
 		Optional<VacationPharmacist> vacation = vacationRepo.findById(vid);
 		if(vacation.isEmpty()) return ResponseEntity.notFound().build();
-		if(!vacation.get().getPharmacist().getFarmacy().getId().equals(farmacy.getId())) return ResponseEntity.badRequest().build();
+		if(!vacation.get().getPharmacist().getFarmacy().getId().equals(farmacy.getId()) || !vacation.get().getStatus().equals(VacationStatus.CREATED)) return ResponseEntity.badRequest().build();
 		vacation.get().setStatus(VacationStatus.DENIED);
 		String[] splited = explanation.split(":");
 		int first =splited[1].indexOf("\"");
