@@ -1,6 +1,5 @@
 package com.ISA2020.farmacia.controller.basic;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +22,6 @@ import com.ISA2020.farmacia.repository.FarmacyRepository;
 import com.ISA2020.farmacia.repository.PharmacistRepository;
 import com.ISA2020.farmacia.util.FilteringUtil;
 import com.fasterxml.jackson.annotation.JsonView;
-
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.UnsupportedJwtException;
 
 
 
@@ -90,7 +85,7 @@ public class SearchController {
 	@JsonView(Views.DermaInfo.class)
 	@GetMapping("/dermatologist/{parametar}")
 	@PreAuthorize("hasAuthority('PATIENT')")
-	public ResponseEntity<Object> searchFarmacyDerma(@PathVariable String parametar) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+	public ResponseEntity<Object> searchFarmacyDerma(@PathVariable String parametar) {	
 		 StringBuilder sb = new StringBuilder(parametar.concat("%"));
 		 sb.insert(0,"%");
 		 List<Dermatologist> dermas = dermaRepo.findByNameLikeIgnoreCaseOrSurnameLikeIgnoreCase(sb.toString(),sb.toString());

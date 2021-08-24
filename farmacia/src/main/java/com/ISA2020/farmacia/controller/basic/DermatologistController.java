@@ -134,7 +134,7 @@ public class DermatologistController {
 	@JsonView(Views.VerySimpleUser.class)
 	@GetMapping("/farmacys/{id}")
 	@PreAuthorize("hasAuthority('PATIENT')")
-	public ResponseEntity<?> farmacyDermatologists( @PathVariable String id) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+	public ResponseEntity<?> farmacyDermatologists( @PathVariable String id){	
 		List<WorkingHours> list = wARepo.findAllByFarmacyId(id);
 		List<Dermatologist> resp = new ArrayList<>();
 		for(WorkingHours wh : list) {

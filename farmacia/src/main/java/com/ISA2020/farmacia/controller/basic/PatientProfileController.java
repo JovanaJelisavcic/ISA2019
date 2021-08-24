@@ -81,7 +81,7 @@ public class PatientProfileController {
 		return new ResponseEntity<>(HttpStatus.OK);
 		
 	}
-	@JsonView(Views.SimpleDrug.class)
+	@JsonView(Views.VerySimpleDrug.class)
 	@GetMapping("/getNonAllergicDrugs")
 	@PreAuthorize("hasAuthority('PATIENT')")
 	public ResponseEntity<List<Drug>> getDrugsForAllergies(@RequestHeader("Authorization") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {

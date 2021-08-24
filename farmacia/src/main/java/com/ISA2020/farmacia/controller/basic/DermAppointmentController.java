@@ -65,7 +65,7 @@ public class DermAppointmentController {
 	@JsonView(Views.DermappointList.class)
 	@GetMapping("/farmacy/{id}")
 	@PreAuthorize("hasAuthority('PATIENT')")
-	public ResponseEntity<?> getFarmacyDermappoint( @PathVariable String id) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+	public ResponseEntity<?> getFarmacyDermappoint( @PathVariable String id)  {	
 		Optional<Farmacy> farmacy =  farmacyRepo.findById(id);
 		if(farmacy.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		List<DermAppointment> dermapoints = dermappointRepo.findByFarmacyId(id);

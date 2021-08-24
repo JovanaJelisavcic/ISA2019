@@ -1,7 +1,9 @@
 package com.ISA2020.farmacia.controller.basic;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -19,10 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ISA2020.farmacia.entity.Complaint;
+import com.ISA2020.farmacia.entity.Drug;
 import com.ISA2020.farmacia.entity.Farmacy;
 import com.ISA2020.farmacia.entity.VacationDermatologist;
 import com.ISA2020.farmacia.entity.VacationStatus;
 import com.ISA2020.farmacia.entity.Views;
+import com.ISA2020.farmacia.entity.DTO.DrugDTO;
 import com.ISA2020.farmacia.entity.DTO.FarmacyAdminDTO;
 import com.ISA2020.farmacia.entity.users.Dermatologist;
 import com.ISA2020.farmacia.entity.users.FarmacyAdmin;
@@ -30,6 +34,7 @@ import com.ISA2020.farmacia.entity.users.Supplier;
 import com.ISA2020.farmacia.entity.users.SysAdmin;
 import com.ISA2020.farmacia.repository.ComplaintRepository;
 import com.ISA2020.farmacia.repository.DermatologistRepository;
+import com.ISA2020.farmacia.repository.DrugRepository;
 import com.ISA2020.farmacia.repository.FarmacyAdminRepository;
 import com.ISA2020.farmacia.repository.FarmacyRepository;
 import com.ISA2020.farmacia.repository.SupplierRepository;
@@ -44,10 +49,6 @@ import com.ISA2020.farmacia.security.UserDetailsServiceImpl;
 import com.ISA2020.farmacia.security.UserRepository;
 import com.ISA2020.farmacia.util.MailUtil;
 import com.fasterxml.jackson.annotation.JsonView;
-
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.UnsupportedJwtException;
 
 @RestController
 @RequestMapping("/sadmin")
@@ -72,6 +73,9 @@ public class SysAdminController {
 	
 	@Autowired
 	DermatologistRepository dermaRepository;
+
+	@Autowired
+	DrugRepository drugRepo;
 	@Autowired
 	VacationDermaRepository vacationRepository;
 	@Autowired
@@ -83,7 +87,7 @@ public class SysAdminController {
 
 	@PostMapping("/farmacy")
 	@PreAuthorize("hasAuthority('SYS_ADMIN')")
-	public ResponseEntity<?> addFarmacy(@RequestBody Farmacy farmacy) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+	public ResponseEntity<?> addFarmacy(@RequestBody Farmacy farmacy)  {	
 		farmacy.setStars(0);
 		farmacyRepo.save(farmacy);
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -92,7 +96,7 @@ public class SysAdminController {
 	
 	@PostMapping("/fadmin")
 	@PreAuthorize("hasAuthority('SYS_ADMIN')")
-	public ResponseEntity<?> addFadmin( @RequestBody FarmacyAdminDTO farmacyAdmin) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+	public ResponseEntity<?> addFadmin( @RequestBody FarmacyAdminDTO farmacyAdmin)  {	
 		Optional<Farmacy> farmacy = farmacyRepo.findById(farmacyAdmin.getFarmacyId());
 		if(farmacy.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		if (userRepository.existsByUsername(farmacyAdmin.getEmail())) {
@@ -117,7 +121,7 @@ public class SysAdminController {
 	
 	@PostMapping("/otherSadmin")
 	@PreAuthorize("hasAuthority('SYS_ADMIN')")
-	public ResponseEntity<?> addSadmin( @RequestBody SysAdmin sysAdmin) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+	public ResponseEntity<?> addSadmin( @RequestBody SysAdmin sysAdmin)  {	
 		if (userRepository.existsByUsername(sysAdmin.getEmail())) {
 			return ResponseEntity
 					.badRequest().build();
@@ -138,7 +142,7 @@ public class SysAdminController {
 
 	@PostMapping("/addDermatologist")
 	@PreAuthorize("hasAuthority('SYS_ADMIN')")
-	public ResponseEntity<?> addDermatologist( @RequestBody Dermatologist dermatologist) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+	public ResponseEntity<?> addDermatologist( @RequestBody Dermatologist dermatologist)  {	
 		dermatologist.setStars(0);
 		dermaRepository.save(dermatologist);
 		
@@ -149,7 +153,7 @@ public class SysAdminController {
 	
 	@PostMapping("/addSupplier")
 	@PreAuthorize("hasAuthority('SYS_ADMIN')")
-	public ResponseEntity<?> addSupplier( @RequestBody Supplier supplier) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+	public ResponseEntity<?> addSupplier( @RequestBody Supplier supplier) {	
 		supplierRepo.save(supplier);
 		
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -161,7 +165,7 @@ public class SysAdminController {
 	@JsonView(Views.VacationRequestsList.class)
 	@GetMapping("/vacationRequests")
 	@PreAuthorize("hasAuthority('SYS_ADMIN')")
-	public ResponseEntity<?> getVacations() throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+	public ResponseEntity<?> getVacations() {	
 		return new ResponseEntity<>(vacationRepository.findAll(), HttpStatus.OK);
 		
 		
@@ -171,7 +175,7 @@ public class SysAdminController {
 
 	@PostMapping("/acceptVacation/{vid}")
 	@PreAuthorize("hasAuthority('SYS_ADMIN')")
-	public ResponseEntity<?> acceptVacation(@PathVariable Long vid) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+	public ResponseEntity<?> acceptVacation(@PathVariable Long vid)  {	
 		Optional<VacationDermatologist> vacation = vacationRepository.findById(vid);
 		if(vacation.isEmpty()) return ResponseEntity.notFound().build();
 		if(!vacation.get().getStatus().equals(VacationStatus.CREATED)) return ResponseEntity.badRequest().build();
@@ -185,7 +189,7 @@ public class SysAdminController {
 
 	@PostMapping("/denyVacation/{vid}")
 	@PreAuthorize("hasAuthority('SYS_ADMIN')")
-	public ResponseEntity<?> denyVacation(@PathVariable Long vid, @RequestBody String explanation) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException, MessagingException {	
+	public ResponseEntity<?> denyVacation(@PathVariable Long vid, @RequestBody String explanation) throws UnsupportedEncodingException, MessagingException  {	
 		Optional<VacationDermatologist> vacation = vacationRepository.findById(vid);
 		if(vacation.isEmpty()) return ResponseEntity.notFound().build();
 		if(!vacation.get().getStatus().equals(VacationStatus.CREATED)) return ResponseEntity.badRequest().build();
@@ -205,7 +209,7 @@ public class SysAdminController {
 	@JsonView(Views.ComplaintsList.class)
 	@GetMapping("/complaints")
 	@PreAuthorize("hasAuthority('SYS_ADMIN')")
-	public ResponseEntity<?> getComplaints() throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+	public ResponseEntity<?> getComplaints() {	
 		return new ResponseEntity<>(complaintRepository.findAll(), HttpStatus.OK);
 		
 		
@@ -213,7 +217,7 @@ public class SysAdminController {
 	
 	@PostMapping("/complaintRespond/{vid}")
 	@PreAuthorize("hasAuthority('SYS_ADMIN')")
-	public ResponseEntity<?> respondComplaint(@PathVariable Long vid, @RequestBody String response) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException, MessagingException {	
+	public ResponseEntity<?> respondComplaint(@PathVariable Long vid, @RequestBody String response) throws UnsupportedEncodingException, MessagingException {	
 		Optional<Complaint> complaint = complaintRepository.findById(vid);
 		if(complaint.isEmpty()) return ResponseEntity.notFound().build();
 		if(complaint.get().isResponded()) return ResponseEntity.badRequest().build();
@@ -229,6 +233,32 @@ public class SysAdminController {
 		
 		
 	}
+	
+	
+	@JsonView(Views.SimpleDrug.class)
+	@GetMapping("/drugs")
+	@PreAuthorize("hasAuthority('SYS_ADMIN')")
+	public ResponseEntity<?> getDrugs() {	
+		return new ResponseEntity<>(drugRepo.findAll(), HttpStatus.OK);
+	}
+	
+	@PostMapping("/addDrug")
+	@PreAuthorize("hasAuthority('SYS_ADMIN')")
+	public ResponseEntity<?> addDrug( @RequestBody DrugDTO drugDto) {	
+		Drug drug = new Drug();
+		drug.setFromDTO(drugDto);
+		List<Drug> replacement = new ArrayList<>();
+		for(String code : drugDto.getReplacementCodes()) {
+			Optional<Drug> drugRepl = drugRepo.findById(code);
+			if(drugRepl.isEmpty()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			replacement.add(drugRepl.get());
+		}
+		drug.setReplacement(replacement);
+		drugRepo.save(drug);
+		return new ResponseEntity<>(HttpStatus.OK);
+		 
+	}
+
 	
 	
 }

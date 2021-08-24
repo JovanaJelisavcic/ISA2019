@@ -136,7 +136,7 @@ public class FarmacyController {
 	@JsonView(Views.SimpleFarmacy.class)
 	@GetMapping("/profile/{id}")
 	@PreAuthorize("hasAuthority('PATIENT')")
-	public ResponseEntity<?> farmProfile( @PathVariable String id) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+	public ResponseEntity<?> farmProfile( @PathVariable String id)  {	
 		Optional<Farmacy> farmacy =   farmacyRepo.findById(id);
 		if(farmacy.isEmpty()) return ResponseEntity.notFound().build();
 		return new ResponseEntity<>(farmacy.get(), HttpStatus.OK);
@@ -147,7 +147,7 @@ public class FarmacyController {
 	@JsonView(Views.SimpleDrug.class)
 	@GetMapping("/drugsAvailable/{id}")
 	@PreAuthorize("hasAuthority('PATIENT')")
-	public ResponseEntity<?> farmacyAvailableDrugs(@PathVariable String id) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+	public ResponseEntity<?> farmacyAvailableDrugs(@PathVariable String id){	
 		Farmacy farmacy = farmacyRepo.getById(id);
 		List<Drug> drugs = new ArrayList<>();
 		farmacy.getDrugsQuantities().forEach((k, v) -> drugs.add(k));

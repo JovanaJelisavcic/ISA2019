@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.ISA2020.farmacia.entity.DTO.DrugDTO;
 import com.fasterxml.jackson.annotation.JsonView;
 
 
@@ -29,7 +29,7 @@ public class Drug {
 	private String name;
 	@Enumerated(EnumType.STRING)
 	@JsonView(Views.SimpleDrug.class)
-	private DrugType type;
+	private DrugType drugType;
 	@Column(nullable=false, length = 2000)
 	@JsonView(Views.SimpleDrug.class)
 	private String contraindications;
@@ -39,12 +39,23 @@ public class Drug {
 	@Column(nullable=false)
 	@JsonView(Views.SimpleDrug.class)
 	private String prescriptionMetrics;
-	@ElementCollection(targetClass=Drug.class)
+	@ManyToMany
 	@CollectionTable(joinColumns = @JoinColumn(name = "code"))
 	@JsonView(Views.VeryDetailedDrug.class)
 	private List<Drug> replacement;
 	
-
+	@Enumerated(EnumType.STRING)
+	@Column(nullable=false)
+	@JsonView(Views.SimpleDrug.class)
+	private DrugForm form;
+	@Column(nullable=false)
+	@JsonView(Views.SimpleDrug.class)
+	private String manufacturer;
+	@Column(nullable=false)
+	@JsonView(Views.SimpleDrug.class)
+	private boolean receptNeeded;
+	@JsonView(Views.SimpleDrug.class)
+	private String  notes;
 	
 	@ManyToMany
 	@JoinTable(
@@ -61,10 +72,18 @@ public class Drug {
 		super();
 		this.code = code;
 		this.name = name;
-		this.type = type;
+		this.drugType = type;
 		this.contraindications = contraindications;
 		this.composition = composition;
 		this.prescriptionMetrics = prescriptionMetrics;
+	}
+
+	public DrugForm getForm() {
+		return form;
+	}
+
+	public void setForm(DrugForm form) {
+		this.form = form;
 	}
 
 	public Drug(String key) {
@@ -89,11 +108,11 @@ public class Drug {
 	}
 
 	public DrugType getType() {
-		return type;
+		return drugType;
 	}
 
 	public void setType(DrugType type) {
-		this.type = type;
+		this.drugType = type;
 	}
 
 	public String getContraindications() {
@@ -158,6 +177,44 @@ public class Drug {
 	@Override
 	public String toString() {
 		return "Drug [code=" + code + ", name=" + name +"]";
+	}
+
+	public String getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+
+	public boolean isReceptNeeded() {
+		return receptNeeded;
+	}
+
+	public void setReceptNeeded(boolean receptNeeded) {
+		this.receptNeeded = receptNeeded;
+	}
+
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+
+	public void setFromDTO(DrugDTO drug) {
+		code=drug.getCode();
+		name=drug.getName();
+		drugType=drug.getDrugType();
+		contraindications=drug.getContraindications();
+		composition=drug.getComposition();
+		prescriptionMetrics=drug.getPrescriptionMetrics();
+		form = drug.getForm();
+		manufacturer= drug.getManufacturer();
+		receptNeeded=drug.isReceptNeeded();
+		notes=drug.getNotes();
+		
 	}
 	
 }

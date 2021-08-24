@@ -211,10 +211,10 @@ insert into WORKING_HOURS (works_from, works_to, DERMATOLOGIST_EMAIL, farmacy_id
 insert into derm_appointment (DATE_TIME,END_TIME,PRICE,EMAIL,FARMACY_ID ) values ('2021-01-01T05:20', '2021-01-01T05:30', 20, 'nscourge8@foxnews.com',1  );
 insert into derm_appointment (DATE_TIME,END_TIME,PRICE,EMAIL,FARMACY_ID ) values ('2021-01-01T06:00', '2021-01-01T06:15', 20, 'nscourge8@foxnews.com',1  );
 
-insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('S90465', 'TAZORAC', 'ANTIBIOTIC', 'Aenean sit amet justo.', 'Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.
+insert into DRUG (code, name, drug_type, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS, form, manufacturer, recept_needed,notes) values ('S90465', 'TAZORAC', 'ANTIBIOTIC', 'Aenean sit amet justo.', 'Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.
 
-Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.', 'Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.');
-insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('T474X4A', 'CARBON DIOXIDE', 'ANTIBIOTIC', 'Nullam sit amet turpis elementum ligula vehicula consequat.', 'Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.
+Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.', 'Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.', 'SYRUP', 'Chemopharma', false,'Shoul be given and taken with cautiosness');
+insert into DRUG (code, name, drug_type, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS, form, manufacturer, recept_needed,notes) values ('T474X4A', 'CARBON DIOXIDE', 'ANTIBIOTIC', 'Nullam sit amet turpis elementum ligula vehicula consequat.', 'Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.
 
 Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.', 'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.
 
@@ -222,14 +222,14 @@ Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, t
 
 Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.
 
-Fusce consequat. Nulla nisl. Nunc nisl.');
-insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('M1215', 'Avon Sun Sport', 'ANTIBIOTIC', 'Sed accumsan felis.', 'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.', 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.
+Fusce consequat. Nulla nisl. Nunc nisl.', 'SYRUP', 'Chemopharma', false,'Shoul be given and taken with cautiosness');
+insert into DRUG (code, name, drug_type, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS, form, manufacturer, recept_needed,notes) values ('M1215', 'Avon Sun Sport', 'ANTIBIOTIC', 'Sed accumsan felis.', 'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.', 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.
 
-Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.');
-insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('S61207S', 'Doxepin Hydrochloride', 'ANTIBIOTIC', 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla.', 'Sed ante. Vivamus tortor. Duis mattis egestas metus.
+Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.', 'SYRUP', 'Chemopharma', false,'Shoul be given and taken with cautiosness');
+insert into DRUG (code, name, drug_type, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS, form, manufacturer, recept_needed,notes) values ('S61207S', 'Doxepin Hydrochloride', 'ANTIBIOTIC', 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla.', 'Sed ante. Vivamus tortor. Duis mattis egestas metus.
 
-Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.', 'Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.');
-insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('T81522A', 'Stratuscare Antacid And Antigas', 'ANTIBIOTIC', 'Nulla suscipit ligula in lacus.',  'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.
+Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.', 'Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.', 'SYRUP', 'Chemopharma', false,'Shoul be given and taken with cautiosness');
+insert into DRUG (code, name, drug_type, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS, form, manufacturer, recept_needed,notes) values ('T81522A', 'Stratuscare Antacid And Antigas', 'ANTIBIOTIC', 'Nulla suscipit ligula in lacus.',  'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.
 
 Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.', 'Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.
 
@@ -237,35 +237,35 @@ Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est ris
 
 Fusce consequat. Nulla nisl. Nunc nisl.
 
-Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.');
-insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('A485', 'Triple Antibiotic Plus Pain Relief', 'ANESTHETIC', 'Cras in purus eu magna vulputate luctus.', 'Sed ante. Vivamus tortor. Duis mattis egestas metus.
+Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.', 'SYRUP', 'Chemopharma', false,'Shoul be given and taken with cautiosness');
+insert into DRUG (code, name, drug_type, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS, form, manufacturer, recept_needed,notes) values ('A485', 'Triple Antibiotic Plus Pain Relief', 'ANESTHETIC', 'Cras in purus eu magna vulputate luctus.', 'Sed ante. Vivamus tortor. Duis mattis egestas metus.
 
-Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.', 'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.');
-insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('S11014D', 'Depo-Provera', 'ANESTHETIC', 'Nulla tellus.','Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.
+Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.', 'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 'SYRUP', 'Chemopharma', false,'Shoul be given and taken with cautiosness');
+insert into DRUG (code, name, drug_type, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS, form, manufacturer, recept_needed,notes) values ('S11014D', 'Depo-Provera', 'ANESTHETIC', 'Nulla tellus.','Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.
 
 Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.
 
 Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.
 
-Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.');
-insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('S93312D', 'Mucinex Fast-Max', 'ANESTHETIC', 'Phasellus sit amet erat.',  'Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.', 'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.');
-insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('H02134', 'Arthritis Relief', 'ANESTHETIC', 'Sed ante.', 'Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.
+Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.', 'SYRUP', 'Chemopharma', false,'Shoul be given and taken with cautiosness');
+insert into DRUG (code, name, drug_type, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS, form, manufacturer, recept_needed,notes) values ('S93312D', 'Mucinex Fast-Max', 'ANESTHETIC', 'Phasellus sit amet erat.',  'Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.', 'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.', 'SYRUP', 'Chemopharma', false,'Shoul be given and taken with cautiosness');
+insert into DRUG (code, name, drug_type, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS, form, manufacturer, recept_needed,notes) values ('H02134', 'Arthritis Relief', 'ANESTHETIC', 'Sed ante.', 'Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.
 
-Phasellus in felis. Donec semper sapien a libero. Nam dui.', 'Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.');
-insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('H4043X2', 'Vitamin A D', 'ANESTHETIC', 'Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.', 'Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.
+Phasellus in felis. Donec semper sapien a libero. Nam dui.', 'Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.', 'SYRUP', 'Chemopharma', false,'Shoul be given and taken with cautiosness');
+insert into DRUG (code, name, drug_type, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS, form, manufacturer, recept_needed,notes) values ('H4043X2', 'Vitamin A D', 'ANESTHETIC', 'Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.', 'Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.
 
 Duis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.', 'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.
 
-Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.');
-insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('M05219', 'Nutropin AQ NuSpin 10', 'ANTIHISTAMINE', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.
+Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.', 'SYRUP', 'Chemopharma', false,'Shoul be given and taken with cautiosness');
+insert into DRUG (code, name, drug_type, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS, form, manufacturer, recept_needed,notes) values ('M05219', 'Nutropin AQ NuSpin 10', 'ANTIHISTAMINE', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.
 
-Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.', 'Phasellus in felis. Donec semper sapien a libero. Nam dui.');
-insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('S066X1D', 'COUGH AND COLD KIDS RELIEF', 'ANTIHISTAMINE', 'Nam dui.', 'Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.
+Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.', 'Phasellus in felis. Donec semper sapien a libero. Nam dui.', 'SYRUP', 'Chemopharma', false,'Shoul be given and taken with cautiosness');
+insert into DRUG (code, name, drug_type, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS, form, manufacturer, recept_needed,notes) values ('S066X1D', 'COUGH AND COLD KIDS RELIEF', 'ANTIHISTAMINE', 'Nam dui.', 'Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.
 
 Sed ante. Vivamus tortor. Duis mattis egestas metus.', 'Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.
 
-Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.');
-insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('S499', 'Gyno Complex', 'ANTIHISTAMINE', 'Integer non velit.',  'Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.
+Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.', 'SYRUP', 'Chemopharma', false,'Shoul be given and taken with cautiosness');
+insert into DRUG (code, name, drug_type, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS, form, manufacturer, recept_needed,notes) values ('S499', 'Gyno Complex', 'ANTIHISTAMINE', 'Integer non velit.',  'Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.
 
 Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.', 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.
 
@@ -273,36 +273,36 @@ Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit u
 
 Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.
 
-Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.');
-insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('O410', 'Fluconazole', 'ANTIHISTAMINE', 'Vivamus tortor.',  'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.', 'Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.');
-insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('T532X2', 'Varicose Veins - Phlebitis', 'ANTIHISTAMINE', 'Nulla suscipit ligula in lacus.', 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.
+Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.', 'SYRUP', 'Chemopharma', false,'Shoul be given and taken with cautiosness');
+insert into DRUG (code, name, drug_type, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS, form, manufacturer, recept_needed,notes) values ('O410', 'Fluconazole', 'ANTIHISTAMINE', 'Vivamus tortor.',  'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.', 'Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.', 'SYRUP', 'Chemopharma', false,'Shoul be given and taken with cautiosness');
+insert into DRUG (code, name, drug_type, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS, form, manufacturer, recept_needed,notes) values ('T532X2', 'Varicose Veins - Phlebitis', 'ANTIHISTAMINE', 'Nulla suscipit ligula in lacus.', 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.
 
 Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 'Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem.
 
-Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.');
-insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('M724', 'Shark Cartilage', 'ANTIHISTAMINE', 'Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.', 'Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.', 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.
+Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.', 'SYRUP', 'Chemopharma', false,'Shoul be given and taken with cautiosness');
+insert into DRUG (code, name, drug_type, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS, form, manufacturer, recept_needed,notes) values ('M724', 'Shark Cartilage', 'ANTIHISTAMINE', 'Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.', 'Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.', 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.
 
-Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.');
-insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('S59129G', 'SEUK', 'ANTIHISTAMINE', 'In hac habitasse platea dictumst.', 'In congue. Etiam justo. Etiam pretium iaculis justo.
+Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.', 'SYRUP', 'Chemopharma', false,'Shoul be given and taken with cautiosness');
+insert into DRUG (code, name, drug_type, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS, form, manufacturer, recept_needed,notes) values ('S59129G', 'SEUK', 'ANTIHISTAMINE', 'In hac habitasse platea dictumst.', 'In congue. Etiam justo. Etiam pretium iaculis justo.
 
 In hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.', 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.
 
 Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.
 
-Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.');
-insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('S95991D', 'PHOTO FINISH MORE THAN PRIMER BLEMISH CONTROL', 'ANTIDEPRESIV', 'Donec dapibus.', 'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.', 'Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.
+Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.', 'SYRUP', 'Chemopharma', false,'Shoul be given and taken with cautiosness');
+insert into DRUG (code, name, drug_type, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS, form, manufacturer, recept_needed,notes) values ('S95991D', 'PHOTO FINISH MORE THAN PRIMER BLEMISH CONTROL', 'ANTIDEPRESIV', 'Donec dapibus.', 'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.', 'Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.
 
 Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.
 
-Phasellus in felis. Donec semper sapien a libero. Nam dui.');
-insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('M4004', 'Cranberry', 'ANTIDEPRESIV', 'Sed sagittis.',  'Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.', 'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.
+Phasellus in felis. Donec semper sapien a libero. Nam dui.', 'SYRUP', 'Chemopharma', false,'Shoul be given and taken with cautiosness');
+insert into DRUG (code, name, drug_type, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS, form, manufacturer, recept_needed,notes) values ('M4004', 'Cranberry', 'ANTIDEPRESIV', 'Sed sagittis.',  'Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.', 'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.
 
 Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.
 
 Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.
 
-Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.');
-insert into DRUG (code, name, TYPE, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS) values ('T550X3', 'Hydralazine Hydrochloride', 'ANTIDEPRESIV', 'In congue.', 'Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.', 'Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.');
+Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.', 'SYRUP', 'Chemopharma', false,'Shoul be given and taken with cautiosness');
+insert into DRUG (code, name, drug_type, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS, form, manufacturer, recept_needed,notes) values ('T550X3', 'Hydralazine Hydrochloride', 'ANTIDEPRESIV', 'In congue.', 'Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.', 'Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.', 'SYRUP', 'Chemopharma', false,'Shoul be given and taken with cautiosness');
 
 insert into DRUG_REPLACEMENT (code, replacement_code) values ('S90465','T474X4A');
 insert into DRUG_REPLACEMENT (code, replacement_code) values ('S90465','M1215');
