@@ -117,5 +117,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		
 	}
 
+	public void registerAdmin(User user) {
+		 String encodedPassword = passwordEncoder.encode(user.getPassword());
+		    user.setPassword(encodedPassword);
+		    user.setVerificationCode(null);
+		    user.setEnabled(true);		     
+		    userRepository.save(user);
+	}
+
 
 }

@@ -1,4 +1,4 @@
-package com.ISA2020.farmacia.entity.users;
+package com.ISA2020.farmacia.entity.DTO;
 
 import java.time.LocalTime;
 

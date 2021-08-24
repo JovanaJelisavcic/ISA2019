@@ -5,6 +5,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.ISA2020.farmacia.entity.Farmacy;
+import com.ISA2020.farmacia.entity.DTO.FarmacyAdminDTO;
 
 @Entity
 public class FarmacyAdmin extends UserInfo {
@@ -43,6 +44,16 @@ public class FarmacyAdmin extends UserInfo {
 		if(!farmacyadmin.getSurname().equals(super.getSurname()))
 			super.setSurname(farmacyadmin.getSurname());
 		
+	}
+	
+	public void setByUserInfo(FarmacyAdminDTO farmacyAdmin) {
+		this.setEmail(farmacyAdmin.getEmail());
+		this.setAdress(farmacyAdmin.getAdress());
+		this.setCity(farmacyAdmin.getCity());
+		this.setName(farmacyAdmin.getName());
+		this.setPhoneNum(farmacyAdmin.getPhoneNum());
+		this.setState(farmacyAdmin.getState());
+		this.setSurname(farmacyAdmin.getSurname());
 	}
 
 	

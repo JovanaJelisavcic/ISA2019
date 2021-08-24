@@ -1,7 +1,10 @@
-package com.ISA2020.farmacia.entity;
+package com.ISA2020.farmacia.entity.DTO;
 
 import java.util.List;
 
+import com.ISA2020.farmacia.entity.DermAppointment;
+import com.ISA2020.farmacia.entity.Price;
+import com.ISA2020.farmacia.entity.Views;
 import com.fasterxml.jackson.annotation.JsonView;
 
 public class PriceListDTO {

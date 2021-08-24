@@ -98,7 +98,7 @@ insert into patient (email, name, surname, adress, city, state, phone_num) value
 insert into patient (email, name, surname, adress, city, state, phone_num) values ('gbusseys@canalblog.com', 'Jodie', 'Flahy', '2 Thackeray Lane', 'Dangmu', 'China', '684-507-7680');
 insert into patient (email, name, surname, adress, city, state, phone_num) values ('kellert@cbsnews.com', 'Axel', 'McVanamy', '17902 Farwell Trail', 'Delmiro Gouveia', 'Brazil', '974-212-1856');
 insert into patient (email, name, surname, adress, city, state, phone_num) values ('jovana.jelisavcic95@gmail.com', 'Jovana', 'Jelisavcic', '17902 Farwell Trail', 'Delmiro Gouveia', 'Brazil', '974-212-1856');
-insert into sys_admin (email, name, surname, adress, city, state, phone_num) values ('gmilesop1@house.gov', 'Cornell', 'Jayme', '494 Harper Park', 'Businovo', 'Russia', '672-670-6543');
+insert into sys_admin (email, name, surname, adress, city, state, phone_num) values ('vleathley0@fastcompany.com', 'Cornell', 'Jayme', '494 Harper Park', 'Businovo', 'Russia', '672-670-6543');
 
 
 insert into supplier (email, name, surname, adress, city, state, phone_num) values ('jovana.jelisavcic95@gmail.com', 'Cornell', 'Jayme', '494 Harper Park', 'Businovo', 'Russia', '672-670-6543');

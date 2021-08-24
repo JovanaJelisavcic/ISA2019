@@ -1,4 +1,4 @@
-package com.ISA2020.farmacia.entity;
+package com.ISA2020.farmacia.entity.DTO;
 
 import java.time.LocalDateTime;
 import java.util.Map;
