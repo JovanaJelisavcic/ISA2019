@@ -12,6 +12,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
+import com.ISA2020.farmacia.entity.Complaint;
 import com.ISA2020.farmacia.entity.Farmacy;
 import com.ISA2020.farmacia.entity.Offer;
 import com.ISA2020.farmacia.entity.Promotion;
@@ -136,6 +137,34 @@ public class MailUtil {
 		   
 		     
 		    content = content.replace("[[reason]]", derma.getExplanation());
+		     
+		    helper.setText(content, true);
+		     
+		    javaMailSender.send(message);
+		
+	}
+
+	public void sendComplaintResponse(Complaint complaint) throws MessagingException, UnsupportedEncodingException {
+		 String toAddress = complaint.getPatient().getEmail();
+		    String senderName = "Farmacia";
+		    String subject = "Answer to your complaint";
+		    String content = "Dear [[name]],<br>"
+		            + "One of our admins responded to you with:<br>"
+		            + "[[reason]]"
+		            + "<br>Thank you for understanding,<br>"
+		            + "Farmacia.";
+		     
+		    MimeMessage message = javaMailSender.createMimeMessage();
+		    MimeMessageHelper helper = new MimeMessageHelper(message);
+		     
+		    helper.setFrom(fromAddress, senderName);
+		    helper.setTo(toAddress);
+		    helper.setSubject(subject);
+		     
+		    content = content.replace("[[name]]", complaint.getPatient().getSurname());
+		   
+		     
+		    content = content.replace("[[reason]]", complaint.getResponseText());
 		     
 		    helper.setText(content, true);
 		     

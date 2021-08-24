@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ISA2020.farmacia.entity.Complaint;
 import com.ISA2020.farmacia.entity.Farmacy;
 import com.ISA2020.farmacia.entity.VacationDermatologist;
 import com.ISA2020.farmacia.entity.VacationStatus;
@@ -27,6 +28,7 @@ import com.ISA2020.farmacia.entity.users.Dermatologist;
 import com.ISA2020.farmacia.entity.users.FarmacyAdmin;
 import com.ISA2020.farmacia.entity.users.Supplier;
 import com.ISA2020.farmacia.entity.users.SysAdmin;
+import com.ISA2020.farmacia.repository.ComplaintRepository;
 import com.ISA2020.farmacia.repository.DermatologistRepository;
 import com.ISA2020.farmacia.repository.FarmacyAdminRepository;
 import com.ISA2020.farmacia.repository.FarmacyRepository;
@@ -72,6 +74,8 @@ public class SysAdminController {
 	DermatologistRepository dermaRepository;
 	@Autowired
 	VacationDermaRepository vacationRepository;
+	@Autowired
+	ComplaintRepository complaintRepository;
 	@Autowired
 	private UserDetailsServiceImpl service;
 	@Autowired
@@ -198,6 +202,33 @@ public class SysAdminController {
 		
 	}
 	
+	@JsonView(Views.ComplaintsList.class)
+	@GetMapping("/complaints")
+	@PreAuthorize("hasAuthority('SYS_ADMIN')")
+	public ResponseEntity<?> getComplaints() throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+		return new ResponseEntity<>(complaintRepository.findAll(), HttpStatus.OK);
+		
+		
+	}
+	
+	@PostMapping("/complaintRespond/{vid}")
+	@PreAuthorize("hasAuthority('SYS_ADMIN')")
+	public ResponseEntity<?> respondComplaint(@PathVariable Long vid, @RequestBody String response) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException, MessagingException {	
+		Optional<Complaint> complaint = complaintRepository.findById(vid);
+		if(complaint.isEmpty()) return ResponseEntity.notFound().build();
+		if(complaint.get().isResponded()) return ResponseEntity.badRequest().build();
+		complaint.get().setResponded(true);
+		String[] splited = response.split(":");
+		int first =splited[1].indexOf("\"");
+		int last =splited[1].lastIndexOf("\"");
+		String respondValue =splited[1].substring(first+1, last);
+		complaint.get().setResponseText(respondValue);
+		complaintRepository.save(complaint.get());
+		mailUtil.sendComplaintResponse(complaint.get());
+		return ResponseEntity.ok().build();
+		
+		
+	}
 	
 	
 }

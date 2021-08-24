@@ -96,7 +96,7 @@ insert into patient (email, name, surname, adress, city, state, phone_num) value
 insert into patient (email, name, surname, adress, city, state, phone_num) values ('eduboisq@unesco.org', 'Harris', 'Cristofor', '22919 Express Road', 'Gornorechenskiy', 'Russia', '382-233-2198');
 insert into patient (email, name, surname, adress, city, state, phone_num) values ('apumfreyr@theglobeandmail.com', 'Gerard', 'Fruchon', '304 Westridge Parkway', 'Siaton', 'Philippines', '176-565-9371');
 insert into patient (email, name, surname, adress, city, state, phone_num) values ('gbusseys@canalblog.com', 'Jodie', 'Flahy', '2 Thackeray Lane', 'Dangmu', 'China', '684-507-7680');
-insert into patient (email, name, surname, adress, city, state, phone_num) values ('kellert@cbsnews.com', 'Axel', 'McVanamy', '17902 Farwell Trail', 'Delmiro Gouveia', 'Brazil', '974-212-1856');
+insert into patient (email, name, surname, adress, city, state, phone_num) values ('petarv7@gmail.com', 'Axel', 'McVanamy', '17902 Farwell Trail', 'Delmiro Gouveia', 'Brazil', '974-212-1856');
 insert into patient (email, name, surname, adress, city, state, phone_num) values ('jovana.jelisavcic95@gmail.com', 'Jovana', 'Jelisavcic', '17902 Farwell Trail', 'Delmiro Gouveia', 'Brazil', '974-212-1856');
 insert into sys_admin (email, name, surname, adress, city, state, phone_num) values ('vleathley0@fastcompany.com', 'Cornell', 'Jayme', '494 Harper Park', 'Businovo', 'Russia', '672-670-6543');
 
@@ -370,3 +370,6 @@ insert into item_qty(order_id, code, qty) values(1, 'T474X4A', 100);
 
 insert into offer(offerid, deadline, price,status,orderid, email) values(1, '2021-12-12T12:00:00', 1500, 'WAITING', 1, 'jovana.jelisavcic95@gmail.com');
 insert into offer(offerid, deadline, price,status,orderid, email) values(2, '2021-12-12T14:00:00', 1480, 'WAITING', 1, 'petarv7@gmail.com');
+
+
+insert into complaint(COMPLAINT_ID,COMPLAINT_TEXT,RESPONDED,SUBJECT,SUBJECT_ID,EMAIL) values (1, 'He was very rude to me, also rasist', false, 'PHARMACIST', 'jovana.jelisavcic95@gmail.com', 'petarv7@gmail.com');
