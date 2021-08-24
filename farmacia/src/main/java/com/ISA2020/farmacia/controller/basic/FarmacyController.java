@@ -1,6 +1,7 @@
 package com.ISA2020.farmacia.controller.basic;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +28,7 @@ import com.ISA2020.farmacia.repository.FarmacyAdminRepository;
 import com.ISA2020.farmacia.repository.FarmacyRepository;
 import com.ISA2020.farmacia.security.JwtUtils;
 import com.fasterxml.jackson.annotation.JsonView;
+
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -129,5 +131,30 @@ public class FarmacyController {
 		return new ResponseEntity<>(HttpStatus.OK);
 		 
 	}
+	
+	
+	@JsonView(Views.SimpleFarmacy.class)
+	@GetMapping("/profile/{id}")
+	@PreAuthorize("hasAuthority('PATIENT')")
+	public ResponseEntity<?> farmProfile( @PathVariable String id) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+		Optional<Farmacy> farmacy =   farmacyRepo.findById(id);
+		if(farmacy.isEmpty()) return ResponseEntity.notFound().build();
+		return new ResponseEntity<>(farmacy.get(), HttpStatus.OK);
+		
+	}
+	
+	
+	@JsonView(Views.SimpleDrug.class)
+	@GetMapping("/drugsAvailable/{id}")
+	@PreAuthorize("hasAuthority('PATIENT')")
+	public ResponseEntity<?> farmacyAvailableDrugs(@PathVariable String id) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+		Farmacy farmacy = farmacyRepo.getById(id);
+		List<Drug> drugs = new ArrayList<>();
+		farmacy.getDrugsQuantities().forEach((k, v) -> drugs.add(k));
+		if(drugs.isEmpty()) return ResponseEntity.notFound().build();
+		return new ResponseEntity<>(drugs, HttpStatus.OK);
+	}
+	
+	
 
 }

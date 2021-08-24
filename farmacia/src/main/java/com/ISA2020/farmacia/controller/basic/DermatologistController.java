@@ -51,7 +51,7 @@ public class DermatologistController {
 	@JsonView(Views.DermaInfo.class)
 	@GetMapping("/farmacys")
 	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
-	public ResponseEntity<?> farmacyDermatologists(@RequestHeader("Authorization") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+	public ResponseEntity<?> myfarmacyDermatologists(@RequestHeader("Authorization") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
 		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 		Farmacy farmacy =  farmAdminRepo.findById(username).get().getFarmacy();
 		List<WorkingHours> list = wARepo.findAllByFarmacyId(farmacy.getId());
@@ -130,5 +130,20 @@ public class DermatologistController {
 		 
 	}
 
+	
+	@JsonView(Views.VerySimpleUser.class)
+	@GetMapping("/farmacys/{id}")
+	@PreAuthorize("hasAuthority('PATIENT')")
+	public ResponseEntity<?> farmacyDermatologists( @PathVariable String id) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+		List<WorkingHours> list = wARepo.findAllByFarmacyId(id);
+		List<Dermatologist> resp = new ArrayList<>();
+		for(WorkingHours wh : list) {
+			if(!resp.contains(wh.getDermatologist()))
+				resp.add(wh.getDermatologist());
+		}
+ 
+		if(resp.isEmpty() ) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		 return new ResponseEntity<>(resp, HttpStatus.OK);
+	}
 	
 }

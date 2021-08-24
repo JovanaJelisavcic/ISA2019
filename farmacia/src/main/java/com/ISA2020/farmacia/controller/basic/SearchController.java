@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -91,7 +90,7 @@ public class SearchController {
 	@JsonView(Views.DermaInfo.class)
 	@GetMapping("/dermatologist/{parametar}")
 	@PreAuthorize("hasAuthority('PATIENT')")
-	public ResponseEntity<Object> searchFarmacyDerma(@RequestHeader("Authorization") String token,@PathVariable String parametar) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+	public ResponseEntity<Object> searchFarmacyDerma(@PathVariable String parametar) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
 		 StringBuilder sb = new StringBuilder(parametar.concat("%"));
 		 sb.insert(0,"%");
 		 List<Dermatologist> dermas = dermaRepo.findByNameLikeIgnoreCaseOrSurnameLikeIgnoreCase(sb.toString(),sb.toString());

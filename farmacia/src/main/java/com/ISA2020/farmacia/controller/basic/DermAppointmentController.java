@@ -1,12 +1,15 @@
 package com.ISA2020.farmacia.controller.basic;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -16,11 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ISA2020.farmacia.entity.DAppointDTO;
 import com.ISA2020.farmacia.entity.DermAppointment;
 import com.ISA2020.farmacia.entity.Farmacy;
+import com.ISA2020.farmacia.entity.Views;
 import com.ISA2020.farmacia.entity.users.Dermatologist;
 import com.ISA2020.farmacia.repository.DermappointRepository;
 import com.ISA2020.farmacia.repository.DermatologistRepository;
 import com.ISA2020.farmacia.repository.FarmacyAdminRepository;
+import com.ISA2020.farmacia.repository.FarmacyRepository;
 import com.ISA2020.farmacia.security.JwtUtils;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -33,6 +39,8 @@ public class DermAppointmentController {
 	JwtUtils jwtUtils;
 	@Autowired
 	FarmacyAdminRepository farmAdminRepo;
+	@Autowired
+	FarmacyRepository farmacyRepo;
 	@Autowired
 	DermappointRepository dermappointRepo;
 	@Autowired
@@ -54,4 +62,14 @@ public class DermAppointmentController {
 		 
 	}
 	
+	@JsonView(Views.DermappointList.class)
+	@GetMapping("/farmacy/{id}")
+	@PreAuthorize("hasAuthority('PATIENT')")
+	public ResponseEntity<?> getFarmacyDermappoint( @PathVariable String id) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+		Optional<Farmacy> farmacy =  farmacyRepo.findById(id);
+		if(farmacy.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		List<DermAppointment> dermapoints = dermappointRepo.findByFarmacyId(id);
+		return new ResponseEntity<>(dermapoints,HttpStatus.OK);
+		 
+	}
 }

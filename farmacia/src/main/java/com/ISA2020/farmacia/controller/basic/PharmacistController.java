@@ -112,7 +112,14 @@ public class PharmacistController {
 	}
 	
 	
-	
+	@JsonView(Views.VerySimpleUser.class)
+	@GetMapping("/farmacy/{id}")
+	@PreAuthorize("hasAuthority('PATIENT')")
+	public ResponseEntity<?> pharmacyistFromFarma(@PathVariable String id) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+		List<Pharmacist> list = pharmacistRepo.findByFarmacyId(id);
+		if(list.isEmpty() ) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		 return new ResponseEntity<>(list, HttpStatus.OK);
+	}
 	
 	
 	

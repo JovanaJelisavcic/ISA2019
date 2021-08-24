@@ -32,6 +32,7 @@ public class Farmacy {
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@JsonView(Views.VerySimpleFarmacy.class)
 	private String farmacyId;
 	@Column(nullable=false)
 	@JsonView(Views.VerySimpleFarmacy.class)
