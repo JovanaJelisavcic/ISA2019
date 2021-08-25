@@ -175,6 +175,16 @@ public class Farmacy {
 		    }
 	}
 
+	public void reservedDrugQty(Drug drug) {
+		drugsQuantities.put(drug, drugsQuantities.get(drug) - 1);
+		
+	}
+
+	public void reverseDrugQty(Drug drug) {
+		drugsQuantities.put(drug, drugsQuantities.get(drug) + 1);
+		
+	}
+
 	
 
 	

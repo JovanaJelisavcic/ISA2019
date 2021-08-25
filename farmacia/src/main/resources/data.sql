@@ -378,3 +378,7 @@ insert into offer(offerid, deadline, price,status,orderid, email) values(2, '202
 
 
 insert into complaint(COMPLAINT_ID,COMPLAINT_TEXT,RESPONDED,SUBJECT,SUBJECT_ID,EMAIL) values (1, 'He was very rude to me, also rasist', false, 'PHARMACIST', 'jovana.jelisavcic95@gmail.com', 'petarv7@gmail.com');
+
+
+insert into drug_reservation(RESERVATION_ID,PICK_UP,CODE,FARMACY_ID)values(1, '2021-12-12', 'T474X4A', 1);
+insert into drugs_reserved(email, reservation_id) values('vleathley0@fastcompany.com',1);

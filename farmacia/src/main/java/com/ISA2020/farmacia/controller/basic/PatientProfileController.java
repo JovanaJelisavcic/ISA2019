@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ISA2020.farmacia.entity.DermAppointment;
 import com.ISA2020.farmacia.entity.Drug;
+import com.ISA2020.farmacia.entity.DrugReservation;
 import com.ISA2020.farmacia.entity.Views;
 import com.ISA2020.farmacia.entity.users.Patient;
 import com.ISA2020.farmacia.entity.users.UserInfo;
@@ -118,6 +119,17 @@ public class PatientProfileController {
 		past.removeIf(a-> !a.isDone());
 		if(past.isEmpty()) new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		return new ResponseEntity<>(past,HttpStatus.OK);
+		
+	}
+	@JsonView(Views.ReservedDrugsList.class)	
+	@GetMapping("/reservedDrugs")
+	@PreAuthorize("hasAuthority('PATIENT')")
+	public ResponseEntity<List<DrugReservation>> reservedDrugs(@RequestHeader("Authorization") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {
+		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
+		Patient patient = patientRepo.findById(username).get();
+		List<DrugReservation> drugs = patient.getDrugsReserved();
+		if(drugs.isEmpty()) new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(drugs,HttpStatus.OK);
 		
 	}
 

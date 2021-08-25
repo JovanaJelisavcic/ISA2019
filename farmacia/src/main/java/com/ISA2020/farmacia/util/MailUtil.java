@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.ISA2020.farmacia.entity.Complaint;
 import com.ISA2020.farmacia.entity.DermAppointment;
+import com.ISA2020.farmacia.entity.DrugReservation;
 import com.ISA2020.farmacia.entity.Farmacy;
 import com.ISA2020.farmacia.entity.Offer;
 import com.ISA2020.farmacia.entity.Promotion;
@@ -181,6 +182,30 @@ public class MailUtil {
 		 msg.setText("Successfully reserved an appointment with dermatologist!");
 		 javaMailSender.send(msg);
 		
+	}
+
+	public void confirmDrugReservation(DrugReservation drugReserve, String username) throws MessagingException, UnsupportedEncodingException {
+		    String senderName = "Farmacia";
+		    String subject = "Drug Reservation";
+		    String content = "Dear patient,<br>"
+		            + "Your reservation is successfull and  your unique reservation number is :<br>"
+		            + "[[reason]]"
+		            + "<br>Thank you for trusting us,<br>"
+		            + "Farmacia.";
+		     
+		    MimeMessage message = javaMailSender.createMimeMessage();
+		    MimeMessageHelper helper = new MimeMessageHelper(message);
+		     
+		    helper.setFrom(fromAddress, senderName);
+		    helper.setTo(username);
+		    helper.setSubject(subject);
+		   
+		     
+		    content = content.replace("[[reason]]", drugReserve.getReservationId().toString());
+		     
+		    helper.setText(content, true);
+		     
+		    javaMailSender.send(message);
 	}
 
 }

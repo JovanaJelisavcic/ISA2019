@@ -11,6 +11,7 @@ import javax.persistence.ManyToMany;
 
 import com.ISA2020.farmacia.entity.DermAppointment;
 import com.ISA2020.farmacia.entity.Drug;
+import com.ISA2020.farmacia.entity.DrugReservation;
 import com.ISA2020.farmacia.entity.Farmacy;
 import com.ISA2020.farmacia.entity.Views;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -35,6 +36,13 @@ public class Patient extends UserInfo {
 			  inverseJoinColumns = @JoinColumn(name = "id"))
 	private List<DermAppointment> dermappoints; 
 	
+	@ManyToMany
+	@JoinTable(
+			  name = "drugs_reserved", 
+			  joinColumns = @JoinColumn(name = "email"), 
+			  inverseJoinColumns = @JoinColumn(name = "reservation_id"))
+	private List<DrugReservation> drugsReserved; 
+	
 	public List<Farmacy> getFarmaciesSubs() {
 		return farmaciesSubs;
 	}
@@ -52,6 +60,14 @@ public class Patient extends UserInfo {
 	public Patient(List<Drug> allergies) {
 		super();
 		this.allergies = allergies;
+	}
+
+	public List<DrugReservation> getDrugsReserved() {
+		return drugsReserved;
+	}
+
+	public void setDrugsReserved(List<DrugReservation> drugsReserved) {
+		this.drugsReserved = drugsReserved;
 	}
 
 	public List<DermAppointment> getDermappoints() {
@@ -94,6 +110,16 @@ public class Patient extends UserInfo {
 
 	public void removeDermapointReservation(DermAppointment dermAppointment) {
 		dermappoints.remove(dermAppointment);
+		
+	}
+
+	public void addDrugReservation(DrugReservation drugReserve) {
+	drugsReserved.add(drugReserve);
+		
+	}
+
+	public void removeDrugReservation(DrugReservation drugReservation) {
+		drugsReserved.remove(drugReservation);
 		
 	}
 

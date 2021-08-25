@@ -1,9 +1,7 @@
 package com.ISA2020.farmacia.controller.basic;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -21,12 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ISA2020.farmacia.entity.Complaint;
-import com.ISA2020.farmacia.entity.Drug;
 import com.ISA2020.farmacia.entity.Farmacy;
 import com.ISA2020.farmacia.entity.VacationDermatologist;
 import com.ISA2020.farmacia.entity.VacationStatus;
 import com.ISA2020.farmacia.entity.Views;
-import com.ISA2020.farmacia.entity.DTO.DrugDTO;
 import com.ISA2020.farmacia.entity.DTO.FarmacyAdminDTO;
 import com.ISA2020.farmacia.entity.users.Dermatologist;
 import com.ISA2020.farmacia.entity.users.FarmacyAdmin;
@@ -242,22 +238,7 @@ public class SysAdminController {
 		return new ResponseEntity<>(drugRepo.findAll(), HttpStatus.OK);
 	}
 	
-	@PostMapping("/addDrug")
-	@PreAuthorize("hasAuthority('SYS_ADMIN')")
-	public ResponseEntity<?> addDrug( @RequestBody DrugDTO drugDto) {	
-		Drug drug = new Drug();
-		drug.setFromDTO(drugDto);
-		List<Drug> replacement = new ArrayList<>();
-		for(String code : drugDto.getReplacementCodes()) {
-			Optional<Drug> drugRepl = drugRepo.findById(code);
-			if(drugRepl.isEmpty()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-			replacement.add(drugRepl.get());
-		}
-		drug.setReplacement(replacement);
-		drugRepo.save(drug);
-		return new ResponseEntity<>(HttpStatus.OK);
-		 
-	}
+	
 
 	
 	
