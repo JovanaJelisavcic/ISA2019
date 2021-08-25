@@ -17,7 +17,7 @@ public class UserInfo {
 	@Id
 	@Column(nullable=false, unique =true,
 		        updatable=false)
-	@JsonView(Views.SimpleUser.class)
+	@JsonView(Views.VerySimpleUser.class)
 	private String email;
 	@Column(nullable=false)
 	@JsonView(Views.VerySimpleUser.class)

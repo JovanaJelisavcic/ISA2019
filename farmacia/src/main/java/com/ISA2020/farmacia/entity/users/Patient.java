@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.ISA2020.farmacia.entity.Counseling;
 import com.ISA2020.farmacia.entity.DermAppointment;
 import com.ISA2020.farmacia.entity.Drug;
 import com.ISA2020.farmacia.entity.DrugReservation;
@@ -42,7 +43,21 @@ public class Patient extends UserInfo {
 			  joinColumns = @JoinColumn(name = "email"), 
 			  inverseJoinColumns = @JoinColumn(name = "reservation_id"))
 	private List<DrugReservation> drugsReserved; 
+	@ManyToMany
+	@JoinTable(
+			  name = "patient_counseling", 
+			  joinColumns = @JoinColumn(name = "email"), 
+			  inverseJoinColumns = @JoinColumn(name = "counseling_id"))
+	private List<Counseling> counselings; 
 	
+	public List<Counseling> getCounselings() {
+		return counselings;
+	}
+
+	public void setCounselings(List<Counseling> counselings) {
+		this.counselings = counselings;
+	}
+
 	public List<Farmacy> getFarmaciesSubs() {
 		return farmaciesSubs;
 	}
@@ -120,6 +135,18 @@ public class Patient extends UserInfo {
 
 	public void removeDrugReservation(DrugReservation drugReservation) {
 		drugsReserved.remove(drugReservation);
+		
+	}
+
+	public boolean addCounseling(Counseling counseling) {
+
+		if(counselings.stream().anyMatch(o -> o.isCanceled() && o.getDateTime().equals(counseling.getDateTime()) &&o.getEndTime().equals(counseling.getEndTime()) &&
+				o.getPharma().equals(counseling.getPharma())	
+				)) {
+			return false;
+		}else {			counseling.setCanceled(false);
+		counselings.add(counseling);
+		return true;}
 		
 	}
 

@@ -19,6 +19,7 @@ import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.OneToMany;
 
 import com.ISA2020.farmacia.entity.users.Patient;
+import com.ISA2020.farmacia.entity.users.Pharmacist;
 import com.ISA2020.farmacia.util.DrugDeserializer;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -52,6 +53,10 @@ public class Farmacy {
 		            cascade = CascadeType.ALL, targetEntity = Price.class)
 	@JsonView(Views.SemiDetailedFarmacy.class)
 	 private List<Price> prices; 
+	
+	@OneToMany(mappedBy = "farmacy", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, targetEntity = Pharmacist.class)
+	private List<Pharmacist> pharmacists; 
 	 
 	@ManyToMany(mappedBy = "farmacies")
 	@JsonView(Views.VeryDetailedFarmacy.class)
@@ -84,6 +89,14 @@ public class Farmacy {
 		this.description = description;
 	}
 	
+
+	public List<Pharmacist> getPharmacists() {
+		return pharmacists;
+	}
+
+	public void setPharmacists(List<Pharmacist> pharmacists) {
+		this.pharmacists = pharmacists;
+	}
 
 	public Map<Drug, Integer> getDrugsQuantities() {
 		return drugsQuantities;

@@ -66,6 +66,8 @@ public class Views {
     public interface DermappointDetailedList extends DermappointList {}
     public interface ComplaintsList extends SimpleUser {}
     public interface ReservedDrugsList extends VerySimpleDrug, VerySimpleFarmacy {}
+    public interface CounselingList extends VerySimpleUser, VerySimpleFarmacy {}
+  
     
     
 }

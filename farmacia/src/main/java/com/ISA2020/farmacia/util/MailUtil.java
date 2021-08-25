@@ -208,4 +208,14 @@ public class MailUtil {
 		    javaMailSender.send(message);
 	}
 
+	public void confirmCounselingReservation(String email) {
+		SimpleMailMessage msg = new SimpleMailMessage();
+		 msg.setTo(email);
+		 msg.setFrom(fromAddress);
+		 msg.setSubject("Appointment with Pharmacist");
+		 msg.setText("Successfully reserved counseling with pharmacist!");
+		 javaMailSender.send(msg);
+		
+	}
+
 }

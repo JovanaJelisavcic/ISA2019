@@ -1,6 +1,7 @@
 package com.ISA2020.farmacia.controller.basic;
 
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ISA2020.farmacia.entity.Counseling;
 import com.ISA2020.farmacia.entity.DermAppointment;
 import com.ISA2020.farmacia.entity.Drug;
 import com.ISA2020.farmacia.entity.DrugReservation;
@@ -130,6 +132,34 @@ public class PatientProfileController {
 		List<DrugReservation> drugs = patient.getDrugsReserved();
 		if(drugs.isEmpty()) new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		return new ResponseEntity<>(drugs,HttpStatus.OK);
+		
+	}
+	
+	
+	
+	@JsonView(Views.CounselingList.class)	
+	@GetMapping("/futureCounselings")
+	@PreAuthorize("hasAuthority('PATIENT')")
+	public ResponseEntity<List<Counseling>> getfuturecounsel(@RequestHeader("Authorization") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {
+		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
+		Patient patient = patientRepo.findById(username).get();
+		List<Counseling> future = patient.getCounselings();
+		future.removeIf(a-> a.getEndTime().isBefore(LocalDateTime.now()));
+		if(future.isEmpty()) new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(future,HttpStatus.OK);
+		
+	}
+	
+	@JsonView(Views.CounselingList.class)	
+	@GetMapping("/pastCounselings")
+	@PreAuthorize("hasAuthority('PATIENT')")
+	public ResponseEntity<List<Counseling>> pastCounselings(@RequestHeader("Authorization") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {
+		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
+		Patient patient = patientRepo.findById(username).get();
+		List<Counseling> past = patient.getCounselings();
+		past.removeIf(a-> a.getDateTime().isAfter(LocalDateTime.now()));
+		if(past.isEmpty()) new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(past,HttpStatus.OK);
 		
 	}
 
