@@ -208,8 +208,13 @@ insert into WORKING_HOURS (works_from, works_to, DERMATOLOGIST_EMAIL, farmacy_id
 insert into WORKING_HOURS (works_from, works_to, DERMATOLOGIST_EMAIL, farmacy_id) values ('11:00', '23:41', 'ostonman9@state.tx.us', 20);
 
 
-insert into derm_appointment (DATE_TIME,END_TIME,PRICE,EMAIL,FARMACY_ID ) values ('2021-01-01T05:20', '2021-01-01T05:30', 20, 'nscourge8@foxnews.com',1  );
-insert into derm_appointment (DATE_TIME,END_TIME,PRICE,EMAIL,FARMACY_ID ) values ('2021-01-01T06:00', '2021-01-01T06:15', 20, 'nscourge8@foxnews.com',1  );
+insert into derm_appointment (id, DATE_TIME,END_TIME,PRICE,EMAIL,FARMACY_ID, reserved, done) values (1,'2021-01-01T05:20', '2021-01-01T05:30', 20, 'nscourge8@foxnews.com',1, true, true);
+insert into derm_appointment (id, DATE_TIME,END_TIME,PRICE,EMAIL,FARMACY_ID, reserved, done) values (2,'2021-01-01T06:00', '2021-01-01T06:15', 20, 'nscourge8@foxnews.com',1, false, false);
+
+insert into dermapoint_reserved(EMAIL, id) values('vleathley0@fastcompany.com',1);
+
+
+
 
 insert into DRUG (code, name, drug_type, PRESCRIPTION_METRICS, composition, CONTRAINDICATIONS, form, manufacturer, recept_needed,notes) values ('S90465', 'TAZORAC', 'ANTIBIOTIC', 'Aenean sit amet justo.', 'Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.
 

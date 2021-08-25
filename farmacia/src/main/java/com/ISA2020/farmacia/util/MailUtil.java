@@ -13,6 +13,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
 import com.ISA2020.farmacia.entity.Complaint;
+import com.ISA2020.farmacia.entity.DermAppointment;
 import com.ISA2020.farmacia.entity.Farmacy;
 import com.ISA2020.farmacia.entity.Offer;
 import com.ISA2020.farmacia.entity.Promotion;
@@ -169,6 +170,16 @@ public class MailUtil {
 		    helper.setText(content, true);
 		     
 		    javaMailSender.send(message);
+		
+	}
+
+	public void confirmReservedDermapoint(DermAppointment dermAppointment, String email) {
+		SimpleMailMessage msg = new SimpleMailMessage();
+		 msg.setTo(email);
+		 msg.setFrom(fromAddress);
+		 msg.setSubject("Appointment with Dermatologist");
+		 msg.setText("Successfully reserved an appointment with dermatologist!");
+		 javaMailSender.send(msg);
 		
 	}
 

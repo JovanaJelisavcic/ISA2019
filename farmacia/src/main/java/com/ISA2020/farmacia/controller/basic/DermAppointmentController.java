@@ -21,11 +21,14 @@ import com.ISA2020.farmacia.entity.Farmacy;
 import com.ISA2020.farmacia.entity.Views;
 import com.ISA2020.farmacia.entity.DTO.DAppointDTO;
 import com.ISA2020.farmacia.entity.users.Dermatologist;
+import com.ISA2020.farmacia.entity.users.Patient;
 import com.ISA2020.farmacia.repository.DermappointRepository;
 import com.ISA2020.farmacia.repository.DermatologistRepository;
 import com.ISA2020.farmacia.repository.FarmacyAdminRepository;
 import com.ISA2020.farmacia.repository.FarmacyRepository;
+import com.ISA2020.farmacia.repository.PatientRepository;
 import com.ISA2020.farmacia.security.JwtUtils;
+import com.ISA2020.farmacia.util.MailUtil;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import io.jsonwebtoken.ExpiredJwtException;
@@ -45,6 +48,10 @@ public class DermAppointmentController {
 	DermappointRepository dermappointRepo;
 	@Autowired
 	DermatologistRepository dermaRepo;
+	@Autowired
+	PatientRepository patientRepo;
+	@Autowired
+	MailUtil mailUtil;
 	
 	
 	@PostMapping("/add")
@@ -57,6 +64,8 @@ public class DermAppointmentController {
 		if(!derm.get().checkIfInAndFree(dappDTO.getDateTime(),dappDTO.getEndTime(), farmacy.getId())) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		DermAppointment appoint = new DermAppointment(dappDTO.getPrice(), derm.get(),farmacy, dappDTO.getDateTime(),
 				dappDTO.getEndTime());
+		appoint.setReserved(false);
+		appoint.setDone(false);
 		dermappointRepo.save(appoint);
 		return new ResponseEntity<>(HttpStatus.OK);
 		 
@@ -69,7 +78,42 @@ public class DermAppointmentController {
 		Optional<Farmacy> farmacy =  farmacyRepo.findById(id);
 		if(farmacy.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		List<DermAppointment> dermapoints = dermappointRepo.findByFarmacyId(id);
+		dermapoints.removeIf(d-> d.isReserved());
 		return new ResponseEntity<>(dermapoints,HttpStatus.OK);
+		 
+	}
+	
+	
+	@PostMapping("/reserve/{id}")
+	@PreAuthorize("hasAuthority('PATIENT')")
+	public ResponseEntity<?> reserveDermappoint(@RequestHeader("Authorization") String token, @PathVariable Long id) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
+		Patient patient =  patientRepo.findById(username).get();
+		Optional<DermAppointment> derm = dermappointRepo.findById(id);
+		if(derm.isEmpty() || derm.get().isReserved()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		derm.get().setReserved(true);
+		derm.get().setDone(false);
+		dermappointRepo.save(derm.get());
+		patient.addDermapointReservation(derm.get());
+		patientRepo.save(patient);
+		mailUtil.confirmReservedDermapoint(derm.get(),patient.getEmail());
+		return new ResponseEntity<>(HttpStatus.OK);
+		 
+	}
+	
+	@PostMapping("/cancel/{id}")
+	@PreAuthorize("hasAuthority('PATIENT')")
+	public ResponseEntity<?> cancelDermappoint(@RequestHeader("Authorization") String token, @PathVariable Long id) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
+		Patient patient =  patientRepo.findById(username).get();
+		Optional<DermAppointment> derm = dermappointRepo.findById(id);
+		if(derm.isEmpty() || !derm.get().isReserved() || !patient.getDermappoints().contains(derm.get()) ) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		patient.removeDermapointReservation(derm.get());
+		derm.get().setReserved(false);
+		derm.get().setDone(false);
+		dermappointRepo.save(derm.get());
+		patientRepo.save(patient);
+		return new ResponseEntity<>(HttpStatus.OK);
 		 
 	}
 }

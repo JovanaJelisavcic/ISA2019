@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.ISA2020.farmacia.entity.DermAppointment;
 import com.ISA2020.farmacia.entity.Drug;
 import com.ISA2020.farmacia.entity.Farmacy;
 import com.ISA2020.farmacia.entity.Views;
@@ -27,6 +28,12 @@ public class Patient extends UserInfo {
 			  joinColumns = @JoinColumn(name = "email"), 
 			  inverseJoinColumns = @JoinColumn(name = "farmacy_id"))
 	private List<Farmacy> farmaciesSubs; 
+	@ManyToMany
+	@JoinTable(
+			  name = "dermapoint_reserved", 
+			  joinColumns = @JoinColumn(name = "email"), 
+			  inverseJoinColumns = @JoinColumn(name = "id"))
+	private List<DermAppointment> dermappoints; 
 	
 	public List<Farmacy> getFarmaciesSubs() {
 		return farmaciesSubs;
@@ -45,6 +52,14 @@ public class Patient extends UserInfo {
 	public Patient(List<Drug> allergies) {
 		super();
 		this.allergies = allergies;
+	}
+
+	public List<DermAppointment> getDermappoints() {
+		return dermappoints;
+	}
+
+	public void setDermappoints(List<DermAppointment> dermappoints) {
+		this.dermappoints = dermappoints;
 	}
 
 	public List<Drug> getAllergies() {
@@ -70,6 +85,15 @@ public class Patient extends UserInfo {
 			super.setState(farmacyadmin.getState());
 		if(!farmacyadmin.getSurname().equals(super.getSurname()))
 			super.setSurname(farmacyadmin.getSurname());
+		
+	}
+
+	public void addDermapointReservation(DermAppointment dermAppointment) {
+		dermappoints.add(dermAppointment);
+	}
+
+	public void removeDermapointReservation(DermAppointment dermAppointment) {
+		dermappoints.remove(dermAppointment);
 		
 	}
 

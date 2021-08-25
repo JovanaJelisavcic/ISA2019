@@ -20,6 +20,7 @@ public class DermAppointment {
 
 	 	@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	 	@JsonView(Views.DermappointList.class)	
 	    private Long id;
 	 	@JsonView(Views.VerySimplePrice.class)
 	 	private float price;
@@ -34,6 +35,10 @@ public class DermAppointment {
 	    private LocalDateTime dateTime;
 	 	@JsonView(Views.VerySimplePrice.class)
 	    private LocalDateTime endTime;
+	 	@JsonView(Views.DermappointList.class)	 	
+	 	private boolean reserved;
+	 	@JsonView(Views.DermappointDetailedList.class)	 	
+	 	private boolean done;
 
 	    public DermAppointment() {}
 	    
@@ -47,6 +52,17 @@ public class DermAppointment {
 			this.dateTime = dateTime;
 			this.endTime = endTime;
 		}
+		
+		public boolean isDone() {
+			return done;
+		}
+
+
+		public void setDone(boolean done) {
+			this.done = done;
+		}
+
+
 		public long getDurationInMinutes() {
 			return dateTime.until( endTime, ChronoUnit.MINUTES );
 		}
@@ -85,6 +101,16 @@ public class DermAppointment {
 		}
 		public void setEndTime(LocalDateTime endTime) {
 			this.endTime = endTime;
+		}
+
+
+		public boolean isReserved() {
+			return reserved;
+		}
+
+
+		public void setReserved(boolean reserved) {
+			this.reserved = reserved;
 		}
 	
 	    
