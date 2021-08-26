@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.ISA2020.farmacia.entity.Farmacy;
+import com.ISA2020.farmacia.entity.basic.Farmacy;
 
 @Repository
 public interface FarmacyRepository extends JpaRepository<Farmacy, String> {

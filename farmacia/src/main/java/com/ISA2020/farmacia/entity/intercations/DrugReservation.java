@@ -1,4 +1,4 @@
-package com.ISA2020.farmacia.entity;
+package com.ISA2020.farmacia.entity.intercations;
 
 import java.time.LocalDate;
 
@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import com.ISA2020.farmacia.entity.basic.Drug;
+import com.ISA2020.farmacia.entity.basic.Farmacy;
+import com.ISA2020.farmacia.entity.basic.Views;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -29,6 +32,7 @@ public class DrugReservation {
     private Farmacy farmacy;
  	@JsonView(Views.ReservedDrugsList.class)
     private LocalDate pickUp;
+ 	private boolean showUp;
     public DrugReservation() {}
 	public DrugReservation(Drug drug, Farmacy farmacy, LocalDate pickUp) {
 		super();
@@ -60,6 +64,13 @@ public class DrugReservation {
 	public void setPickUp(LocalDate pickUp) {
 		this.pickUp = pickUp;
 	}
+	public boolean isShowUp() {
+		return showUp;
+	}
+	public void setShowUp(boolean showUp) {
+		this.showUp = showUp;
+	}
+
     
     
 }

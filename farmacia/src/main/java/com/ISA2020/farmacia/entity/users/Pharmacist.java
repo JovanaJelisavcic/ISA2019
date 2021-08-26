@@ -12,10 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import com.ISA2020.farmacia.entity.Counseling;
-import com.ISA2020.farmacia.entity.Farmacy;
-import com.ISA2020.farmacia.entity.VacationPharmacist;
-import com.ISA2020.farmacia.entity.Views;
+import com.ISA2020.farmacia.entity.basic.Farmacy;
+import com.ISA2020.farmacia.entity.basic.VacationPharmacist;
+import com.ISA2020.farmacia.entity.basic.Views;
+import com.ISA2020.farmacia.entity.intercations.Counseling;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity

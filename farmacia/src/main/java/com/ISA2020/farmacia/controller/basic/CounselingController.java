@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ISA2020.farmacia.entity.Counseling;
-import com.ISA2020.farmacia.entity.Farmacy;
-import com.ISA2020.farmacia.entity.Views;
 import com.ISA2020.farmacia.entity.DTO.CounselingDTO;
 import com.ISA2020.farmacia.entity.DTO.PeriodDTO;
+import com.ISA2020.farmacia.entity.basic.Farmacy;
+import com.ISA2020.farmacia.entity.basic.Views;
+import com.ISA2020.farmacia.entity.intercations.Counseling;
 import com.ISA2020.farmacia.entity.users.Patient;
 import com.ISA2020.farmacia.entity.users.Pharmacist;
 import com.ISA2020.farmacia.repository.CounselingRepository;
@@ -82,6 +82,7 @@ public class CounselingController {
 	public ResponseEntity<?> freePharmas(@RequestHeader("Authorization") String token, @RequestBody CounselingDTO counselingDTO) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException  {	
 		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 		Patient patient = patientRepo.findById(username).get();
+		if(patient.getPenalties()>=3) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		Optional<Pharmacist> pharma = pharmaRepo.findById(counselingDTO.getPharmacist());
 		if(pharma.isEmpty() ) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		if(!(pharma.get().getWorksFrom().isBefore(counselingDTO.getDateTime().toLocalTime()) && pharma.get().getWorksTo().isAfter(counselingDTO.getEndTime().toLocalTime()))
@@ -91,6 +92,7 @@ public class CounselingController {
 		counseling.setPharma(pharma.get());
 		counseling.setDateTime(counselingDTO.getDateTime());
 		counseling.setEndTime(counselingDTO.getEndTime());
+		counseling.setShowUp(true);
 		if(!patient.addCounseling(counseling)) return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		counselingRepo.save(counseling);
 		patientRepo.save(patient);

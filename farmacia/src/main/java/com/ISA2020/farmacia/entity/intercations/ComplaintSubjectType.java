@@ -1,4 +1,4 @@
-package com.ISA2020.farmacia.entity;
+package com.ISA2020.farmacia.entity.intercations;
 
 public enum ComplaintSubjectType {
 	FARMACY,

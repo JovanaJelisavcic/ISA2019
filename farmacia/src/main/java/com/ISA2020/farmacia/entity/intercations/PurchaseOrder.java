@@ -1,4 +1,4 @@
-package com.ISA2020.farmacia.entity;
+package com.ISA2020.farmacia.entity.intercations;
 
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -17,6 +17,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.OneToOne;
 
+import com.ISA2020.farmacia.entity.basic.Drug;
+import com.ISA2020.farmacia.entity.basic.Views;
 import com.ISA2020.farmacia.entity.users.FarmacyAdmin;
 import com.ISA2020.farmacia.util.DrugDeserializer;
 import com.fasterxml.jackson.annotation.JsonCreator;

@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.ISA2020.farmacia.entity.DermAppointment;
+import com.ISA2020.farmacia.entity.intercations.DermAppointment;
 
 @Repository
 public interface DermappointRepository extends JpaRepository<DermAppointment, Long> {

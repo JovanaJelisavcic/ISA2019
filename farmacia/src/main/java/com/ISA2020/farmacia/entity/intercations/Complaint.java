@@ -1,4 +1,4 @@
-package com.ISA2020.farmacia.entity;
+package com.ISA2020.farmacia.entity.intercations;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import com.ISA2020.farmacia.entity.basic.Views;
 import com.ISA2020.farmacia.entity.users.Patient;
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -23,18 +24,18 @@ public class Complaint {
 		@OneToOne(cascade = CascadeType.ALL)
 	    @JoinColumn(name = "email", referencedColumnName = "email")
 		@JsonView(Views.SimpleUser.class)
-		Patient patient;
+		private Patient patient;
 		@JsonView(Views.ComplaintsList.class)
-		String complaintText;
+		private String complaintText;
 		@JsonView(Views.ComplaintsList.class)
-		String responseText;
+		private String responseText;
 		@JsonView(Views.ComplaintsList.class)
-		boolean responded;
+		private boolean responded;
 		@Enumerated(EnumType.STRING)
 		@JsonView(Views.ComplaintsList.class)
-		ComplaintSubjectType subject;
+		private ComplaintSubjectType subject;
 		@JsonView(Views.ComplaintsList.class)
-		String subjectId;
+		private String subjectId;
 		
 		public Complaint() {}
 		public Complaint(Patient patient, String complaintText, String responseText, boolean responded,

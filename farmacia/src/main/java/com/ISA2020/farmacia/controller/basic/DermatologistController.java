@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ISA2020.farmacia.entity.Farmacy;
-import com.ISA2020.farmacia.entity.Views;
-import com.ISA2020.farmacia.entity.WorkingHours;
 import com.ISA2020.farmacia.entity.DTO.DermatologistDTO;
+import com.ISA2020.farmacia.entity.basic.Farmacy;
+import com.ISA2020.farmacia.entity.basic.Views;
+import com.ISA2020.farmacia.entity.basic.WorkingHours;
 import com.ISA2020.farmacia.entity.users.Dermatologist;
 import com.ISA2020.farmacia.repository.DermatologistRepository;
 import com.ISA2020.farmacia.repository.FarmacyAdminRepository;

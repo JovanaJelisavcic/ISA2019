@@ -1,4 +1,4 @@
-package com.ISA2020.farmacia.entity;
+package com.ISA2020.farmacia.entity.basic;
 
 public enum VacationStatus {
 	ACCEPTED,

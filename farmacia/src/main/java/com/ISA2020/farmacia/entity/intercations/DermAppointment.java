@@ -1,4 +1,4 @@
-package com.ISA2020.farmacia.entity;
+package com.ISA2020.farmacia.entity.intercations;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.ISA2020.farmacia.entity.basic.Farmacy;
+import com.ISA2020.farmacia.entity.basic.Views;
 import com.ISA2020.farmacia.entity.users.Dermatologist;
 import com.fasterxml.jackson.annotation.JsonView;
 

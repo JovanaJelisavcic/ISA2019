@@ -12,14 +12,14 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
-import com.ISA2020.farmacia.entity.Complaint;
-import com.ISA2020.farmacia.entity.DermAppointment;
-import com.ISA2020.farmacia.entity.DrugReservation;
-import com.ISA2020.farmacia.entity.Farmacy;
-import com.ISA2020.farmacia.entity.Offer;
-import com.ISA2020.farmacia.entity.Promotion;
-import com.ISA2020.farmacia.entity.VacationDermatologist;
-import com.ISA2020.farmacia.entity.VacationPharmacist;
+import com.ISA2020.farmacia.entity.basic.Farmacy;
+import com.ISA2020.farmacia.entity.basic.Promotion;
+import com.ISA2020.farmacia.entity.basic.VacationDermatologist;
+import com.ISA2020.farmacia.entity.basic.VacationPharmacist;
+import com.ISA2020.farmacia.entity.intercations.Complaint;
+import com.ISA2020.farmacia.entity.intercations.DermAppointment;
+import com.ISA2020.farmacia.entity.intercations.DrugReservation;
+import com.ISA2020.farmacia.entity.intercations.Offer;
 import com.ISA2020.farmacia.entity.users.Patient;
 @Component
 public class MailUtil {

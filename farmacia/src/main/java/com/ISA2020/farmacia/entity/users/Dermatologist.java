@@ -8,9 +8,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
-import com.ISA2020.farmacia.entity.DermAppointment;
-import com.ISA2020.farmacia.entity.Views;
-import com.ISA2020.farmacia.entity.WorkingHours;
+import com.ISA2020.farmacia.entity.basic.Views;
+import com.ISA2020.farmacia.entity.basic.WorkingHours;
+import com.ISA2020.farmacia.entity.intercations.DermAppointment;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity

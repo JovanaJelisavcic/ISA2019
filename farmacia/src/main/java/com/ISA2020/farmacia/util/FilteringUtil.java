@@ -5,13 +5,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.ISA2020.farmacia.entity.Drug;
-import com.ISA2020.farmacia.entity.Farmacy;
-import com.ISA2020.farmacia.entity.Offer;
-import com.ISA2020.farmacia.entity.Price;
-import com.ISA2020.farmacia.entity.PurchaseOrder;
-import com.ISA2020.farmacia.entity.VacationPharmacist;
-import com.ISA2020.farmacia.entity.WorkingHours;
+import com.ISA2020.farmacia.entity.basic.Drug;
+import com.ISA2020.farmacia.entity.basic.Farmacy;
+import com.ISA2020.farmacia.entity.basic.Price;
+import com.ISA2020.farmacia.entity.basic.VacationPharmacist;
+import com.ISA2020.farmacia.entity.basic.WorkingHours;
+import com.ISA2020.farmacia.entity.intercations.Offer;
+import com.ISA2020.farmacia.entity.intercations.PurchaseOrder;
 import com.ISA2020.farmacia.entity.users.Dermatologist;
 import com.ISA2020.farmacia.entity.users.Pharmacist;
 @Component

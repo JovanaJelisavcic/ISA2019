@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ISA2020.farmacia.entity.Drug;
-import com.ISA2020.farmacia.entity.Farmacy;
-import com.ISA2020.farmacia.entity.Views;
+import com.ISA2020.farmacia.entity.basic.Drug;
+import com.ISA2020.farmacia.entity.basic.Farmacy;
+import com.ISA2020.farmacia.entity.basic.Views;
 import com.ISA2020.farmacia.entity.users.Dermatologist;
 import com.ISA2020.farmacia.entity.users.Pharmacist;
 import com.ISA2020.farmacia.repository.DermatologistRepository;

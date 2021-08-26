@@ -10,12 +10,12 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import com.ISA2020.farmacia.entity.Counseling;
-import com.ISA2020.farmacia.entity.DermAppointment;
-import com.ISA2020.farmacia.entity.Drug;
-import com.ISA2020.farmacia.entity.DrugReservation;
-import com.ISA2020.farmacia.entity.Farmacy;
-import com.ISA2020.farmacia.entity.Views;
+import com.ISA2020.farmacia.entity.basic.Drug;
+import com.ISA2020.farmacia.entity.basic.Farmacy;
+import com.ISA2020.farmacia.entity.basic.Views;
+import com.ISA2020.farmacia.entity.intercations.Counseling;
+import com.ISA2020.farmacia.entity.intercations.DermAppointment;
+import com.ISA2020.farmacia.entity.intercations.DrugReservation;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -50,6 +50,8 @@ public class Patient extends UserInfo {
 			  joinColumns = @JoinColumn(name = "email"), 
 			  inverseJoinColumns = @JoinColumn(name = "counseling_id"))
 	private List<Counseling> counselings; 
+	
+	private int penalties;
 	
 	public List<Counseling> getCounselings() {
 		return counselings;
@@ -149,6 +151,14 @@ public class Patient extends UserInfo {
 		counselings.add(counseling);
 		return true;}
 		
+	}
+
+	public int getPenalties() {
+		return penalties;
+	}
+
+	public void setPenalties(int penalties) {
+		this.penalties = penalties;
 	}
 
 

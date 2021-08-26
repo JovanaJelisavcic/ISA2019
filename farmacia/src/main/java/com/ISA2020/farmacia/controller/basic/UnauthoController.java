@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ISA2020.farmacia.entity.Drug;
-import com.ISA2020.farmacia.entity.Farmacy;
-import com.ISA2020.farmacia.entity.Views;
+import com.ISA2020.farmacia.entity.basic.Drug;
+import com.ISA2020.farmacia.entity.basic.Farmacy;
+import com.ISA2020.farmacia.entity.basic.Views;
 import com.ISA2020.farmacia.repository.DrugRepository;
 import com.ISA2020.farmacia.repository.FarmacyRepository;
 import com.ISA2020.farmacia.util.FilteringUtil;
@@ -26,6 +26,7 @@ public class UnauthoController {
 	FarmacyRepository farmRepo;
 	@Autowired 
 	DrugRepository drugRepo;
+	
 	@Autowired 
 	FilteringUtil filteringUtil;
 	
@@ -40,5 +41,6 @@ public class UnauthoController {
 		List<Drug> drugs =  drugRepo.getFiveRandom();
 		return filteringUtil.filterPricesAndFields(drugs);
 	}
+
 	
 }

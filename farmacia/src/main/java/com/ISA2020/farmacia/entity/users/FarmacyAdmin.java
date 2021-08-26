@@ -4,8 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.ISA2020.farmacia.entity.Farmacy;
 import com.ISA2020.farmacia.entity.DTO.FarmacyAdminDTO;
+import com.ISA2020.farmacia.entity.basic.Farmacy;
 
 @Entity
 public class FarmacyAdmin extends UserInfo {

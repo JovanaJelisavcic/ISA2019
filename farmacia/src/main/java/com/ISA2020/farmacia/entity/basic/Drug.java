@@ -1,4 +1,4 @@
-package com.ISA2020.farmacia.entity;
+package com.ISA2020.farmacia.entity.basic;
 
 import java.util.List;
 
@@ -56,6 +56,8 @@ public class Drug {
 	private boolean receptNeeded;
 	@JsonView(Views.SimpleDrug.class)
 	private String  notes;
+	@JsonView(Views.SimpleDrug.class)
+	private float  stars;
 	
 	@ManyToMany
 	@JoinTable(
@@ -76,6 +78,14 @@ public class Drug {
 		this.contraindications = contraindications;
 		this.composition = composition;
 		this.prescriptionMetrics = prescriptionMetrics;
+	}
+
+	public float getStars() {
+		return stars;
+	}
+
+	public void setStars(float stars) {
+		this.stars = stars;
 	}
 
 	public DrugForm getForm() {

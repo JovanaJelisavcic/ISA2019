@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ISA2020.farmacia.entity.DermAppointment;
-import com.ISA2020.farmacia.entity.Farmacy;
-import com.ISA2020.farmacia.entity.Views;
 import com.ISA2020.farmacia.entity.DTO.DAppointDTO;
+import com.ISA2020.farmacia.entity.basic.Farmacy;
+import com.ISA2020.farmacia.entity.basic.Views;
+import com.ISA2020.farmacia.entity.intercations.DermAppointment;
 import com.ISA2020.farmacia.entity.users.Dermatologist;
 import com.ISA2020.farmacia.entity.users.Patient;
 import com.ISA2020.farmacia.repository.DermappointRepository;
@@ -65,7 +65,7 @@ public class DermAppointmentController {
 		DermAppointment appoint = new DermAppointment(dappDTO.getPrice(), derm.get(),farmacy, dappDTO.getDateTime(),
 				dappDTO.getEndTime());
 		appoint.setReserved(false);
-		appoint.setDone(false);
+
 		dermappointRepo.save(appoint);
 		return new ResponseEntity<>(HttpStatus.OK);
 		 
@@ -89,10 +89,11 @@ public class DermAppointmentController {
 	public ResponseEntity<?> reserveDermappoint(@RequestHeader("Authorization") String token, @PathVariable Long id) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
 		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 		Patient patient =  patientRepo.findById(username).get();
+		if(patient.getPenalties()>=3) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		Optional<DermAppointment> derm = dermappointRepo.findById(id);
 		if(derm.isEmpty() || derm.get().isReserved()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		derm.get().setReserved(true);
-		derm.get().setDone(false);
+		derm.get().setDone(true);
 		dermappointRepo.save(derm.get());
 		patient.addDermapointReservation(derm.get());
 		patientRepo.save(patient);
@@ -110,10 +111,8 @@ public class DermAppointmentController {
 		if(derm.isEmpty() || !derm.get().isReserved() || !patient.getDermappoints().contains(derm.get()) ) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		patient.removeDermapointReservation(derm.get());
 		derm.get().setReserved(false);
-		derm.get().setDone(false);
 		dermappointRepo.save(derm.get());
 		patientRepo.save(patient);
 		return new ResponseEntity<>(HttpStatus.OK);
-		 
 	}
 }

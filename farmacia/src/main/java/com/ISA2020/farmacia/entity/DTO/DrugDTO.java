@@ -2,8 +2,8 @@ package com.ISA2020.farmacia.entity.DTO;
 
 import java.util.List;
 
-import com.ISA2020.farmacia.entity.DrugForm;
-import com.ISA2020.farmacia.entity.DrugType;
+import com.ISA2020.farmacia.entity.basic.DrugForm;
+import com.ISA2020.farmacia.entity.basic.DrugType;
 
 public class DrugDTO {
 	

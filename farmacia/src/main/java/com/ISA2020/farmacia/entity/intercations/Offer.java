@@ -1,4 +1,4 @@
-package com.ISA2020.farmacia.entity;
+package com.ISA2020.farmacia.entity.intercations;
 
 import java.time.LocalDateTime;
 
@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.ISA2020.farmacia.entity.basic.Views;
 import com.ISA2020.farmacia.entity.users.Supplier;
 import com.fasterxml.jackson.annotation.JsonView;
 
