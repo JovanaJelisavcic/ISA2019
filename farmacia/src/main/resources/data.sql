@@ -366,7 +366,7 @@ insert into FARMACY_DRUG_QTY  (QTY,CODE,FARMACY_ID) values ( 200, 'T474X4A', 1 )
 insert into FARMACY_DRUG_QTY  (QTY,CODE,FARMACY_ID) values ( 600, 'T532X2',1 );
 insert into FARMACY_DRUG_QTY  (QTY,CODE,FARMACY_ID) values ( 600, 'M1215',1 );
 
-insert into farmacies_subs(email,farmacy_id ) values ('jovana.jelisavcic95@gmail.com',1);
+insert into farmacies_subs(email,farmacy_id ) values ('vleathley0@fastcompany.com',1);
 
 
 insert into purchase_order(order_id, expiration,status,email) values(1, '2021-08-08T12:00:00', 'WAITS_FOR_CHOICE', 'vleathley0@fastcompany.com');
@@ -381,7 +381,9 @@ insert into complaint(COMPLAINT_ID,COMPLAINT_TEXT,RESPONDED,SUBJECT,SUBJECT_ID,E
 
 
 insert into drug_reservation(RESERVATION_ID,PICK_UP,CODE,FARMACY_ID)values(1, '2021-12-12', 'T474X4A', 1);
+insert into drug_reservation(RESERVATION_ID,PICK_UP,CODE,FARMACY_ID)values(2, '2021-08-08', 'T532X2', 2);
 insert into drugs_reserved(email, reservation_id) values('vleathley0@fastcompany.com',1);
+insert into drugs_reserved(email, reservation_id) values('vleathley0@fastcompany.com',2);
 
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL) values(1, false, '2021-08-28T12:00:00', '2021-08-28T12:20:00',11.52, 'epreist11@vkontakte.ru' );
 insert into patient_counseling(email, counseling_id) values ('vleathley0@fastcompany.com', 1);

@@ -155,6 +155,14 @@ public class FarmacyController {
 		return new ResponseEntity<>(drugs, HttpStatus.OK);
 	}
 	
+	@JsonView(Views.SimpleFarmacy.class)
+	@GetMapping("/all")
+	@PreAuthorize("hasAuthority('PATIENT')")
+	public ResponseEntity<?> getAllFarmacies(){	
+		List<Farmacy> farmacies = farmacyRepo.findAll();
+		return new ResponseEntity<>(farmacies, HttpStatus.OK);
+	}
+	
 	
 
 }

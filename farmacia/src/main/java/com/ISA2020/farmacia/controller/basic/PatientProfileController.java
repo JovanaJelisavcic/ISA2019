@@ -23,6 +23,7 @@ import com.ISA2020.farmacia.entity.Counseling;
 import com.ISA2020.farmacia.entity.DermAppointment;
 import com.ISA2020.farmacia.entity.Drug;
 import com.ISA2020.farmacia.entity.DrugReservation;
+import com.ISA2020.farmacia.entity.Farmacy;
 import com.ISA2020.farmacia.entity.Views;
 import com.ISA2020.farmacia.entity.users.Patient;
 import com.ISA2020.farmacia.entity.users.UserInfo;
@@ -160,6 +161,18 @@ public class PatientProfileController {
 		past.removeIf(a-> a.getDateTime().isAfter(LocalDateTime.now()));
 		if(past.isEmpty()) new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		return new ResponseEntity<>(past,HttpStatus.OK);
+		
+	}
+	
+	@JsonView(Views.SimpleFarmacy.class)	
+	@GetMapping("/subscriptions")
+	@PreAuthorize("hasAuthority('PATIENT')")
+	public ResponseEntity<?> subscriptions(@RequestHeader("Authorization") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {
+		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
+		Patient patient = patientRepo.findById(username).get();
+		List<Farmacy> subs = patient.getFarmaciesSubs();
+		if(subs.isEmpty()) new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(subs,HttpStatus.OK);
 		
 	}
 
