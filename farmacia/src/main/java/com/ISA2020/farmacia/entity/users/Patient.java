@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 import com.ISA2020.farmacia.entity.basic.Drug;
 import com.ISA2020.farmacia.entity.basic.Farmacy;
@@ -25,7 +24,7 @@ public class Patient extends UserInfo {
 	@CollectionTable(joinColumns = @JoinColumn(name = "email"))
 	@JsonView(Views.SimpleDrug.class)
     private List<Drug> allergies;
-	@OneToMany
+	@ManyToMany
 	@JoinTable(
 			  name = "farmacies_subs", 
 			  joinColumns = @JoinColumn(name = "email"), 

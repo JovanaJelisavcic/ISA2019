@@ -1,7 +1,5 @@
 package com.ISA2020.farmacia.util;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +41,7 @@ public class SubjectUtils {
 		List<Pharmacist> result = new ArrayList<>();
 
 		for(Counseling c : patient.getCounselings()) {
-			if(!c.isCanceled() && c.getEndTime().isBefore(LocalDateTime.now()) && !result.contains(c.getPharma()))
+			if(!c.isCanceled() && c.isShowUp()  && !result.contains(c.getPharma()))
 				result.add(c.getPharma());
 		}
 		return result;
@@ -53,7 +51,7 @@ public class SubjectUtils {
 			List<Dermatologist> result = new ArrayList<>();
 
 		for(DermAppointment d : patient.getDermappoints()) {
-			if(d.isReserved() && d.getEndTime().isBefore(LocalDateTime.now()) && !result.contains(d.getDerma()))
+			if(d.isReserved() && d.isDone() && !result.contains(d.getDerma()))
 				result.add(d.getDerma());
 		}
 		return result;
@@ -63,17 +61,17 @@ public class SubjectUtils {
 		List<Farmacy> result = new ArrayList<>();
 		
 		for(Counseling c : patient.getCounselings()) {
-			if(!c.isCanceled() && c.getEndTime().isBefore(LocalDateTime.now()) && !result.contains(c.getPharma().getFarmacy()))
+			if(!c.isCanceled() && c.isShowUp() && !result.contains(c.getPharma().getFarmacy()))
 				result.add(c.getPharma().getFarmacy());
 		}
 		
 		for(DermAppointment d : patient.getDermappoints()) {
-			if(d.isReserved() && d.getEndTime().isBefore(LocalDateTime.now()) && !result.contains(d.getFarmacy()))
+			if(d.isReserved() && d.isDone() && !result.contains(d.getFarmacy()))
 				result.add(d.getFarmacy());
 		}
 		
 		for(DrugReservation r : patient.getDrugsReserved()) {
-			if(r.getPickUp().isBefore(LocalDate.now()) && !result.contains(r.getFarmacy()))
+			if(r.isShowUp() && !result.contains(r.getFarmacy()))
 				result.add(r.getFarmacy());
 		}
 		
@@ -83,7 +81,7 @@ public class SubjectUtils {
 	private List<Drug> getOnlyPossibleDrugs(Patient patient) {
 		List<Drug> result = new ArrayList<>();
 		for(DrugReservation r : patient.getDrugsReserved()) {
-			if(r.getPickUp().isBefore(LocalDate.now()) && !result.contains(r.getDrug()))
+			if(r.isShowUp() && !result.contains(r.getDrug()))
 				result.add(r.getDrug());
 		}
 		

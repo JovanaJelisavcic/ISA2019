@@ -1,6 +1,7 @@
 package com.ISA2020.farmacia.controller.basic;
 
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,7 +66,7 @@ public class DermAppointmentController {
 		DermAppointment appoint = new DermAppointment(dappDTO.getPrice(), derm.get(),farmacy, dappDTO.getDateTime(),
 				dappDTO.getEndTime());
 		appoint.setReserved(false);
-
+		appoint.setDone(false);
 		dermappointRepo.save(appoint);
 		return new ResponseEntity<>(HttpStatus.OK);
 		 
@@ -78,7 +79,7 @@ public class DermAppointmentController {
 		Optional<Farmacy> farmacy =  farmacyRepo.findById(id);
 		if(farmacy.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		List<DermAppointment> dermapoints = dermappointRepo.findByFarmacyId(id);
-		dermapoints.removeIf(d-> d.isReserved());
+		dermapoints.removeIf(d-> d.getDateTime().isBefore(LocalDateTime.now()) && d.isReserved());
 		return new ResponseEntity<>(dermapoints,HttpStatus.OK);
 		 
 	}
@@ -91,9 +92,8 @@ public class DermAppointmentController {
 		Patient patient =  patientRepo.findById(username).get();
 		if(patient.getPenalties()>=3) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		Optional<DermAppointment> derm = dermappointRepo.findById(id);
-		if(derm.isEmpty() || derm.get().isReserved()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		if(derm.isEmpty() || derm.get().isReserved()||derm.get().getDateTime().isBefore(LocalDateTime.now())) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		derm.get().setReserved(true);
-		derm.get().setDone(true);
 		dermappointRepo.save(derm.get());
 		patient.addDermapointReservation(derm.get());
 		patientRepo.save(patient);
@@ -108,7 +108,7 @@ public class DermAppointmentController {
 		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 		Patient patient =  patientRepo.findById(username).get();
 		Optional<DermAppointment> derm = dermappointRepo.findById(id);
-		if(derm.isEmpty() || !derm.get().isReserved() || !patient.getDermappoints().contains(derm.get()) ) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		if(derm.isEmpty() || !derm.get().isReserved() || !patient.getDermappoints().contains(derm.get()) || derm.get().getDateTime().minusHours(24).isBefore(LocalDateTime.now())) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		patient.removeDermapointReservation(derm.get());
 		derm.get().setReserved(false);
 		dermappointRepo.save(derm.get());

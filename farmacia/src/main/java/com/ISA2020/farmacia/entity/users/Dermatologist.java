@@ -8,6 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.ISA2020.farmacia.entity.basic.VacationDermatologist;
+import com.ISA2020.farmacia.entity.basic.VacationStatus;
 import com.ISA2020.farmacia.entity.basic.Views;
 import com.ISA2020.farmacia.entity.basic.WorkingHours;
 import com.ISA2020.farmacia.entity.intercations.DermAppointment;
@@ -34,6 +36,8 @@ public class Dermatologist extends UserInfo {
 	private List<DermAppointment> appointments;
 	@JsonView(Views.VerySimpleUser.class)
 	private float stars;
+	@OneToMany(mappedBy="dermatologist")
+	private List<VacationDermatologist> vacations;
 
 	
 	public Dermatologist() {}
@@ -74,21 +78,34 @@ public class Dermatologist extends UserInfo {
 
 	public boolean removeWorkingHours(String id) {
 		if(workingHours.isEmpty()) return false;
-		workingHours.removeIf(p -> p.getFarmacy().getId().equals(id));
-		return true;		
+		boolean check =workingHours.removeIf(p -> p.getFarmacy().getId().equals(id) && !hasAppointmentsInFarmacy(id));
+		if(check) return true;
+		else return false;
 	}
 
 	
+
+	private boolean hasAppointmentsInFarmacy(String id) {
+		if(appointments.isEmpty()) return false;
+		if(appointments.stream().anyMatch(p->p.getFarmacy().getId().equals(id) && p.isReserved() && p.getDateTime().isAfter(LocalDateTime.now()) )) return true;
+		return false;
+	}
 
 	public boolean checkIfInAndFree(LocalDateTime dateTime, LocalDateTime endTime, String farmacyId) {
 		if(workingHours.isEmpty()) return false;
 		for(WorkingHours wh : workingHours) {
 			if(wh.getFarmacy().getId().equals(farmacyId)) {
 				if(dateTime.toLocalTime().isAfter(wh.getWorksFrom()) && endTime.toLocalTime().isBefore(wh.getWorksTo())) 
-					if(checkIfFree(farmacyId, dateTime, endTime)) return true;
+					if(checkIfFree(farmacyId, dateTime, endTime) && !checkIfOnVacation(dateTime, endTime)) return true;
 					else return false;	
 			}
 		}
+		return false;
+	}
+
+	private boolean checkIfOnVacation(LocalDateTime dateTime, LocalDateTime endTime) {
+		if(vacations.isEmpty()) return false;
+		if(vacations.stream().anyMatch(p->dateTime.toLocalDate().isAfter(p.getBeginning()) && endTime.toLocalDate().isBefore(p.getEnding()) && p.getStatus().equals(VacationStatus.ACCEPTED))) return true;
 		return false;
 	}
 
@@ -109,6 +126,22 @@ public class Dermatologist extends UserInfo {
 				return true;
 		}
 		return false;
+	}
+
+	public List<DermAppointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(List<DermAppointment> appointments) {
+		this.appointments = appointments;
+	}
+
+	public List<VacationDermatologist> getVacations() {
+		return vacations;
+	}
+
+	public void setVacations(List<VacationDermatologist> vacations) {
+		this.vacations = vacations;
 	}
 	
 }

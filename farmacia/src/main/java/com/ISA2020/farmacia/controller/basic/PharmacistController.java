@@ -1,6 +1,7 @@
 package com.ISA2020.farmacia.controller.basic;
 
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -87,6 +88,7 @@ public class PharmacistController {
 		Farmacy farmacy =  farmAdminRepo.findById(username).get().getFarmacy();
 		
 		if(!pharmacist.get().getFarmacy().equals(farmacy)) return new ResponseEntity<>(HttpStatus.CONFLICT);
+		if(pharmacist.get().getCounselings().stream().anyMatch(p->!p.isCanceled() && !p.isShowUp() && p.getDateTime().isAfter(LocalDateTime.now()))) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		pharmacistRepo.delete(pharmacist.get());
 		return new ResponseEntity<>(HttpStatus.OK);
 		 

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ISA2020.farmacia.entity.basic.Drug;
 import com.ISA2020.farmacia.entity.basic.Farmacy;
+import com.ISA2020.farmacia.entity.basic.Promotion;
 import com.ISA2020.farmacia.entity.basic.Views;
 import com.ISA2020.farmacia.entity.intercations.Counseling;
 import com.ISA2020.farmacia.entity.intercations.DermAppointment;
@@ -106,7 +107,7 @@ public class PatientProfileController {
 		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 		Patient patient = patientRepo.findById(username).get();
 		List<DermAppointment> future = patient.getDermappoints();
-		future.removeIf(a-> a.isDone());
+		future.removeIf(a-> a.getDateTime().isBefore(LocalDateTime.now()));
 		if(future.isEmpty()) new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		return new ResponseEntity<>(future,HttpStatus.OK);
 		
@@ -119,7 +120,7 @@ public class PatientProfileController {
 		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 		Patient patient = patientRepo.findById(username).get();
 		List<DermAppointment> past = patient.getDermappoints();
-		past.removeIf(a-> !a.isDone());
+		past.removeIf(a-> a.getDateTime().isAfter(LocalDateTime.now()));
 		if(past.isEmpty()) new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		return new ResponseEntity<>(past,HttpStatus.OK);
 		
@@ -145,7 +146,7 @@ public class PatientProfileController {
 		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 		Patient patient = patientRepo.findById(username).get();
 		List<Counseling> future = patient.getCounselings();
-		future.removeIf(a-> a.getEndTime().isBefore(LocalDateTime.now()));
+		future.removeIf(a-> a.getEndTime().isBefore(LocalDateTime.now()) || a.isCanceled());
 		if(future.isEmpty()) new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		return new ResponseEntity<>(future,HttpStatus.OK);
 		
@@ -158,19 +159,21 @@ public class PatientProfileController {
 		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 		Patient patient = patientRepo.findById(username).get();
 		List<Counseling> past = patient.getCounselings();
-		past.removeIf(a-> a.getDateTime().isAfter(LocalDateTime.now()));
+		past.removeIf(a-> a.getDateTime().isAfter(LocalDateTime.now()) || a.isCanceled());
 		if(past.isEmpty()) new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		return new ResponseEntity<>(past,HttpStatus.OK);
 		
 	}
 	
-	@JsonView(Views.SimpleFarmacy.class)	
+	@JsonView(Views.PromotionList.class)	
 	@GetMapping("/subscriptions")
 	@PreAuthorize("hasAuthority('PATIENT')")
 	public ResponseEntity<?> subscriptions(@RequestHeader("Authorization") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {
 		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 		Patient patient = patientRepo.findById(username).get();
 		List<Farmacy> subs = patient.getFarmaciesSubs();
+		List<Promotion> promos = new ArrayList<>();
+		subs.forEach(s->promos.addAll(s.getPromotions()));
 		if(subs.isEmpty()) new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		return new ResponseEntity<>(subs,HttpStatus.OK);
 		

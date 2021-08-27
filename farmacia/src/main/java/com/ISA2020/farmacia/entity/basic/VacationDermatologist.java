@@ -10,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 import com.ISA2020.farmacia.entity.users.Dermatologist;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -22,7 +22,7 @@ public class VacationDermatologist {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@JsonView(Views.VacationRequestsList.class)
 	private Long vacationId;
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "email", referencedColumnName = "email")
 	@JsonView(Views.VacationRequestsList.class)
 	private Dermatologist dermatologist;

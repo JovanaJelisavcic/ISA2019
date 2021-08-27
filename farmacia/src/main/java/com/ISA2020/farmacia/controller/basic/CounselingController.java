@@ -92,7 +92,7 @@ public class CounselingController {
 		counseling.setPharma(pharma.get());
 		counseling.setDateTime(counselingDTO.getDateTime());
 		counseling.setEndTime(counselingDTO.getEndTime());
-		counseling.setShowUp(true);
+		counseling.setShowUp(false);
 		if(!patient.addCounseling(counseling)) return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		counselingRepo.save(counseling);
 		patientRepo.save(patient);
@@ -109,7 +109,7 @@ public class CounselingController {
 		Patient patient = patientRepo.findById(username).get();
 		
 		Optional<Counseling> counseling = counselingRepo.findById(id);
-		if(counseling.isEmpty() || !counseling.get().getDateTime().minusDays(1).isAfter(LocalDateTime.now()) || !patient.getCounselings().contains(counseling.get()) ) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		if(counseling.isEmpty() || !counseling.get().getDateTime().minusHours(24).isAfter(LocalDateTime.now()) || !patient.getCounselings().contains(counseling.get())  ) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		counseling.get().setCanceled(true);
 		counselingRepo.save(counseling.get());
 		return new ResponseEntity<>(HttpStatus.OK);

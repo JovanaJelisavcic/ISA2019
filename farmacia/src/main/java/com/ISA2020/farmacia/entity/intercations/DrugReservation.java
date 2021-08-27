@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.ISA2020.farmacia.entity.basic.Drug;
@@ -22,7 +23,7 @@ public class DrugReservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonView(Views.ReservedDrugsList.class)
     private Long reservationId;
- 	@OneToOne(fetch = FetchType.LAZY)
+ 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "code")
  	@JsonView(Views.ReservedDrugsList.class)
     private Drug drug;

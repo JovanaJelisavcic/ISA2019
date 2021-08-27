@@ -1,5 +1,6 @@
 package com.ISA2020.farmacia.entity.basic;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CollectionTable;
@@ -176,6 +177,7 @@ public class Drug {
 	public boolean deleteFarmacy(Farmacy farmacy) {
 		if(!farmacies.contains(farmacy)) return false;
 		else {
+			if(!farmacy.getDrugReservations().stream().anyMatch(p->p.getPickUp().isAfter(LocalDate.now()) && !p.isShowUp())) return false;
 			farmacies.remove(farmacy);
 			return true;
 		}

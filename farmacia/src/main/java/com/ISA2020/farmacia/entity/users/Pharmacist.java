@@ -118,5 +118,6 @@ public class Pharmacist extends UserInfo {
 		}
 		return true;
 	}
+
 	
 }

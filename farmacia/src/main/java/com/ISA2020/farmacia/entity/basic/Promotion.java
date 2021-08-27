@@ -10,18 +10,25 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.ISA2020.farmacia.entity.basic.Views.PromotionList;
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 public class Promotion {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@JsonView(PromotionList.class)	
 	private Long promoid;
-
+	@JsonView(PromotionList.class)	
 	private String promotionText;
+	@JsonView(PromotionList.class)	
 	private LocalDateTime startsFrom;
+	@JsonView(PromotionList.class)	
 	private LocalDateTime expires;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "farmacy_id", nullable=false)
+	@JsonView(PromotionList.class)	
 	private Farmacy farmacyId;
 	
 	public Promotion() {}

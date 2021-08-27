@@ -88,7 +88,7 @@ public class DrugController {
 		farmacyRepo.save(farmacy.get());
 		drugReserve.setDrug(drug.get());
 		drugReserve.setFarmacy(farmacy.get());
-		drugReserve.setShowUp(true);
+		drugReserve.setShowUp(false);
 		reserveRepo.save(drugReserve);
 		patient.addDrugReservation(drugReserve);
 		patientRepo.save(patient);
@@ -103,7 +103,7 @@ public class DrugController {
 		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 		Patient patient = patientRepo.getById(username);
 		Optional<DrugReservation> reservation = reserveRepo.findById(id);
-		if(!reservation.get().getPickUp().minusDays(1).isAfter(LocalDate.now())) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		if(!reservation.get().getPickUp().minusDays(1).isAfter(LocalDate.now()) && reservation.get().isShowUp()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		if(reservation.isEmpty()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		if(!patient.getDrugsReserved().contains(reservation.get())) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		

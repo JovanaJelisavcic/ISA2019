@@ -18,6 +18,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.OneToMany;
 
+import com.ISA2020.farmacia.entity.intercations.DrugReservation;
 import com.ISA2020.farmacia.entity.users.Patient;
 import com.ISA2020.farmacia.entity.users.Pharmacist;
 import com.ISA2020.farmacia.util.DrugDeserializer;
@@ -73,9 +74,13 @@ public class Farmacy {
 	@Column(name="qty")
 	@JsonProperty("map")
 	  @JsonDeserialize(keyUsing = DrugDeserializer.class)
-	private  Map<Drug, Integer> drugsQuantities; 
-
+	private  Map<Drug, Integer> drugsQuantities;
 	
+	@OneToMany(mappedBy="farmacy")
+    private List<DrugReservation> drugReservations;
+
+	@OneToMany(mappedBy="farmacyId")
+    private List<Promotion> promotions;
 	
 
 
@@ -89,6 +94,22 @@ public class Farmacy {
 		this.description = description;
 	}
 	
+
+	public List<Promotion> getPromotions() {
+		return promotions;
+	}
+
+	public void setPromotions(List<Promotion> promotions) {
+		this.promotions = promotions;
+	}
+
+	public List<DrugReservation> getDrugReservations() {
+		return drugReservations;
+	}
+
+	public void setDrugReservations(List<DrugReservation> drugReservations) {
+		this.drugReservations = drugReservations;
+	}
 
 	public List<Pharmacist> getPharmacists() {
 		return pharmacists;
