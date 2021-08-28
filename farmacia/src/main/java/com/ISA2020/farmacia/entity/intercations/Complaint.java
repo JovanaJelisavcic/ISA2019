@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
 
 import com.ISA2020.farmacia.entity.basic.Views;
 import com.ISA2020.farmacia.entity.users.Patient;
@@ -26,6 +27,7 @@ public class Complaint {
 		@JsonView(Views.SimpleUser.class)
 		private Patient patient;
 		@JsonView(Views.ComplaintsList.class)
+		@NotBlank(message = "Complaint text is mandatory")
 		private String complaintText;
 		@JsonView(Views.ComplaintsList.class)
 		private String responseText;

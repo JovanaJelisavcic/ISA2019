@@ -15,11 +15,13 @@ import com.ISA2020.farmacia.entity.basic.Views;
 import com.ISA2020.farmacia.entity.intercations.Counseling;
 import com.ISA2020.farmacia.entity.intercations.DermAppointment;
 import com.ISA2020.farmacia.entity.intercations.DrugReservation;
+import com.ISA2020.farmacia.entity.users.Patient;
 import com.ISA2020.farmacia.repository.CounselingRepository;
 import com.ISA2020.farmacia.repository.DermappointRepository;
 import com.ISA2020.farmacia.repository.DrugRepository;
 import com.ISA2020.farmacia.repository.DrugReservationRespository;
 import com.ISA2020.farmacia.repository.FarmacyRepository;
+import com.ISA2020.farmacia.repository.PatientRepository;
 import com.ISA2020.farmacia.util.FilteringUtil;
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -40,6 +42,8 @@ public class UnauthoController {
 	CounselingRepository counslRepo;
 	@Autowired 
 	DermappointRepository dermapRepo;
+	@Autowired 
+	PatientRepository patientRepo;
 	
 	
 	
@@ -64,10 +68,13 @@ public class UnauthoController {
 			d.setShowUp(true);
 			drugReservRepo.save(d);
 	}
-	@PostMapping("mock/drugNotPicked/{id}")
-	public void drugNotPicked(@PathVariable Long id) {
+	@PostMapping("mock/drugNotPicked/{id}/{eamil}")
+	public void drugNotPicked(@PathVariable Long id, @PathVariable String email) {
 		DrugReservation d =drugReservRepo.getById(id);
 		d.setShowUp(false);
+		Patient patient = patientRepo.getById(email);
+		patient.setPenalties(patient.getPenalties()+1);
+		patientRepo.save(patient);
 		drugReservRepo.save(d);
 	}
 	@PostMapping("mock/counslCame/{id}")
@@ -76,10 +83,13 @@ public class UnauthoController {
 		d.setShowUp(true);
 		counslRepo.save(d);
 	}
-	@PostMapping("mock/counsNcome/{id}")
-	public void counsNcome(@PathVariable Long id) {
+	@PostMapping("mock/counsNcome/{id}/{email}")
+	public void counsNcome(@PathVariable Long id, @PathVariable String email) {
 		Counseling d =counslRepo.getById(id);
 		d.setShowUp(false);
+		Patient patient = patientRepo.getById(email);
+		patient.setPenalties(patient.getPenalties()+1);
+		patientRepo.save(patient);
 		counslRepo.save(d);
 	}
 	@PostMapping("mock/dermapCame/{id}")
@@ -88,10 +98,13 @@ public class UnauthoController {
 		d.setDone(true);
 		dermapRepo.save(d);
 	}
-	@PostMapping("mock/dermapNcome/{id}")
-	public void dermapNcome(@PathVariable Long id) {
+	@PostMapping("mock/dermapNcome/{id}/{email}")
+	public void dermapNcome(@PathVariable Long id, @PathVariable String email) {
 		DermAppointment d =dermapRepo.getById(id);
 		d.setDone(false);
+		Patient patient = patientRepo.getById(email);
+		patient.setPenalties(patient.getPenalties()+1);
+		patientRepo.save(patient);
 		dermapRepo.save(d);
 	}
 	

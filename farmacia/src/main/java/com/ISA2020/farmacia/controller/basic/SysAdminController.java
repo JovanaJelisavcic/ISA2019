@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import javax.mail.MessagingException;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -79,7 +80,7 @@ public class SysAdminController {
 
 	@PostMapping("/farmacy")
 	@PreAuthorize("hasAuthority('SYS_ADMIN')")
-	public ResponseEntity<?> addFarmacy(@RequestBody Farmacy farmacy)  {	
+	public ResponseEntity<?> addFarmacy(@Valid @RequestBody Farmacy farmacy)  {	
 		farmacy.setStars(0);
 		farmacyRepo.save(farmacy);
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -88,7 +89,7 @@ public class SysAdminController {
 	
 	@PostMapping("/fadmin")
 	@PreAuthorize("hasAuthority('SYS_ADMIN')")
-	public ResponseEntity<?> addFadmin( @RequestBody FarmacyAdminDTO farmacyAdmin)  {	
+	public ResponseEntity<?> addFadmin(@Valid @RequestBody FarmacyAdminDTO farmacyAdmin)  {	
 		Optional<Farmacy> farmacy = farmacyRepo.findById(farmacyAdmin.getFarmacyId());
 		if(farmacy.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		if (userRepository.existsByUsername(farmacyAdmin.getEmail())) {
@@ -113,7 +114,7 @@ public class SysAdminController {
 	
 	@PostMapping("/otherSadmin")
 	@PreAuthorize("hasAuthority('SYS_ADMIN')")
-	public ResponseEntity<?> addSadmin( @RequestBody SysAdmin sysAdmin)  {	
+	public ResponseEntity<?> addSadmin(@Valid @RequestBody SysAdmin sysAdmin)  {	
 		if (userRepository.existsByUsername(sysAdmin.getEmail())) {
 			return ResponseEntity
 					.badRequest().build();
@@ -134,8 +135,9 @@ public class SysAdminController {
 
 	@PostMapping("/addDermatologist")
 	@PreAuthorize("hasAuthority('SYS_ADMIN')")
-	public ResponseEntity<?> addDermatologist( @RequestBody Dermatologist dermatologist)  {	
+	public ResponseEntity<?> addDermatologist(@Valid @RequestBody Dermatologist dermatologist)  {	
 		dermatologist.setStars(0);
+		if(dermaRepository.findById(dermatologist.getEmail()).isPresent()) return ResponseEntity.badRequest().build();
 		dermaRepository.save(dermatologist);
 		
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -145,9 +147,9 @@ public class SysAdminController {
 	
 	@PostMapping("/addSupplier")
 	@PreAuthorize("hasAuthority('SYS_ADMIN')")
-	public ResponseEntity<?> addSupplier( @RequestBody Supplier supplier) {	
+	public ResponseEntity<?> addSupplier(@Valid @RequestBody Supplier supplier) {	
+		if(supplierRepo.findById(supplier.getEmail()).isPresent()) return ResponseEntity.badRequest().build();
 		supplierRepo.save(supplier);
-		
 		return new ResponseEntity<>(HttpStatus.OK);
 		 
 	}

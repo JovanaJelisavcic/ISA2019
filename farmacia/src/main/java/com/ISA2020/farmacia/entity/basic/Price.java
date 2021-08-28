@@ -2,6 +2,7 @@ package com.ISA2020.farmacia.entity.basic;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,6 +22,7 @@ public class Price {
 	    private Long id;
 
 	 @JsonView(Views.VerySimplePrice.class)
+	 @Column(nullable=false)
 	private float price;
 	 @ManyToOne(fetch = FetchType.LAZY, optional = false, targetEntity= Drug.class)
 	  @JoinColumn(name = "code", nullable = false)
@@ -29,8 +31,9 @@ public class Price {
 	 @ManyToOne(fetch = FetchType.LAZY, optional = false, targetEntity= Farmacy.class)
 	  @JoinColumn(name = "farmacy_id", nullable = false)
 	    private Farmacy farmacy;
-	 
+	 @Column(nullable=false)
 	 private LocalDate standsFrom;
+	 @Column(nullable=false)
 	 private LocalDate standsUntil;
 	
 	public Price() {}

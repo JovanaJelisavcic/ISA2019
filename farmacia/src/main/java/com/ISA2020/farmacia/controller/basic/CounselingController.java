@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -79,7 +81,7 @@ public class CounselingController {
 	
 	@PostMapping("/reserve")
 	@PreAuthorize("hasAuthority('PATIENT')")
-	public ResponseEntity<?> freePharmas(@RequestHeader("Authorization") String token, @RequestBody CounselingDTO counselingDTO) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException  {	
+	public ResponseEntity<?> freePharmas(@RequestHeader("Authorization") String token,@Valid @RequestBody CounselingDTO counselingDTO) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException  {	
 		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 		Patient patient = patientRepo.findById(username).get();
 		if(patient.getPenalties()>=3) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -93,6 +95,7 @@ public class CounselingController {
 		counseling.setDateTime(counselingDTO.getDateTime());
 		counseling.setEndTime(counselingDTO.getEndTime());
 		counseling.setShowUp(false);
+		counseling.setPrice(pharma.get().getPrice());
 		if(!patient.addCounseling(counseling)) return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		counselingRepo.save(counseling);
 		patientRepo.save(patient);

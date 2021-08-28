@@ -2,6 +2,7 @@ package com.ISA2020.farmacia.entity.intercations;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,14 +23,17 @@ public class Counseling {
 	@JsonView(Views.CounselingList.class)	
     private Long counselingId;
 	@JsonView(Views.CounselingList.class)	
+	@Column(nullable=false)
  	private float price;
  	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "email")
- 	@JsonView(Views.CounselingList.class)	
+ 	@JsonView(Views.CounselingList.class)
  	private Pharmacist pharma;
- 	@JsonView(Views.CounselingList.class)	
+ 	@JsonView(Views.CounselingList.class)
+	@Column(nullable=false)
     private LocalDateTime dateTime;
- 	@JsonView(Views.CounselingList.class)	
+ 	@JsonView(Views.CounselingList.class)
+	@Column(nullable=false)
     private LocalDateTime endTime;	
  	private boolean canceled;
  	private boolean showUp;

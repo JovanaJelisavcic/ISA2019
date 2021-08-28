@@ -68,6 +68,7 @@ public class Views {
     public interface ReservedDrugsList extends VerySimpleDrug, VerySimpleFarmacy {}
     public interface CounselingList extends VerySimpleUser, VerySimpleFarmacy {}
     public interface PromotionList extends VerySimpleFarmacy {}
+    public interface WorkingHours {}
   
     
     

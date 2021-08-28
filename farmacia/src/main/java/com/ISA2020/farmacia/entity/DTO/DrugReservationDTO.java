@@ -2,6 +2,9 @@ package com.ISA2020.farmacia.entity.DTO;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
+
 public class DrugReservationDTO {
 
 
@@ -9,6 +12,8 @@ public class DrugReservationDTO {
  	
     private String farmacy;
 
+    @NotNull(message="Pick up date is mandatory")
+ 	@Future(message="Pick up date has to be in the future")
     private LocalDate pickUp;
 
     public DrugReservationDTO() {}

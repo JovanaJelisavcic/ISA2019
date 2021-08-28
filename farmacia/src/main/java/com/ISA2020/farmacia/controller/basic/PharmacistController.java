@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -67,7 +69,7 @@ public class PharmacistController {
 	
 	@PostMapping("/add")
 	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
-	public ResponseEntity<?> addPharmacist(@RequestHeader("Authorization") String token, @RequestBody Pharmacist pharmacist) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+	public ResponseEntity<?> addPharmacist(@RequestHeader("Authorization") String token, @Valid @RequestBody Pharmacist pharmacist) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
 		if(pharmacistRepo.findById(pharmacist.getEmail()).isPresent()) return new ResponseEntity<>(HttpStatus.CONFLICT);
 		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 		Farmacy farmacy =  farmAdminRepo.findById(username).get().getFarmacy();

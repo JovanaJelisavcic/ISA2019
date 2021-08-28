@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,7 +59,7 @@ public class DermAppointmentController {
 	
 	@PostMapping("/add")
 	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
-	public ResponseEntity<?> addDermappoint(@RequestHeader("Authorization") String token, @RequestBody DAppointDTO dappDTO) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+	public ResponseEntity<?> addDermappoint(@RequestHeader("Authorization") String token,@Valid @RequestBody DAppointDTO dappDTO) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
 		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 		Farmacy farmacy =  farmAdminRepo.findById(username).get().getFarmacy();
 		Optional<Dermatologist> derm = dermaRepo.findById(dappDTO.getDerma());

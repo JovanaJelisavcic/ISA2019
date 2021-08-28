@@ -48,7 +48,7 @@ public class DermatologistController {
 	@Autowired 
 	FilteringUtil filteringUtil;
 
-	@JsonView(Views.DermaInfo.class)
+	@JsonView(Views.VerySimpleUser.class)
 	@GetMapping("/farmacys")
 	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
 	public ResponseEntity<?> myfarmacyDermatologists(@RequestHeader("Authorization") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
@@ -64,6 +64,17 @@ public class DermatologistController {
 		if(resp.isEmpty() ) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		 return new ResponseEntity<>(filteringUtil.filterAdressDerma(resp), HttpStatus.OK);
 	}
+	
+	
+	@JsonView(Views.WorkingHours.class)
+	@GetMapping("/workingHours/{email}")
+	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
+	public ResponseEntity<?> whDerme(@RequestHeader("Authorization") String token,@PathVariable String email) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+		List<WorkingHours> list = wARepo.findAllByDerma(email);
+		if(list.isEmpty() ) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		 return new ResponseEntity<>(list, HttpStatus.OK);
+	}
+	
 	
 	@JsonView(Views.DermaInfo.class)
 	@GetMapping("/all")

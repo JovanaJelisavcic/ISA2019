@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.mail.MessagingException;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -79,7 +80,7 @@ public class FarmacyAdminController {
 	
 	@PutMapping("/update")
 	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
-	public ResponseEntity<?> updateProfile(@RequestHeader("Authorization") String token, @RequestBody UserInfo farmacyadmin) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {
+	public ResponseEntity<?> updateProfile(@RequestHeader("Authorization") String token,@Valid @RequestBody UserInfo farmacyadmin) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {
 		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 		FarmacyAdmin newOne = farmAdminRepo.findById(username).get();
 		if(!farmacyadmin.getEmail().equals(username)) {
@@ -93,7 +94,7 @@ public class FarmacyAdminController {
 	
 	@PostMapping("/price")
 	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
-	public ResponseEntity<?> farmacyPrices(@RequestHeader("Authorization") String token, @RequestBody PriceDTO priceDTO) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+	public ResponseEntity<?> farmacyPrices(@RequestHeader("Authorization") String token,@Valid @RequestBody PriceDTO priceDTO) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
 		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 		Farmacy farmacy =  farmAdminRepo.findById(username).get().getFarmacy();
 		Optional<Drug> drug = drugRepo.findById(priceDTO.getDrug());
@@ -122,7 +123,7 @@ public class FarmacyAdminController {
 	
 	@PostMapping("/promotion")
 	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
-	public ResponseEntity<?> postPromotion(@RequestHeader("Authorization") String token, @RequestBody Promotion promotion) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+	public ResponseEntity<?> postPromotion(@RequestHeader("Authorization") String token, @Valid @RequestBody Promotion promotion) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
 		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 		Farmacy farmacy =  farmAdminRepo.findById(username).get().getFarmacy();
 		promotion.setFarmacyId(farmacy);

@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -29,13 +30,16 @@ public class WorkingHours {
 	@JoinColumn(name = "farmacy_id", nullable=false)
 	@JsonView(Views.VerySimpleFarmacy.class)
 	private Farmacy farmacyId;
-	@Column(nullable=false)
+	@NotNull(message = "Working Hours are mandatory")
 	@DateTimeFormat(style = "HH:mm")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm")
+	@JsonView(Views.WorkingHours.class)
 	LocalTime worksFrom;
 	@Column(nullable=false)
 	@DateTimeFormat(style = "HH:mm")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm")
+	@NotNull(message = "Working Hours are mandatory")
+	@JsonView(Views.WorkingHours.class)
 	LocalTime worksTo;
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Dermatologist dermatologist;

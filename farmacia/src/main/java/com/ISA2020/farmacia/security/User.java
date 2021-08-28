@@ -13,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(	name = "users", 
@@ -25,9 +26,11 @@ public class User {
 	private Long userId;
 
 	@Column(nullable=false)
+	@NotBlank(message="Username is mandatory")
 	private String username;
 
 	@Column(nullable=false)
+	@NotBlank(message="Password is mandatory")
 	private String password;
 	
 	@Column(name = "verification_code", length = 64)

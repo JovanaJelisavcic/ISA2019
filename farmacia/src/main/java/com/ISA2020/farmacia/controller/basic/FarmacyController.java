@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +30,6 @@ import com.ISA2020.farmacia.repository.FarmacyAdminRepository;
 import com.ISA2020.farmacia.repository.FarmacyRepository;
 import com.ISA2020.farmacia.security.JwtUtils;
 import com.fasterxml.jackson.annotation.JsonView;
-
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -57,7 +58,7 @@ public class FarmacyController {
 	
 	@PutMapping("/update")
 	@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
-	public ResponseEntity<?> updateProfile(@RequestHeader("Authorization") String token, @RequestBody Farmacy farmacy) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {
+	public ResponseEntity<?> updateProfile(@RequestHeader("Authorization") String token,@Valid @RequestBody Farmacy farmacy) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {
 		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 		FarmacyAdmin admin = farmAdminRepo.findById(username).get();
 		if(!admin.getFarmacy().getId().equals(farmacy.getId())) {

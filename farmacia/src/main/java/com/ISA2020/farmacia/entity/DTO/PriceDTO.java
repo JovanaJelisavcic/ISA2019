@@ -2,15 +2,23 @@ package com.ISA2020.farmacia.entity.DTO;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class PriceDTO {
-
+	@NotNull(message="Price is mandatory")
 	private float price;
-	
+	@NotBlank(message="Drug cannot be blank")
 	private String drug;
-
+		@NotBlank(message="Farmacy cannot be blank")
 	    private String farmacy;
-	 
+		@NotNull(message="Date is mandatory")
+	 	@Future(message="Date has to be in the future")
 	 private LocalDate standsFrom;
+		@NotNull(message="Date is mandatory")
+	 	@Future(message="Date has to be in the future")
 	 private LocalDate standsUntil;
 	 public PriceDTO() {}
 	public PriceDTO(float price, String drug, String farmacy, LocalDate standsFrom, LocalDate standsUntil) {
@@ -21,6 +29,9 @@ public class PriceDTO {
 		this.standsFrom = standsFrom;
 		this.standsUntil = standsUntil;
 	}
+	 @AssertTrue public boolean isValidRange() {
+		    return standsFrom.isBefore(standsUntil);
+		  }
 	public float getPrice() {
 		return price;
 	}

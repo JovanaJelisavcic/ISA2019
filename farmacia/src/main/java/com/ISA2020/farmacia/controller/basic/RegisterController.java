@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +72,7 @@ public class RegisterController {
 	JwtUtils jwtUtils;
 
 	@PostMapping("/signin")
-	public ResponseEntity<?> authenticateUser(@RequestBody User loginRequest) throws UnsupportedEncodingException, URISyntaxException {
+	public ResponseEntity<?> authenticateUser(@Valid @RequestBody User loginRequest) throws UnsupportedEncodingException, URISyntaxException {
 
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -117,13 +118,14 @@ public class RegisterController {
 	}
 
 	@PostMapping("/signup")
-	public ResponseEntity<String> registerUser(@RequestBody UserInfo signUpRequest, HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
+	public ResponseEntity<String> registerUser(@Valid @RequestBody UserInfo signUpRequest, HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
 		if (userRepository.existsByUsername(signUpRequest.getEmail())) {
 			return ResponseEntity
 					.badRequest().build();
 		}
-
-		Patient otherCheck =  patientRepo.save(new Patient(signUpRequest));
+		Patient tosave = new Patient(signUpRequest);
+		tosave.setPenalties(0);
+		Patient otherCheck =  patientRepo.save(tosave);
 		if(otherCheck!=null) {
 			logger.info(signUpRequest.getPassword());
 			User user = new User(signUpRequest.getEmail(), 
@@ -153,7 +155,7 @@ public class RegisterController {
 	 
 	 @PostMapping("/changePassword")
 	 @PreAuthorize("hasAuthority('FARMACY_ADMIN')")
-		public ResponseEntity<?> changePassword(@RequestBody PasswordChangeRequest passwordChange) throws URISyntaxException {
+		public ResponseEntity<?> changePassword(@Valid @RequestBody PasswordChangeRequest passwordChange) throws URISyntaxException {
 		 UserDetails user = service.loadUserByUsername(
 			      SecurityContextHolder.getContext().getAuthentication().getName());
 			    

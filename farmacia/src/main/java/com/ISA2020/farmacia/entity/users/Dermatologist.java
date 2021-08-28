@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -35,6 +36,7 @@ public class Dermatologist extends UserInfo {
 	@JsonView(Views.SemiDetailedUser.class)
 	private List<DermAppointment> appointments;
 	@JsonView(Views.VerySimpleUser.class)
+	@Column(columnDefinition="Decimal(2,1)")
 	private float stars;
 	@OneToMany(mappedBy="dermatologist")
 	private List<VacationDermatologist> vacations;

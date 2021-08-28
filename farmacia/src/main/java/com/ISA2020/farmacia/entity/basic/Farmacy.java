@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 
 import com.ISA2020.farmacia.entity.intercations.DrugReservation;
 import com.ISA2020.farmacia.entity.users.Patient;
@@ -38,9 +39,11 @@ public class Farmacy {
 	private String farmacyId;
 	@Column(nullable=false)
 	@JsonView(Views.VerySimpleFarmacy.class)
+	@NotBlank(message="Name is mandatory")
 	private String name;
 	 @Column(nullable=false)
 	 @JsonView(Views.VerySimpleFarmacy.class)
+	 @NotBlank(message="Adress is mandatory")
 	private String adress;
 	 @JsonView(Views.VerySimpleFarmacy.class)
 	 @Column(columnDefinition="Decimal(2,1)")

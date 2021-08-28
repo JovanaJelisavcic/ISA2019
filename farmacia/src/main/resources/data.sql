@@ -209,7 +209,7 @@ insert into farmacy_admin (email, name, surname, adress, city, state, phone_num,
 
 
 
-insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Legra', 'D''Aguanno', 'ldaguanno0@issuu.com', '15313 Burrows Alley', 'Hongzhou', 'China', '331-356-5166', 2.5, '08:19', '19:06', 1);
+insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id,price) values ('Legra', 'D''Aguanno', 'ldaguanno0@issuu.com', '15313 Burrows Alley', 'Hongzhou', 'China', '331-356-5166', 2.5, '08:19', '19:06', 1, 11.52);
 insert into vacation_pharmacist (VACATION_ID,BEGINNING,ENDING,STATUS,EMAIL)  values (1, '2021-09-12', '2021-09-25', 'CREATED', 'ldaguanno0@issuu.com');
 insert into vacation_pharmacist (VACATION_ID,BEGINNING,ENDING,STATUS,EMAIL)  values (5, '2021-09-01', '2021-09-07', 'ACCEPTED', 'ldaguanno0@issuu.com'); 
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(1, true, '2021-08-26T12:00:00', '2021-08-26T12:20:00',11.52, 'ldaguanno0@issuu.com', false );
@@ -229,7 +229,7 @@ insert into patient_counseling(email, counseling_id) values ('nlustedb@skyrock.c
 
 
 
-insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Lisle', 'Creeber', 'lcreeber1@google.de', '1955 Fair Oaks Plaza', 'Wushi', 'China', '518-718-7196', 4.5, '07:48', '19:03', 2);
+insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id, price) values ('Lisle', 'Creeber', 'lcreeber1@google.de', '1955 Fair Oaks Plaza', 'Wushi', 'China', '518-718-7196', 4.5, '07:48', '19:03', 2,13.00);
 insert into vacation_pharmacist (VACATION_ID,BEGINNING,ENDING,STATUS,EMAIL)  values (6, '2021-08-20', '2021-08-25', 'ACCEPTED', 'lcreeber1@google.de');
 insert into vacation_pharmacist (VACATION_ID,BEGINNING,ENDING,STATUS,EMAIL)  values (7, '2021-09-01', '2021-09-05', 'ACCEPTED', 'lcreeber1@google.de'); 
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(7, true, '2021-08-26T12:00:00', '2021-08-26T12:20:00',13.00, 'lcreeber1@google.de', false );
@@ -243,7 +243,7 @@ insert into patient_counseling(email, counseling_id) values ('ecomberbeachd@netl
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(11, false, '2021-09-11T13:25:00', '2021-09-11T13:30:00',13.00, 'lcreeber1@google.de', false );
 insert into patient_counseling(email, counseling_id) values ('mstonmane@flickr.com', 11);
 
-insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Cybill', 'Exroll', 'cexroll2@barnesandnoble.com', '6 Paget Crossing', 'Xiejiatan', 'China', '879-718-3715', 3.6, '07:27', '13:08', 3);
+insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id,price) values ('Cybill', 'Exroll', 'cexroll2@barnesandnoble.com', '6 Paget Crossing', 'Xiejiatan', 'China', '879-718-3715', 3.6, '07:27', '13:08', 3,12.00);
 insert into vacation_pharmacist (VACATION_ID,BEGINNING,ENDING,STATUS,EMAIL)  values (14, '2021-08-08', '2021-08-29', 'DENIED', 'cexroll2@barnesandnoble.com');
 insert into vacation_pharmacist (VACATION_ID,BEGINNING,ENDING,STATUS,EMAIL)  values (4, '2021-09-15', '2021-09-29', 'CREATED', 'cexroll2@barnesandnoble.com');
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(12, true, '2021-08-26T12:00:00', '2021-08-26T12:20:00',12.00, 'cexroll2@barnesandnoble.com', false );
@@ -257,18 +257,18 @@ insert into patient_counseling(email, counseling_id) values ('cjancicg@mtv.com',
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(16, false, '2021-09-11T08:25:00', '2021-09-11T08:30:00',12.00, 'cexroll2@barnesandnoble.com', false );
 insert into patient_counseling(email, counseling_id) values ('cphidginh@amazonaws.com', 16);
 
-insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Leticia', 'Gorch', 'lgorch3@cnn.com', '7 Cambridge Lane', 'Ternovka', 'Russia', '340-956-7178', 4.2, '09:42', '23:45', 4);
+insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id, price) values ('Leticia', 'Gorch', 'lgorch3@cnn.com', '7 Cambridge Lane', 'Ternovka', 'Russia', '340-956-7178', 4.2, '09:42', '23:45', 4,13.00);
 insert into vacation_pharmacist (VACATION_ID,BEGINNING,ENDING,STATUS,EMAIL)  values (2, '2021-09-12', '2021-09-15', 'CREATED', 'lgorch3@cnn.com'); 
 insert into vacation_pharmacist (VACATION_ID,BEGINNING,ENDING,STATUS,EMAIL)  values (8, '2021-08-30', '2021-09-03', 'ACCEPTED', 'lgorch3@cnn.com');
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(17, false, '2021-09-11T10:00:00', '2021-09-11T10:05:00',13.00, 'lgorch3@cnn.com', false );
 insert into patient_counseling(email, counseling_id) values ('stomaszczyki@themeforest.net', 17);
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(18, false, '2021-09-11T10:10:00', '2021-09-11T10:20:00',13.00, 'lgorch3@cnn.com', false );
 insert into patient_counseling(email, counseling_id) values ('blistj@oracle.com', 18);
-insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(19, false, '2021-09-11T10:25:00', '2021-09-11T10:30:00',12.00, 'lgorch3@cnn.com', false );
+insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(19, false, '2021-09-11T10:25:00', '2021-09-11T10:30:00',13.00, 'lgorch3@cnn.com', false );
 insert into patient_counseling(email, counseling_id) values ('cparsandk@dmoz.org', 19);
 
 
-insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Ursula', 'Lago', 'ulago4@vimeo.com', '70075 Dwight Center', 'Rabat', 'Morocco', '110-752-9868', 4.1, '06:14', '21:30', 5);
+insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id, price) values ('Ursula', 'Lago', 'ulago4@vimeo.com', '70075 Dwight Center', 'Rabat', 'Morocco', '110-752-9868', 4.1, '06:14', '21:30', 5,11.00);
 insert into vacation_pharmacist (VACATION_ID,BEGINNING,ENDING,STATUS,EMAIL)  values (3, '2021-09-30', '2021-10-05', 'CREATED', 'ulago4@vimeo.com'); 
 insert into vacation_pharmacist (VACATION_ID,BEGINNING,ENDING,STATUS,EMAIL)  values (9, '2021-09-12', '2021-09-15', 'ACCEPTED', 'ulago4@vimeo.com'); 
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(20, true, '2021-08-26T12:00:00', '2021-08-26T12:20:00',11.00, 'ulago4@vimeo.com', false );
@@ -282,7 +282,7 @@ insert into patient_counseling(email, counseling_id) values ('lyeatmanm@amazon.c
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(24, false, '2021-09-11T11:25:00', '2021-09-11T11:30:00',11.00, 'ulago4@vimeo.com', false );
 insert into patient_counseling(email, counseling_id) values ('bconersn@w3.org', 24);
 
-insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Estella', 'O''Fairy', 'eofairy5@mac.com', '7585 East Avenue', 'Cempa', 'Indonesia', '826-319-0058', 4.0, '09:53', '22:36', 6);
+insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id, price) values ('Estella', 'O''Fairy', 'eofairy5@mac.com', '7585 East Avenue', 'Cempa', 'Indonesia', '826-319-0058', 4.0, '09:53', '22:36', 6, 13.00);
 insert into vacation_pharmacist (VACATION_ID,BEGINNING,ENDING,STATUS,EMAIL)  values (10, '2021-09-03', '2021-09-29', 'ACCEPTED', 'eofairy5@mac.com');
 insert into vacation_pharmacist (VACATION_ID,BEGINNING,ENDING,STATUS,EMAIL)  values (11, '2021-08-12', '2021-10-25', 'DENIED', 'eofairy5@mac.com'); 
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(25, true, '2021-08-26T12:00:00', '2021-08-26T12:20:00',13.00, 'eofairy5@mac.com', false );
@@ -294,7 +294,7 @@ insert into patient_counseling(email, counseling_id) values ('bconersn@w3.org', 
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(28, false, '2021-08-26T13:45:00', '2021-08-26T13:50:00',13.00, 'eofairy5@mac.com', true );
 insert into patient_counseling(email, counseling_id) values ('mvarrowo@imdb.com', 28);
 
-insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Gus', 'Saunders', 'gsaunders6@deliciousdays.com', '49 Spaight Place', 'Birendranagar', 'Nepal', '663-229-0652', 4.9, '04:11', '19:28', 7);
+insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id, price) values ('Gus', 'Saunders', 'gsaunders6@deliciousdays.com', '49 Spaight Place', 'Birendranagar', 'Nepal', '663-229-0652', 4.9, '04:11', '19:28', 7,11.00);
 insert into vacation_pharmacist (VACATION_ID,BEGINNING,ENDING,STATUS,EMAIL)  values (12, '2021-08-30', '2021-09-29', 'DENIED', 'gsaunders6@deliciousdays.com');
 insert into vacation_pharmacist (VACATION_ID,BEGINNING,ENDING,STATUS,EMAIL)  values (13, '2021-12-12', '2021-12-25', 'DENIED', 'gsaunders6@deliciousdays.com'); 
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(29, false, '2021-09-11T11:00:00', '2021-09-11T11:05:00',11.00, 'gsaunders6@deliciousdays.com', false );
@@ -306,7 +306,7 @@ insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, s
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(33, false, '2021-09-11T14:10:00', '2021-09-11T14:20:00',11.00, 'gsaunders6@deliciousdays.com', false );
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(34, false, '2021-09-11T14:25:00', '2021-09-11T14:30:00',11.00, 'gsaunders6@deliciousdays.com', false );
 
-insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Vic', 'Manzell', 'vmanzell7@google.pl', '603 Twin Pines Terrace', 'Talovyy', 'Russia', '750-404-3515', 3.6, '05:59', '22:24', 8);
+insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id, price) values ('Vic', 'Manzell', 'vmanzell7@google.pl', '603 Twin Pines Terrace', 'Talovyy', 'Russia', '750-404-3515', 3.6, '05:59', '22:24', 8, 10.00);
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(35, false, '2021-09-11T17:00:00', '2021-09-11T17:05:00',10.00, 'vmanzell7@google.pl', false );
 insert into patient_counseling(email, counseling_id) values ('apumfreyr@theglobeandmail.com', 35);
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(36, false, '2021-09-11T17:10:00', '2021-09-11T17:20:00',10.00, 'vmanzell7@google.pl', false );
@@ -315,7 +315,7 @@ insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, s
 insert into patient_counseling(email, counseling_id) values ('gbusseys@canalblog.com', 37);
 
 
-insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Vidovik', 'Tinniswood', 'vtinniswood8@youtube.com', '36370 Clemons Plaza', 'Ōmura', 'Japan', '573-586-4455', 3.8, '05:37', '23:05', 9);
+insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id, price) values ('Vidovik', 'Tinniswood', 'vtinniswood8@youtube.com', '36370 Clemons Plaza', 'Ōmura', 'Japan', '573-586-4455', 3.8, '05:37', '23:05', 9,10.00);
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(41, false, '2021-08-11T14:00:00', '2021-08-11T14:05:00',10.00, 'vtinniswood8@youtube.com', true );
 insert into patient_counseling(email, counseling_id) values ('mvarrowo@imdb.com', 41);
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(42, false, '2021-08-11T14:10:00', '2021-08-11T14:20:00',10.00, 'vtinniswood8@youtube.com', true );
@@ -323,7 +323,7 @@ insert into patient_counseling(email, counseling_id) values ('egattyp@umn.edu', 
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(43, false, '2021-08-11T14:25:00', '2021-08-11T14:30:00',10.00, 'vtinniswood8@youtube.com', true );
 insert into patient_counseling(email, counseling_id) values ('eduboisq@unesco.org', 43);
 
-insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Maryjo', 'Attoc', 'mattoc9@cmu.edu', '0 Service Park', 'Libao', 'China', '514-451-5802', 4.2, '08:41', '15:35', 10);
+insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id, price) values ('Maryjo', 'Attoc', 'mattoc9@cmu.edu', '0 Service Park', 'Libao', 'China', '514-451-5802', 4.2, '08:41', '15:35', 10,14.00);
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(44, false, '2021-08-11T12:00:00', '2021-08-11T12:05:00',14.00, 'mattoc9@cmu.edu', true );
 insert into patient_counseling(email, counseling_id) values ('apumfreyr@theglobeandmail.com', 44);
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(45, false, '2021-08-11T12:10:00', '2021-08-11T12:20:00',14.00, 'mattoc9@cmu.edu', true );
@@ -332,7 +332,7 @@ insert into patient_counseling(email, counseling_id) values ('egattyp@umn.edu', 
 
 
 
-insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Drusilla', 'Louden', 'dloudena@answers.com', '7 Reinke Alley', 'Kulotino', 'Russia', '806-674-8587', 4.7, '06:55', '22:41', 11);
+insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id, price) values ('Drusilla', 'Louden', 'dloudena@answers.com', '7 Reinke Alley', 'Kulotino', 'Russia', '806-674-8587', 4.7, '06:55', '22:41', 11,10.00);
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(50, false, '2021-08-11T14:00:00', '2021-08-11T14:05:00',10.00, 'dloudena@answers.com', true );
 insert into patient_counseling(email, counseling_id) values ('eduboisq@unesco.org', 50);
 insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, show_up) values(52, false, '2021-08-11T14:10:00', '2021-08-11T14:20:00',10.00, 'dloudena@answers.com', true );
@@ -341,15 +341,15 @@ insert into COUNSELING (COUNSELING_ID,CANCELED,DATE_TIME,END_TIME,PRICE,EMAIL, s
 insert into patient_counseling(email, counseling_id) values ('gbusseys@canalblog.com', 51);
 
 
-insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Ingemar', 'Benediktovich', 'ibenediktovichb@pagesperso-orange.fr', '268 Ruskin Trail', 'Duisburg', 'Germany', '767-223-5108', 4.7, '16:20', '20:00', 12);
-insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Heinrick', 'Cisneros', 'hcisnerosc@foxnews.com', '55295 Quincy Junction', 'Goczałkowice Zdrój', 'Poland', '554-379-6078', 4.8, '09:36', '21:58', 13);
-insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Averil', 'Schust', 'aschustd@wiley.com', '323 Northwestern Parkway', 'Magisterial', 'Mexico', '466-894-0318', 4.2, '09:54', '23:24', 14);
-insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Cam', 'Mack', 'cmacke@blogtalkradio.com', '30 Meadow Valley Pass', 'Huashan', 'China', '899-635-9624', 4.6, '05:42', '19:21', 15);
-insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Bertrand', 'McKee', 'bmckeef@timesonline.co.uk', '6994 Eggendart Road', 'Lirang', 'China', '489-219-3319', 4.7, '06:24', '11:13', 16);
-insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Filip', 'Aveyard', 'faveyardh@pcworld.com', '31845 Sommers Alley', 'Inderka', 'Russia', '508-426-2276', 3.9, '07:50', '21:47', 17);
-insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Towney', 'Revill', 'trevilli@wunderground.com', '023 Dennis Parkway', 'Novokizhinginsk', 'Russia', '256-222-9432', 2.5, '06:49', '21:08', 18);
-insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Leonhard', 'Eves', 'levesj@gizmodo.com', '3711 Mallard Place', 'Loudun', 'France', '815-313-2104', 3.2, '05:49', '23:57', 19);
-insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id) values ('Eugenia', 'Dewfall', 'edewfallk@ovh.net', '04205 Dennis Center', 'Ban Talat Bueng', 'Thailand', '636-258-1551', 4.2, '04:45', '22:37', 20);
+insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id, price) values ('Ingemar', 'Benediktovich', 'ibenediktovichb@pagesperso-orange.fr', '268 Ruskin Trail', 'Duisburg', 'Germany', '767-223-5108', 4.7, '16:20', '20:00', 12, 12.00);
+insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id, price) values ('Heinrick', 'Cisneros', 'hcisnerosc@foxnews.com', '55295 Quincy Junction', 'Goczałkowice Zdrój', 'Poland', '554-379-6078', 4.8, '09:36', '21:58', 13, 12.00);
+insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id, price) values ('Averil', 'Schust', 'aschustd@wiley.com', '323 Northwestern Parkway', 'Magisterial', 'Mexico', '466-894-0318', 4.2, '09:54', '23:24', 14, 12.00);
+insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id, price) values ('Cam', 'Mack', 'cmacke@blogtalkradio.com', '30 Meadow Valley Pass', 'Huashan', 'China', '899-635-9624', 4.6, '05:42', '19:21', 15, 12.00);
+insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id, price) values ('Bertrand', 'McKee', 'bmckeef@timesonline.co.uk', '6994 Eggendart Road', 'Lirang', 'China', '489-219-3319', 4.7, '06:24', '11:13', 16, 12.00);
+insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id, price) values ('Filip', 'Aveyard', 'faveyardh@pcworld.com', '31845 Sommers Alley', 'Inderka', 'Russia', '508-426-2276', 3.9, '07:50', '21:47', 17, 12.00);
+insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id, price) values ('Towney', 'Revill', 'trevilli@wunderground.com', '023 Dennis Parkway', 'Novokizhinginsk', 'Russia', '256-222-9432', 2.5, '06:49', '21:08', 18, 12.00);
+insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id, price) values ('Leonhard', 'Eves', 'levesj@gizmodo.com', '3711 Mallard Place', 'Loudun', 'France', '815-313-2104', 3.2, '05:49', '23:57', 19, 12.00);
+insert into pharmacist (name, surname, email, adress, city, state, phone_num, stars, works_from, works_to, farmacy_id, price) values ('Eugenia', 'Dewfall', 'edewfallk@ovh.net', '04205 Dennis Center', 'Ban Talat Bueng', 'Thailand', '636-258-1551', 4.2, '04:45', '22:37', 20, 12.00);
 
 
 
@@ -2347,24 +2347,38 @@ insert into offer(offerid, deadline, price,status,orderid, email) values(2, '202
 
 
 
-insert into purchase_order(order_id, expiration,status,email) values(2, '2021-09-14T12:00:00', 'WAITS_FOR_OFFER', 'cboniface1@about.me');
+insert into purchase_order(order_id, expiration,status,email) values(2, '2021-08-14T12:00:00', 'WAITS_FOR_CHOICE', 'cboniface1@about.me');
 insert into item_qty(order_id, code, qty) values(2, 'S499', 100);
 insert into item_qty(order_id, code, qty) values(2, 'H4043X2', 100);
 insert into item_qty(order_id, code, qty) values(2, 'T474X4A', 100);
 
-insert into offer(offerid, deadline, price,status,orderid, email) values(3, '2021-12-12T12:00:00', 1800, 'WAITING', 1, 'jovana.jelisavcic95@gmail.com');
-insert into offer(offerid, deadline, price,status,orderid, email) values(4, '2021-12-12T14:00:00', 1820, 'WAITING', 1, 'petarv7@gmail.com');
+insert into offer(offerid, deadline, price,status,orderid, email) values(3, '2021-12-12T12:00:00', 1800, 'WAITING', 2, 'jovana.jelisavcic95@gmail.com');
+insert into offer(offerid, deadline, price,status,orderid, email) values(4, '2021-12-12T14:00:00', 1820, 'WAITING', 2, 'petarv7@gmail.com');
 
-insert into purchase_order(order_id, expiration,status,email) values(3, '2021-08-26T12:00:00', 'WAITS_FOR_CHOICE', 'bhellin2@gravatar.com');
+insert into purchase_order(order_id, expiration,status,email) values(3, '2021-09-26T12:00:00', 'WAITS_FOR_OFFER', 'bhellin2@gravatar.com');
 insert into item_qty(order_id, code, qty) values(3, 'A485', 100);
 insert into item_qty(order_id, code, qty) values(3, 'T550X3', 100);
 insert into item_qty(order_id, code, qty) values(3, 'T81522A', 100);
 
-insert into offer(offerid, deadline, price,status,orderid, email) values(5, '2021-12-12T12:00:00', 1325, 'WAITING', 1, 'jovana.jelisavcic95@gmail.com');
-insert into offer(offerid, deadline, price,status,orderid, email) values(6, '2021-12-12T14:00:00', 1300, 'WAITING', 1, 'petarv7@gmail.com');
 
 
 
+insert into rating(RATING_ID,RATING_STARS,SUBJECT,SUBJECT_ID,EMAIL) values(1,4,'FARMACY','2','gbaistowc@last.fm');
+insert into rating(RATING_ID,RATING_STARS,SUBJECT,SUBJECT_ID,EMAIL) values(2,3,'FARMACY','12','gbaistowc@last.fm');
+insert into rating(RATING_ID,RATING_STARS,SUBJECT,SUBJECT_ID,EMAIL) values(3,2,'FARMACY','13','gbaistowc@last.fm');
+insert into rating(RATING_ID,RATING_STARS,SUBJECT,SUBJECT_ID,EMAIL) values(4,5,'FARMACY','16','gbaistowc@last.fm');
+insert into rating(RATING_ID,RATING_STARS,SUBJECT,SUBJECT_ID,EMAIL) values(5,4,'DERMATOLOGIST','somulderrigf@over-blog.com','gbaistowc@last.fm');
+insert into rating(RATING_ID,RATING_STARS,SUBJECT,SUBJECT_ID,EMAIL) values(6,4,'PHARMACIST','lcreeber1@google.de','gbaistowc@last.fm');
+insert into rating(RATING_ID,RATING_STARS,SUBJECT,SUBJECT_ID,EMAIL) values(7,3,'PHARMACY','6','cjancicg@mtv.com');
+insert into rating(RATING_ID,RATING_STARS,SUBJECT,SUBJECT_ID,EMAIL) values(8,4,'PHARMACY','7','cjancicg@mtv.com');
+insert into rating(RATING_ID,RATING_STARS,SUBJECT,SUBJECT_ID,EMAIL) values(9,4,'PHARMACY','8','cjancicg@mtv.com');
+insert into rating(RATING_ID,RATING_STARS,SUBJECT,SUBJECT_ID,EMAIL) values(10,4,'DERMATOLOGIST','graatz5@tuttocitta.it','cjancicg@mtv.com');
+insert into rating(RATING_ID,RATING_STARS,SUBJECT,SUBJECT_ID,EMAIL) values(11,4,'DERMATOLOGIST','ablant6@bigcartel.com','cjancicg@mtv.com');
+insert into rating(RATING_ID,RATING_STARS,SUBJECT,SUBJECT_ID,EMAIL) values(12,4,'DERMATOLOGIST','mmilksop7@devhub.com','cjancicg@mtv.com');
+insert into rating(RATING_ID,RATING_STARS,SUBJECT,SUBJECT_ID,EMAIL) values(13,3,'PHARMACY','1','stomaszczyki@themeforest.net');
+insert into rating(RATING_ID,RATING_STARS,SUBJECT,SUBJECT_ID,EMAIL) values(14,4,'PHARMACY','2','stomaszczyki@themeforest.net');
+insert into rating(RATING_ID,RATING_STARS,SUBJECT,SUBJECT_ID,EMAIL) values(15,4,'PHARMACY','5','stomaszczyki@themeforest.net');
+insert into rating(RATING_ID,RATING_STARS,SUBJECT,SUBJECT_ID,EMAIL) values(16,5,'DERMATOLOGIST','wrobarts0@privacy.gov.au','stomaszczyki@themeforest.net');
 
 
 insert into complaint(COMPLAINT_ID,COMPLAINT_TEXT,RESPONDED,SUBJECT,SUBJECT_ID,EMAIL) values (1, 'He was very rude to me, also rasist', true, 'PHARMACIST', 'ulago4@vimeo.com', 'cparsandk@dmoz.org');

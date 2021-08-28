@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Optional;
 
 import javax.mail.MessagingException;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,7 +54,7 @@ public class RatingController {
 	
 	@PostMapping("/rate")
 	@PreAuthorize("hasAuthority('PATIENT')")
-	public ResponseEntity<?> rateSomething(@RequestHeader("Authorization") String token,@RequestBody Rating rating) throws UnsupportedEncodingException, MessagingException {	
+	public ResponseEntity<?> rateSomething(@RequestHeader("Authorization") String token,@Valid @RequestBody Rating rating) throws UnsupportedEncodingException, MessagingException {	
 		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 		Patient patient = patientRepo.findById(username).get();
 		if(!subjectUtils.checkPossible(patient,rating.getSubject(), rating.getSubjectId())) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

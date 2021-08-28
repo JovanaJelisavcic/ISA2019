@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 import com.ISA2020.farmacia.entity.basic.Farmacy;
 import com.ISA2020.farmacia.entity.basic.VacationPharmacist;
@@ -26,12 +27,16 @@ public class Pharmacist extends UserInfo {
 	@JsonView(Views.VerySimpleFarmacy.class)
 	private Farmacy farmacy;
 	@JsonView(Views.VerySimpleUser.class)
+	@Column(columnDefinition="Decimal(2,1)")
 	float stars;
-	@Column(nullable=false)
+	@Column(columnDefinition="Decimal(3,1)")
+	@NotNull(message="Price is mandatory")
+	float price;
+	@NotNull(message="Working Hours are mandatory")
 	@JsonView(Views.SimpleUser.class)
 	LocalTime worksFrom;
 	@JsonView(Views.SimpleUser.class)
-	@Column(nullable=false)
+	@NotNull(message="Working Hours are mandatory")
 	LocalTime worksTo;
 	@OneToMany(mappedBy = "pharma", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, targetEntity = Counseling.class)
@@ -51,6 +56,14 @@ public class Pharmacist extends UserInfo {
 	}
 
 
+
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
+	}
 
 	public List<VacationPharmacist> getVacations() {
 		return vacations;

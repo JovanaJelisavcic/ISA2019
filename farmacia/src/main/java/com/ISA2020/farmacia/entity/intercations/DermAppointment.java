@@ -3,6 +3,7 @@ package com.ISA2020.farmacia.entity.intercations;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,6 +26,7 @@ public class DermAppointment {
 	 	@JsonView(Views.DermappointList.class)	
 	    private Long id;
 	 	@JsonView(Views.VerySimplePrice.class)
+		@Column(nullable=false)
 	 	private float price;
 	 	@ManyToOne(fetch = FetchType.LAZY)
 	    @JoinColumn(name = "email")
@@ -32,10 +34,13 @@ public class DermAppointment {
 	 	private Dermatologist derma;
 	 	@ManyToOne(fetch = FetchType.LAZY)
 	    @JoinColumn(name = "farmacy_id")
+	 	@JsonView(Views.VerySimpleFarmacy.class)
 	    private Farmacy farmacy;
 	 	@JsonView(Views.VerySimplePrice.class)
+		@Column(nullable=false)
 	    private LocalDateTime dateTime;
 	 	@JsonView(Views.VerySimplePrice.class)
+		@Column(nullable=false)
 	    private LocalDateTime endTime;
 	 	@JsonView(Views.DermappointList.class)	 	
 	 	private boolean reserved;

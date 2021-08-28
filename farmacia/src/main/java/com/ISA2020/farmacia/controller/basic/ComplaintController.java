@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.mail.MessagingException;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -82,7 +83,7 @@ public class ComplaintController {
 	
 	@PostMapping("/complain")
 	@PreAuthorize("hasAuthority('PATIENT')")
-	public ResponseEntity<?> addComplaint(@RequestHeader("Authorization") String token,@RequestBody Complaint complaint) throws UnsupportedEncodingException, MessagingException {	
+	public ResponseEntity<?> addComplaint(@RequestHeader("Authorization") String token,@Valid @RequestBody Complaint complaint) throws UnsupportedEncodingException, MessagingException {	
 		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 		Patient patient = patientRepo.findById(username).get();
 		if(!subjectUtils.checkPossible(patient,complaint.getSubject(), complaint.getSubjectId())) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

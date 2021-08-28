@@ -2,6 +2,7 @@ package com.ISA2020.farmacia.entity.intercations;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -32,6 +33,7 @@ public class DrugReservation {
  	@JsonView(Views.ReservedDrugsList.class)
     private Farmacy farmacy;
  	@JsonView(Views.ReservedDrugsList.class)
+	@Column(nullable=false)
     private LocalDate pickUp;
  	private boolean showUp;
     public DrugReservation() {}

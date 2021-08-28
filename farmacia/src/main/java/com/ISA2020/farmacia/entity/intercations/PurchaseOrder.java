@@ -37,15 +37,17 @@ public class PurchaseOrder {
 		@CollectionTable(name="item_qty",
 		    joinColumns=@JoinColumn(name="order_id"))
 		@MapKeyJoinColumn(name="code")
-		@Column(name="qty")
+		@Column(name="qty",nullable=false)
 		@JsonView(Views.SimpleDrug.class)
 		@JsonProperty("map")
 		  @JsonDeserialize(keyUsing = DrugDeserializer.class)
 		private  Map<Drug, Integer> drugsToPurchase; 
 		@JsonView(Views.MyFarmacyOrdersList.class)
+		@Column(nullable=false)
 		 private LocalDateTime expiration;
 		 @Enumerated(EnumType.STRING)
 		 @JsonView(Views.MyFarmacyOrdersList.class)
+		 @Column(nullable=false)
 		 private OrderStatus status;
 		 @OneToOne(cascade = CascadeType.ALL)
 		    @JoinColumn(name = "email", referencedColumnName = "email")

@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -70,7 +72,7 @@ public class OrderOfferController {
 	   
 	   @PostMapping("/purchaseOrder")
 		@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
-		public ResponseEntity<?> postOrder(@RequestHeader("Authorization") String token, @RequestBody PurchaseOrderDTO order) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+		public ResponseEntity<?> postOrder(@RequestHeader("Authorization") String token,@Valid @RequestBody PurchaseOrderDTO order) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
 			String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 			FarmacyAdmin farmacyAdmin =  farmAdminRepo.findById(username).get();
 			Farmacy farmacy = farmacyAdmin.getFarmacy();
@@ -108,7 +110,7 @@ public class OrderOfferController {
 		
 		@PostMapping("/updateOrder")
 		@PreAuthorize("hasAuthority('FARMACY_ADMIN')")
-		public ResponseEntity<?> updateOrder(@RequestHeader("Authorization") String token, @RequestBody PurchaseOrderDTO order) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
+		public ResponseEntity<?> updateOrder(@RequestHeader("Authorization") String token,@Valid @RequestBody PurchaseOrderDTO order) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {	
 			String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 			FarmacyAdmin farmacyAdmin =  farmAdminRepo.findById(username).get();
 			Farmacy farmacy = farmacyAdmin.getFarmacy();
@@ -163,7 +165,7 @@ public class OrderOfferController {
 			Optional<Offer> offer = offerRepo.findById(id);
 			if(offer.isEmpty()) return ResponseEntity.notFound().build();
 			if(!offer.get().getOrder().getMaker().equals(farmacyAdmin)) return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-			if(!offer.get().getOrder().getExpiration().isBefore(LocalDateTime.now())) return ResponseEntity.badRequest().build();
+			if(!offer.get().getOrder().getExpiration().isBefore(LocalDateTime.now()) || !offer.get().getOrder().getStatus().equals(OrderStatus.WAITS_FOR_CHOICE)) return ResponseEntity.badRequest().build();
 			offer.get().setStatus(OfferStatus.ACCEPTED);
 			List<Offer> otherOffers = offerRepo.findAllByOrderId(offer.get().getOrder().getOrderId());
 			otherOffers.removeIf(e-> e.getOfferid().equals(offer.get().getOfferid()));

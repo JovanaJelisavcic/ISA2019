@@ -2,19 +2,30 @@ package com.ISA2020.farmacia.entity.DTO;
 
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import com.ISA2020.farmacia.entity.basic.DrugForm;
 import com.ISA2020.farmacia.entity.basic.DrugType;
 
 public class DrugDTO {
 	
+	@NotBlank(message="Code is mandatory")
 	private String code;
+	@NotBlank(message="Name is mandatory")
 	private String name;
+	@NotNull(message="Type is mandatory")
 	private DrugType drugType;
+	@NotBlank(message="Contradictions are mandatory")
 	private String contraindications;
+	@NotBlank(message="Composition is mandatory")
 	private String composition;
+	@NotBlank(message="Prescription metrics are mandatory")
 	private String prescriptionMetrics;
 	private List<String> replacementCodes;
+	@NotNull(message="Form is mandatory")
 	private DrugForm form;
+	@NotBlank(message="Manufacturer is mandatory")
 	private String manufacturer;
 	private boolean receptNeeded;
 	private String  notes;

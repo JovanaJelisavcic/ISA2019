@@ -3,6 +3,7 @@ package com.ISA2020.farmacia.entity.basic;
 import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -11,6 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
 
 import com.ISA2020.farmacia.entity.users.Dermatologist;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -27,11 +31,16 @@ public class VacationDermatologist {
 	@JsonView(Views.VacationRequestsList.class)
 	private Dermatologist dermatologist;
 	@JsonView(Views.VacationRequestsList.class)
+ 	@NotNull(message="Date is mandatory")
+ 	@Future(message="Date has to be in the future")
 	private LocalDate beginning;
 	@JsonView(Views.VacationRequestsList.class)
+ 	@NotNull(message="Date is mandatory")
+ 	@Future(message="Date has to be in the future")
 	private LocalDate ending;
 	@Enumerated(EnumType.STRING)
 	@JsonView(Views.VacationRequestsList.class)
+	@Column(nullable=false)
 	private VacationStatus status;
 	@JsonView(Views.VacationRequestsList.class)
 	private String explanation;
@@ -47,6 +56,9 @@ public class VacationDermatologist {
 		this.status = status;
 		this.explanation = explanation;
 	}
+	 @AssertTrue public boolean isValidRange() {
+		    return beginning.isBefore(ending);
+		  }
 	public Long getVacationId() {
 		return vacationId;
 	}

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.mail.MessagingException;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -56,9 +57,10 @@ public class DrugController {
 	
 	@PostMapping("/add")
 	@PreAuthorize("hasAuthority('SYS_ADMIN')")
-	public ResponseEntity<?> addDrug( @RequestBody DrugDTO drugDto) {	
+	public ResponseEntity<?> addDrug(@Valid @RequestBody DrugDTO drugDto) {	
 		Drug drug = new Drug();
 		drug.setFromDTO(drugDto);
+		drug.setStars(0);
 		List<Drug> replacement = new ArrayList<>();
 		for(String code : drugDto.getReplacementCodes()) {
 			Optional<Drug> drugRepl = drugRepo.findById(code);
@@ -73,7 +75,7 @@ public class DrugController {
 	
 	@PostMapping("/reserve")
 	@PreAuthorize("hasAuthority('PATIENT')")
-	public ResponseEntity<?> reserveDrug(@RequestHeader("Authorization") String token, @RequestBody DrugReservationDTO drugReservDto) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException, MessagingException {	
+	public ResponseEntity<?> reserveDrug(@RequestHeader("Authorization") String token,@Valid @RequestBody DrugReservationDTO drugReservDto) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException, MessagingException {	
 		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 		Patient patient = patientRepo.getById(username);
 		if(patient.getPenalties()>=3) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

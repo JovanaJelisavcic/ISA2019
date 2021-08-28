@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -61,7 +63,7 @@ public class PatientProfileController {
 	
 	@PutMapping("/update")
 	@PreAuthorize("hasAuthority('PATIENT')")
-	public ResponseEntity<?> updateProfile(@RequestHeader("Authorization") String token, @RequestBody UserInfo user) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {
+	public ResponseEntity<?> updateProfile(@RequestHeader("Authorization") String token,@Valid @RequestBody UserInfo user) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException {
 		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 		Patient newOne = patientRepo.findById(username).get();
 		if(!user.getEmail().equals(username)) {

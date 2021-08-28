@@ -3,6 +3,7 @@ package com.ISA2020.farmacia.entity.intercations;
 import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -34,10 +35,13 @@ public class Offer {
 	private Supplier supplier;
 	@Enumerated(EnumType.STRING)
 	@JsonView(Views.MyFarmacyOffersList.class)
+	@Column(nullable=false)
 	private OfferStatus status;
 	@JsonView(Views.MyFarmacyOffersList.class)
+	@Column(nullable=false)
 	private float price;
 	@JsonView(Views.MyFarmacyOffersList.class)
+	@Column(nullable=false)
 	private LocalDateTime deadline;
 	  
 	  

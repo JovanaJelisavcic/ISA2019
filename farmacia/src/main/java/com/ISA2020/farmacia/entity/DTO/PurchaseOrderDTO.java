@@ -3,10 +3,16 @@ package com.ISA2020.farmacia.entity.DTO;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
+
 public class PurchaseOrderDTO {
 	
 	private Long id;
+	@NotNull(message="At least one drug has to be added to Order")
 	private  Map<String, Integer> drugsToPurchase; // lekovi plus kolicina
+	@NotNull(message="Expiration date is mandatory")
+ 	@Future(message="Expiration date has to be in the future")
 	 private LocalDateTime expiration;
 	 
 	 public PurchaseOrderDTO() {}

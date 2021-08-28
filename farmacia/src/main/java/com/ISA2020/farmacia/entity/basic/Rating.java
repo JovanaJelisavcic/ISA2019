@@ -1,6 +1,7 @@
 package com.ISA2020.farmacia.entity.basic;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -9,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import com.ISA2020.farmacia.entity.users.Patient;
 @Entity
@@ -19,12 +23,17 @@ public class Rating {
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "email", referencedColumnName = "email")
 	private Patient patient;
-	private float ratingStars;
+	@NotNull(message="Rating is mandatory")
+	 @Min(value=1, message="Rating has to be between 1 and 5")
+	@Max(value=5, message="Rating has to be between 1 and 5")
+	private int ratingStars;
 	@Enumerated(EnumType.STRING)
+	@Column(nullable=false)
 	private RatingSubjectType subject;
+	@Column(nullable=false)
 	private String subjectId;
 	public Rating() {}
-	public Rating(Patient patient, float ratingStars, RatingSubjectType subject, String subjectId) {
+	public Rating(Patient patient, int ratingStars, RatingSubjectType subject, String subjectId) {
 		super();
 		this.patient = patient;
 		this.ratingStars = ratingStars;
@@ -43,10 +52,10 @@ public class Rating {
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
-	public float getRatingStars() {
+	public int getRatingStars() {
 		return ratingStars;
 	}
-	public void setRatingStars(float ratingStars) {
+	public void setRatingStars(int ratingStars) {
 		this.ratingStars = ratingStars;
 	}
 	public RatingSubjectType getSubject() {

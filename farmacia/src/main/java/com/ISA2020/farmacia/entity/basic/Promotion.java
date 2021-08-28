@@ -9,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.ISA2020.farmacia.entity.basic.Views.PromotionList;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -21,10 +25,15 @@ public class Promotion {
 	@JsonView(PromotionList.class)	
 	private Long promoid;
 	@JsonView(PromotionList.class)	
+	@NotBlank(message="Promotion Text is mandatory")
 	private String promotionText;
 	@JsonView(PromotionList.class)	
+	@NotNull(message="Date is mandatory")
+ 	@Future(message="Date has to be in the future")
 	private LocalDateTime startsFrom;
 	@JsonView(PromotionList.class)	
+	@NotNull(message="Date is mandatory")
+ 	@Future(message="Date has to be in the future")
 	private LocalDateTime expires;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "farmacy_id", nullable=false)
@@ -39,6 +48,9 @@ public class Promotion {
 		this.expires = expires;
 		this.farmacyId = farmacyId;
 	}
+	 @AssertTrue public boolean isValidRange() {
+		    return startsFrom.isBefore(expires);
+		  }
 	public String getPromotionText() {
 		return promotionText;
 	}
