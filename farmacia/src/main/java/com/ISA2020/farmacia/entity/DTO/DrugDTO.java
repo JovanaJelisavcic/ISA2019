@@ -29,6 +29,8 @@ public class DrugDTO {
 	private String manufacturer;
 	private boolean receptNeeded;
 	private String  notes;
+	@NotNull(message="Points are mandatory")
+	private int points;
 	public DrugDTO() {}
 	public DrugDTO(String code, String name, DrugType drugType, String contraindications, String composition,
 			String prescriptionMetrics, List<String> replacementCodes, DrugForm form, String manufacturer,
@@ -45,6 +47,13 @@ public class DrugDTO {
 		this.manufacturer = manufacturer;
 		this.receptNeeded = receptNeeded;
 		this.notes = notes;
+	}
+	
+	public int getPoints() {
+		return points;
+	}
+	public void setPoints(int points) {
+		this.points = points;
 	}
 	public String getCode() {
 		return code;

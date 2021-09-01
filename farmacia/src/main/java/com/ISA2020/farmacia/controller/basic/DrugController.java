@@ -61,6 +61,7 @@ public class DrugController {
 		Drug drug = new Drug();
 		drug.setFromDTO(drugDto);
 		drug.setStars(0);
+		drug.setPoints(drugDto.getPoints());
 		List<Drug> replacement = new ArrayList<>();
 		for(String code : drugDto.getReplacementCodes()) {
 			Optional<Drug> drugRepl = drugRepo.findById(code);

@@ -51,6 +51,8 @@ public class Patient extends UserInfo {
 	private List<Counseling> counselings; 
 	
 	private int penalties;
+	//@JsonView(Views.SemiDetailedUser.class)
+	private int loyalty;
 	
 	public List<Counseling> getCounselings() {
 		return counselings;
@@ -158,6 +160,14 @@ public class Patient extends UserInfo {
 
 	public void setPenalties(int penalties) {
 		this.penalties = penalties;
+	}
+
+	public int getLoyalty() {
+		return loyalty;
+	}
+
+	public void setLoyalty(int loyalty) {
+		this.loyalty = loyalty;
 	}
 
 

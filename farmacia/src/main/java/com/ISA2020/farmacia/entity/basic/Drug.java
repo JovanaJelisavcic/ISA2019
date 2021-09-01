@@ -45,6 +45,7 @@ public class Drug {
 	@JsonView(Views.VeryDetailedDrug.class)
 	private List<Drug> replacement;
 	
+	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable=false)
 	@JsonView(Views.SimpleDrug.class)
@@ -59,6 +60,7 @@ public class Drug {
 	private String  notes;
 	@JsonView(Views.SimpleDrug.class)
 	private float  stars;
+	private int points;
 	
 	@ManyToMany
 	@JoinTable(
@@ -227,6 +229,14 @@ public class Drug {
 		receptNeeded=drug.isReceptNeeded();
 		notes=drug.getNotes();
 		
+	}
+
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
 	}
 	
 }

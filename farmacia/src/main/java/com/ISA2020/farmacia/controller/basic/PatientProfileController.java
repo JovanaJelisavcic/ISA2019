@@ -3,11 +3,13 @@ package com.ISA2020.farmacia.controller.basic;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.codehaus.jettison.json.JSONException;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,6 +35,7 @@ import com.ISA2020.farmacia.entity.users.UserInfo;
 import com.ISA2020.farmacia.repository.DrugRepository;
 import com.ISA2020.farmacia.repository.PatientRepository;
 import com.ISA2020.farmacia.security.JwtUtils;
+import com.ISA2020.farmacia.util.LoyaltyUtils;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import io.jsonwebtoken.ExpiredJwtException;
@@ -51,6 +54,8 @@ public class PatientProfileController {
 	DrugRepository drugRepo;
 	@Autowired
 	JwtUtils jwtUtils;
+	@Autowired
+	LoyaltyUtils loyaltyUtils;
 	
 	@JsonView(Views.SimpleUser.class)
 	@GetMapping("/myprofile")
@@ -178,6 +183,19 @@ public class PatientProfileController {
 		subs.forEach(s->promos.addAll(s.getPromotions()));
 		if(subs.isEmpty()) new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		return new ResponseEntity<>(subs,HttpStatus.OK);
+		
+	}
+	
+	@GetMapping("/loyaltyStatus")
+	@PreAuthorize("hasAuthority('PATIENT')")
+	public ResponseEntity<?> loyalty(@RequestHeader("Authorization") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException, JSONException {
+		String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
+		Patient patient = patientRepo.findById(username).get();
+		HashMap<String, String> map = new HashMap<>();
+	    map.put("points", String.valueOf(patient.getLoyalty()));
+	    map.put("userType", loyaltyUtils.getUserType(patient.getLoyalty()));
+	    map.put("discount", String.valueOf(loyaltyUtils.getPatientDiscount(patient)));
+		return new ResponseEntity<>(map,HttpStatus.OK);
 		
 	}
 
