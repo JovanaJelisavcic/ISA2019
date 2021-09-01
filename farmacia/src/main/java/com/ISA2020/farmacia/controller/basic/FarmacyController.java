@@ -1,12 +1,16 @@
 package com.ISA2020.farmacia.controller.basic;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.ISA2020.farmacia.entity.basic.Drug;
 import com.ISA2020.farmacia.entity.basic.Farmacy;
@@ -29,6 +34,7 @@ import com.ISA2020.farmacia.repository.DrugRepository;
 import com.ISA2020.farmacia.repository.FarmacyAdminRepository;
 import com.ISA2020.farmacia.repository.FarmacyRepository;
 import com.ISA2020.farmacia.security.JwtUtils;
+import com.ISA2020.farmacia.util.GeoUtils;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import io.jsonwebtoken.ExpiredJwtException;
@@ -38,7 +44,7 @@ import io.jsonwebtoken.UnsupportedJwtException;
 @RestController
 @RequestMapping("/farmacy")
 public class FarmacyController {
-	
+
 	@Autowired
 	FarmacyRepository farmacyRepo;
 	@Autowired
@@ -46,7 +52,22 @@ public class FarmacyController {
 	@Autowired
 	JwtUtils jwtUtils;
 	@Autowired
+	GeoUtils geoUtils;
+	@Autowired
 	FarmacyAdminRepository farmAdminRepo;
+	final String accessKey = "6c93357a36b238e6e01c463a206f8e92";
+	
+	@GetMapping(value ="/getLongLat/{farmacyId}", produces = { "application/json" })
+	public ResponseEntity<?> longlat(@PathVariable Long farmacyId) throws URISyntaxException, JSONException {	
+		RestTemplate restTemplate = new RestTemplate();
+		String adress = geoUtils.getQueryAdress(farmacyRepo.getById(String.valueOf(farmacyId)).getAdress());
+		final String baseUrl = "http://api.positionstack.com/v1/forward"
+				+ "?access_key=" + accessKey + "&query=" + adress;
+		URI uri = new URI(baseUrl);
+		String result = restTemplate.getForObject(uri, String.class);
+		JSONObject o =   geoUtils.getLatLong(result);	
+		return new ResponseEntity<>(o, HttpStatus.OK);
+	}
 	
 	@JsonView(Views.SimpleFarmacy.class)
 	@GetMapping("/profile")

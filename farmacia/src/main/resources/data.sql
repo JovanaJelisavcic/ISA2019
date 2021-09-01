@@ -149,26 +149,26 @@ insert into sys_admin (email, name, surname, adress, city, state, phone_num) val
 insert into sys_admin (email, name, surname, adress, city, state, phone_num) values ('earrow6@hao123.com', 'Sibelle', 'Shapira', '33 Southridge Drive', 'Colatina', 'Brazil', '414-163-5653');
 
 
-insert into FARMACY (farmacy_id, adress, name, stars, description) values (1, '179 Fieldstone Lane, Uzice', 'Redunca redunca', 3.5, 'Placed in busy place, works all the time');
-insert into FARMACY (farmacy_id, adress, name, stars, description) values (2, '3487 Hauk Junction, Uzice', 'Antechinus flavipes', 4.5, 'Placed in busy place, works all the time');
-insert into FARMACY (farmacy_id, adress, name, stars, description) values (3, '9094 Lerdahl Drive, Beograd', 'Castor canadensis', 4.2, 'Placed in busy place, works all the time');
-insert into FARMACY (farmacy_id, adress, name, stars, description) values (4, '18226 Anniversary Point, Vranje', 'Phalaropus fulicarius', 3.7, 'Placed in busy place, works all the time');
-insert into FARMACY (farmacy_id, adress, name, stars, description) values (5, '1 Meadow Valley Road, Pirot', 'Gazella thompsonii', 2.5, 'Placed in busy place, works all the time');
-insert into FARMACY (farmacy_id, adress, name, stars, description) values (6, '140 Farmco Lane, Pirot', 'Estrilda erythronotos', 1.5, 'Placed in busy place, works all the time');
-insert into FARMACY (farmacy_id, adress, name, stars, description) values (7, '9 Little Fleur Alley, Leskovac', 'Uraeginthus angolensis', 2.6, 'Placed in busy place, works all the time');
-insert into FARMACY (farmacy_id, adress, name, stars, description) values (8, '31 Brickson Park Center, Vranje', 'Macropus parryi', 4.8, 'Placed in busy place, works all the time');
-insert into FARMACY (farmacy_id, adress, name, stars, description) values (9, '36321 Maple Hill, Uzice', 'Naja nivea', 4.7, 'Placed in busy place, works all the time');
-insert into FARMACY (farmacy_id, adress, name, stars, description) values (10, '7275 Gerald Plaza, Beograd', 'Paraxerus cepapi',4.9, 'Placed in busy place, works all the time');
-insert into FARMACY (farmacy_id, adress, name, stars, description) values (11, '31 East Hill, Beograd', 'Dolichitus patagonum', 3.9, 'Placed in busy place, works all the time');
-insert into FARMACY (farmacy_id, adress, name, stars, description) values (12, '91678 Autumn Leaf Road, Beograd', 'Spermophilus armatus', 3.4, 'Placed in busy place, works all the time');
-insert into FARMACY (farmacy_id, adress, name, stars, description) values (13, '6038 Sycamore Avenue, Uzice', 'Pelecans onocratalus', 3.7, 'Placed in busy place, works all the time');
-insert into FARMACY (farmacy_id, adress, name, stars, description) values (14, '9 Center Alley, Vranje', 'Colobus guerza', 4.7, 'Placed in busy place, works all the time');
-insert into FARMACY (farmacy_id, adress, name, stars, description) values (15, '4661 Elmside Lane, Pirot', 'Casmerodius albus', 3.7, 'Placed in busy place, works all the time');
-insert into FARMACY (farmacy_id, adress, name, stars, description) values (16, '4554 Debs Hill, Uzice', 'Sciurus vulgaris', 3.4, 'Placed in busy place, works all the time');
-insert into FARMACY (farmacy_id, adress, name, stars, description) values (17, '0 Farwell Street, Beograd', 'Corvus albus', 4.8, 'Placed in busy place, works all the time');
-insert into FARMACY (farmacy_id, adress, name, stars, description) values (18, '371 Village Trail, Novi Sad', 'Acrantophis madagascariensis', 4.7, 'Placed in busy place, works all the time');
-insert into FARMACY (farmacy_id, adress, name, stars, description) values (19, '19 Heath Parkway, Novi Sad', 'Ninox superciliaris', 4.2, 'Placed in busy place, works all the time');
-insert into FARMACY (farmacy_id, adress, name, stars, description) values (20, '074 Division Hill, Novi Sad', 'Thylogale stigmatica', 4.0, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (1, 'Calle de Sta Engracia, 5, 28010 Madrid, Spain', 'Redunca redunca', 3.5, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (2, 'Calle de Manuel Silvela, 28010 Madrid, Spain', 'Antechinus flavipes', 4.5, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (3, 'Calle de San Bernardo, 120, 28015 Madrid, Spain', 'Castor canadensis', 4.2, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (4, 'Calle de Quintana, 5, 28008 Madrid, Spain', 'Phalaropus fulicarius', 3.7, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (5, 'Calle de Vallehermoso, 44, 28015 Madrid, Spain', 'Gazella thompsonii', 2.5, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (6, 'Calle Bande, 14, 28042 Madrid, Spain', 'Estrilda erythronotos', 1.5, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (7, 'Calle Monteverde, 18, 28042 Madrid, Spain', 'Uraeginthus angolensis', 2.6, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (8, 'Calle Mistral, 19, 28042 Madrid, Spain', 'Macropus parryi', 4.8, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (9, 'Calle Baza, 6, 28042 Madrid, Spain', 'Naja nivea', 4.7, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (10, 'Calle Bureta, 16, 28042 Madrid, Spain', 'Paraxerus cepapi',4.9, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (11, 'Calle de Briones, 27, 28042 Madrid, Spain', 'Dolichitus patagonum', 3.9, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (12, 'Calle de Lezama, 5, 28034 Madrid, Spain', 'Spermophilus armatus', 3.4, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (13, 'Calle Julio Montero, 9, 28034 Madrid, Spain', 'Pelecans onocratalus', 3.7, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (14, 'Calle Campo de Montiel, 5, 28034 Madrid, Spain', 'Colobus guerza', 4.7, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (15, 'Calle de Zurbano, 46, 28010 Madrid, Spain', 'Casmerodius albus', 3.7, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (16, 'Calle de Max Aub, 7, 28003 Madrid, Spain', 'Sciurus vulgaris', 3.4, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (17, 'Calle Brisa, 2, 28003 Madrid, Spain', 'Corvus albus', 4.8, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (18, 'Calle de los Olivos, 21, 28003 Madrid, Spain', 'Acrantophis madagascariensis', 4.7, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (19, 'Calle de Leira, 8, 28043 Madrid, Spain', 'Ninox superciliaris', 4.2, 'Placed in busy place, works all the time');
+insert into FARMACY (farmacy_id, adress, name, stars, description) values (20, 'Calle Guisona, 4, 28033 Madrid, Spain', 'Thylogale stigmatica', 4.0, 'Placed in busy place, works all the time');
 
 
 
