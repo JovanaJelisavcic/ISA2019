@@ -17,6 +17,8 @@ public interface WorkingHoursRepository extends JpaRepository<WorkingHours, Long
 	@Query(value="SELECT * from working_hours where DERMATOLOGIST_EMAIL=?1 ", nativeQuery = true)
 	List<WorkingHours> findAllByDerma(String email);
 
+
+
 	
 
 	

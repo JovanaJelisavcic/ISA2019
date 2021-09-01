@@ -1,5 +1,7 @@
 package com.ISA2020.farmacia.controller.basic;
 
+import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Optional;
@@ -8,7 +10,10 @@ import javax.mail.MessagingException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +23,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ISA2020.farmacia.entity.DTO.PriceDTO;
@@ -41,6 +47,7 @@ import com.ISA2020.farmacia.repository.VacationPharmacistRepository;
 import com.ISA2020.farmacia.security.JwtUtils;
 import com.ISA2020.farmacia.util.FilteringUtil;
 import com.ISA2020.farmacia.util.MailUtil;
+import com.ISA2020.farmacia.util.ReportUtil;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import io.jsonwebtoken.ExpiredJwtException;
@@ -69,6 +76,8 @@ public class FarmacyAdminController {
 	private PromotionRepository promotionRepo;
 	@Autowired
 	MailUtil mailUtil;
+	@Autowired
+	ReportUtil reportUtil;
 
 	@JsonView(Views.SimpleUser.class)
 	@GetMapping("/profile")
@@ -183,6 +192,22 @@ public class FarmacyAdminController {
 		
 		
 	}
+	
+	 @RequestMapping(value = "/report", method = RequestMethod.GET,
+	            produces = MediaType.APPLICATION_PDF_VALUE)
+	    public ResponseEntity<InputStreamResource> citiesReport(@RequestHeader("Authorization") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException, FileNotFoundException {
+		 String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
+			Farmacy farmacy =  farmAdminRepo.findById(username).get().getFarmacy();
+	        ByteArrayInputStream bis = reportUtil.generateReport(farmacy, "monthlyReport.pdf");
+	        var headers = new HttpHeaders();
+	        headers.add("Content-Disposition", "inline; filename=monthlyReport.pdf");
+
+	        return ResponseEntity
+	                .ok()
+	                .headers(headers)
+	                .contentType(MediaType.APPLICATION_PDF)
+	                .body(new InputStreamResource(bis));
+	    }
 	
 	
 }

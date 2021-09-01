@@ -14,6 +14,9 @@ public interface DermappointRepository extends JpaRepository<DermAppointment, Lo
 	@Query(value="SELECT * from derm_appointment where farmacy_id= ?1 ", nativeQuery = true)
 	List<DermAppointment> findByFarmacyId(String id);
 
+	@Query(value="SELECT COUNT(id) from derm_appointment where farmacy_id= ?1 and DAY(DATE_TIME)=?2 and MONTH(DATE_TIME) = MONTH(CURRENT_DATE()) ", nativeQuery = true)
+	int countThisMonth(String farmacyId, int day);
+
 	
 
 }
