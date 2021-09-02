@@ -1,8 +1,9 @@
 package com.ISA2020.farmacia.util;
 
 import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
 import org.springframework.stereotype.Component;
+
+import com.ISA2020.farmacia.entity.DTO.CoordinatesDTO;
 
 @Component
 public class GeoUtils 
@@ -13,8 +14,8 @@ public class GeoUtils
 		return adress.replaceAll(" ", "%20");
 	}
 
-	public JSONObject getLatLong(String result) throws JSONException {
-		JSONObject answer = new JSONObject();
+	public CoordinatesDTO getLatLong(String result) throws JSONException {
+		CoordinatesDTO answer = new CoordinatesDTO();
 
 		String[] splited =result.split(":");
 		String latWithComa = splited[2];
@@ -27,8 +28,8 @@ public class GeoUtils
 
 		String longi =longSplit[0];
 
-		answer.put("latitude", lat);
-		answer.put("longitude",longi);
+		answer.setLatitude(Double.parseDouble(lat));
+		answer.setLongitude(Double.parseDouble(longi));
 
 		return answer;
 	}

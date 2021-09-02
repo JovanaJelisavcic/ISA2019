@@ -1,4 +1,4 @@
-package com.ISA2020.farmacia.controller.basic;
+package com.ISA2020.farmacia.controller;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ISA2020.farmacia.entity.DTO.PriceDTO;
@@ -193,7 +192,7 @@ public class FarmacyAdminController {
 		
 	}
 	
-	 @RequestMapping(value = "/report", method = RequestMethod.GET,
+	 @GetMapping(value = "/report", 
 	            produces = MediaType.APPLICATION_PDF_VALUE)
 	    public ResponseEntity<InputStreamResource> citiesReport(@RequestHeader("Authorization") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException, FileNotFoundException {
 		 String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());

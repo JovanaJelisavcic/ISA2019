@@ -1,4 +1,4 @@
-package com.ISA2020.farmacia.controller.basic;
+package com.ISA2020.farmacia.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;

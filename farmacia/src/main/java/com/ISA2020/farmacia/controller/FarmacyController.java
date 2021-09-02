@@ -1,4 +1,4 @@
-package com.ISA2020.farmacia.controller.basic;
+package com.ISA2020.farmacia.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
@@ -10,7 +10,6 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.ISA2020.farmacia.entity.DTO.CoordinatesDTO;
 import com.ISA2020.farmacia.entity.basic.Drug;
 import com.ISA2020.farmacia.entity.basic.Farmacy;
 import com.ISA2020.farmacia.entity.basic.Views;
@@ -65,7 +65,7 @@ public class FarmacyController {
 				+ "?access_key=" + accessKey + "&query=" + adress;
 		URI uri = new URI(baseUrl);
 		String result = restTemplate.getForObject(uri, String.class);
-		JSONObject o =   geoUtils.getLatLong(result);	
+		CoordinatesDTO o =   geoUtils.getLatLong(result);	
 		return new ResponseEntity<>(o, HttpStatus.OK);
 	}
 	

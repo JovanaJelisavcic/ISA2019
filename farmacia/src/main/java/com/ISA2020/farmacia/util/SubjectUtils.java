@@ -6,7 +6,7 @@ import java.util.List;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.ISA2020.farmacia.controller.basic.RegisterController;
+import com.ISA2020.farmacia.controller.RegisterController;
 import com.ISA2020.farmacia.entity.basic.Drug;
 import com.ISA2020.farmacia.entity.basic.Farmacy;
 import com.ISA2020.farmacia.entity.basic.RatingSubjectType;
