@@ -12,7 +12,9 @@ import com.ISA2020.farmacia.entity.intercations.Counseling;
 public interface CounselingRepository extends JpaRepository<Counseling, Long> {
 
 	@Query(value="SELECT COUNT(COUNSELING_ID) from COUNSELING where DAY(DATE_TIME) = ?1 and MONTH(DATE_TIME) = MONTH(CURRENT_DATE()) and email in (?2) ", nativeQuery = true)
-	int countThisMonth( int day, List<String> emails);
+	int countThisDay( int day, List<String> emails);
+	@Query(value="SELECT COUNT(COUNSELING_ID) from COUNSELING where MONTH(DATE_TIME) = ?1 and YEAR(DATE_TIME) = YEAR(CURRENT_DATE()) and email in (?2) ", nativeQuery = true)
+	int countThisMonth(int i, List<String> emails);
 
 	
 	

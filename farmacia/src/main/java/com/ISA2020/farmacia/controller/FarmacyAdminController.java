@@ -197,10 +197,11 @@ public class FarmacyAdminController {
 	    public ResponseEntity<InputStreamResource> citiesReport(@RequestHeader("Authorization") String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, IllegalArgumentException, UnsupportedEncodingException, FileNotFoundException {
 		 String username =jwtUtils.getUserNameFromJwtToken(token.substring(6, token.length()).strip());
 			Farmacy farmacy =  farmAdminRepo.findById(username).get().getFarmacy();
-	        ByteArrayInputStream bis = reportUtil.generateReport(farmacy, "monthlyReport.pdf");
+	        ByteArrayInputStream bis = reportUtil.generateReport(farmacy, "farmacyReport.pdf");
+	        
 	        var headers = new HttpHeaders();
-	        headers.add("Content-Disposition", "inline; filename=monthlyReport.pdf");
-
+	        headers.add("Content-Disposition", "inline; filename=farmacyReport.pdf");
+	        
 	        return ResponseEntity
 	                .ok()
 	                .headers(headers)
