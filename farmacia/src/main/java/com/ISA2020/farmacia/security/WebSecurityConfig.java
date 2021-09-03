@@ -1,5 +1,8 @@
 package com.ISA2020.farmacia.security;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +17,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
 
 
 
@@ -53,7 +57,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().and().csrf().disable()
+		http.cors().configurationSource(httpServletRequest -> {
+			CorsConfiguration config = new CorsConfiguration();
+			config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+			config.setAllowedMethods(Collections.singletonList("*"));
+			config.setAllowCredentials(true);
+			config.setAllowedHeaders(Collections.singletonList("*"));
+			config.setExposedHeaders(Arrays.asList("Authorization"));
+			config.setMaxAge(3600L);
+			return config;
+		}).and().csrf().disable()
 		.exceptionHandling().authenticationEntryPoint(myOwnAuthenticationEntryPoint).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.authorizeRequests().antMatchers("/register/signin").permitAll()

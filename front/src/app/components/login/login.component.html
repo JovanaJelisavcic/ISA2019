@@ -1,0 +1,60 @@
+<mat-card class="main-component">
+  <mat-card-content>
+    <mat-tab-group #loginTabs dynamicHeight (selectedIndexChange)="onChangeTab()">
+      <mat-tab label="Login">
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput placeholder="Ex. pat@example.com" [(ngModel)]="loginUser.username" required/>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput [(ngModel)]="loginUser.password" required/>
+          </mat-form-field>
+        </div>
+        <div class="submit-btn">
+          <button mat-button color="primary" [disabled]="!loginUser.password || !loginUser.username" (click)="login()">Login</button>
+        </div>
+      </mat-tab>
+      <mat-tab label="Register">
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput placeholder="Ex. pat@example.com" [(ngModel)]="registerUser.email"/>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input type="text" matInput placeholder="Name" [(ngModel)]="registerUser.name"/>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Surname</mat-label>
+            <input type="text" matInput [(ngModel)]="registerUser.surname"/>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Address</mat-label>
+            <input type="text" matInput [(ngModel)]="registerUser.adress"/>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>City</mat-label>
+            <input type="text" matInput [(ngModel)]="registerUser.city"/>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>State</mat-label>
+            <input type="text" matInput [(ngModel)]="registerUser.state"/>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Phone Number</mat-label>
+            <input type="text" matInput [(ngModel)]="registerUser.phoneNum"/>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput [(ngModel)]="registerUser.password"/>
+          </mat-form-field>
+        </div>
+        <div class="submit-btn">
+          <button mat-button color="primary" [disabled]="isRegisterDisabled()" (click)="register()">Register</button>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>
