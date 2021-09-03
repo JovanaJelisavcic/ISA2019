@@ -17,7 +17,7 @@ npm install
 
 ### Executing program
 
-* Back-end : Run as Java Application in Exclipse or STS
+* Back-end : Run as Java Application in Eclipse or STS
 * Front-end: 
 ```
 ng serve
